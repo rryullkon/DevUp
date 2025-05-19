@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Authentification simple</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Les fondamentaux de PHP</h1>
+        <p>Système d’authentification simple avec sessions</p>
+    </header>
+
+    <main>
+        <h1>Créer une authentification en PHP</h1>
+
+        <section>
+            <h2>Objectif</h2>
+            <p>Protéger l'accès à une page (par exemple un dashboard) en exigeant une connexion avec identifiant et mot de passe.</p>
+        </section>
+
+        <section>
+            <h2>Étape 1 : Fonction de vérification de connexion</h2>
+            <p>On crée une fonction dans un fichier <code>auth.php</code> qui vérifie si l'utilisateur est connecté :</p>
+            <pre>
+function estConnecte(): bool {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    return !empty($_SESSION['connecte']);
+}
+            </pre>
+        </section>
+
+        <section>
+            <h2>Étape 2 : Restreindre l'accès à une page</h2>
+            <p>Dans la page <code>dashboard.php</code>, on inclut <code>auth.php</code> et on redirige si l’utilisateur n’est pas connecté :</p>
+            <pre>
+require_once 'functions/auth.php';
+
+if (!estConnecte()) {
+    header('Location: login.php');
+    exit;
+}
+            </pre>
+        </section>
+
+        <section>
+            <h2>Étape 3 : Créer un formulaire de connexion</h2>
+            <p>Dans <code>login.php</code>, on crée un formulaire POST avec identifiant et mot de passe :</p>
+            <pre>
+&lt;form method="POST"&gt;
+    &lt;input type="text" name="pseudo" placeholder="Nom d'utilisateur" /&gt;
+    &lt;input type="password" name="mot_de_passe" placeholder="Mot de passe" /&gt;
+    &lt;button type="submit"&gt;Se connecter&lt;/button&gt;
+&lt;/form&gt;
+            </pre>
+        </section>
+
+        <section>
+            <h2>Étape 4 : Vérification des identifiants</h2>
+            <p>Dans le même fichier <code>login.php</code>, on vérifie les identifiants en PHP :</p>
+            <pre>
+$erreur = null;
+
+if (!empty($_POST['pseudo']) && !empty($_POST['mot_de_passe'])) {
+    if ($_POST['pseudo'] === 'john' && $_POST['mot_de_passe'] === 'doe') {
+        session_start();
+        $_SESSION['connecte'] = true;
+        header('Location: dashboard.php');
+        exit;
+    } else {
+        $erreur = "Identifiants incorrects.";
+    }
+}
+            </pre>
+            <p>On peut afficher l'erreur ainsi :</p>
+            <pre>
+if ($erreur) {
+    echo "&lt;div class='alert alert-danger'&gt;$erreur&lt;/div&gt;";
+}
+            </pre>
+        </section>
+
+        <section>
+            <h2>Étape 5 : Déconnexion</h2>
+            <p>On crée un fichier <code>logout.php</code> très simple :</p>
+            <pre>
+session_start();
+unset($_SESSION['connecte']);
+header('Location: login.php');
+exit;
+            </pre>
+        </section>
+
+        <section>
+            <h2>Améliorations possibles</h2>
+            <ul>
+                <li>Ne pas stocker les identifiants en dur (utiliser une base de données)</li>
+                <li>Utiliser <code>password_hash()</code> et <code>password_verify()</code> pour sécuriser les mots de passe</li>
+                <li>Gérer des rôles (admin, utilisateur, etc.)</li>
+                <li>Ajouter un système de messages flash</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour aller plus loin, consultez la <a href="https://www.php.net/manual/fr/book.session.php">documentation des sessions PHP</a></p>
+    </footer>
+</body>
+</html>

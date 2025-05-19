@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Compteur de visites</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Les fondamentaux de PHP</h1>
+        <p>Créer un compteur de visites avec stockage de données</p>
+    </header>
+
+    <main>
+        <h1>Créer un compteur de visites</h1>
+
+        <section>
+            <h2>Objectif du projet</h2>
+            <p>Dans ce chapitre, vous allez apprendre à créer un compteur de visites. Chaque fois qu’une page est chargée, le compteur s’incrémente. Le total est ensuite affiché dans le pied de page du site.</p>
+        </section>
+
+        <section>
+            <h2>Structure du projet</h2>
+            <p>Le compteur s’appuie sur un fichier texte pour stocker le nombre de pages vues. Ce fichier se trouve dans un dossier <code>data/</code> et contient simplement un nombre que l'on incrémente à chaque visite.</p>
+        </section>
+
+        <section>
+            <h2>Organisation des fichiers</h2>
+            <p>Pour une meilleure organisation, les fonctions liées au compteur sont placées dans un fichier <code>functions/compteur.php</code>. On y trouve :</p>
+            <ul>
+                <li><strong>ajouter_vue()</strong> : Incrémente le compteur global et journalier</li>
+                <li><strong>nombre_vues()</strong> : Récupère le nombre total de pages vues</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Fonction d'incrémentation</h2>
+            <p>Cette fonction vérifie si le fichier existe. Si oui, elle lit le compteur, l’incrémente, puis le réécrit. Sinon, elle crée le fichier avec une valeur initiale.</p>
+            <pre>
+&lt;?php
+function ajouter_vue() {
+    $fichier = __DIR__ . '/../data/compteur';
+    $fichier_journalier = $fichier . '-' . date('Y-m-d');
+    incrémenter_compteur($fichier);
+    incrémenter_compteur($fichier_journalier);
+}
+
+function incrémenter_compteur(string $fichier): void {
+    $compteur = 1;
+    if (file_exists($fichier)) {
+        $compteur = (int)file_get_contents($fichier);
+        $compteur++;
+    }
+    file_put_contents($fichier, $compteur);
+}
+?&gt;
+            </pre>
+        </section>
+
+        <section>
+            <h2>Fonction de lecture</h2>
+            <p>Cette fonction permet de récupérer le nombre total de vues en lisant simplement le fichier.</p>
+            <pre>
+&lt;?php
+function nombre_vues(): int {
+    $fichier = __DIR__ . '/../data/compteur';
+    return (int)file_get_contents($fichier);
+}
+?&gt;
+            </pre>
+        </section>
+
+        <section>
+            <h2>Affichage dans le footer</h2>
+            <p>Dans votre fichier <code>footer.php</code>, pensez à inclure le fichier <code>compteur.php</code>, appeler <code>ajouter_vue()</code> au chargement de la page, puis afficher <code>nombre_vues()</code> comme ceci :</p>
+            <pre>
+&lt;?php
+require_once __DIR__ . '/../functions/compteur.php';
+ajouter_vue();
+$vues = nombre_vues();
+?&gt;
+
+&lt;p&gt;Il y a eu &lt;?= $vues ?&gt; visite&lt;?= $vues &gt; 1 ? 's' : '' ?&gt; sur le site.&lt;/p&gt;
+            </pre>
+        </section>
+
+        <section>
+            <h2>Amélioration : compteur journalier</h2>
+            <p>Chaque jour, un fichier différent est créé pour stocker les visites. Cela vous permet d’avoir un historique des visites par jour, utile pour de futurs tableaux de bord.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Consultez la <a href="https://www.php.net/docs.php">documentation officielle PHP</a> pour en savoir plus.</p>
+    </footer>
+</body>
+</html>
