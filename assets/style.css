@@ -358,6 +358,100 @@ h2::before {
     background: linear-gradient(90deg, #2965f1 60%, #264de4 100%);
 }
 
+/* Dans style.css, ajout des nouveaux styles pour les cartes */
+
+/* Angular */
+.card-angular {
+    background: linear-gradient(120deg, #dd0031 60%, #c3002f 100%);
+}
+.card-angular a {
+    background: linear-gradient(90deg, #c3002f 60%, #dd0031 100%);
+}
+.card-angular a:hover {
+    background: linear-gradient(90deg, #dd0031 60%, #c3002f 100%);
+}
+
+/* Svelte */
+.card-svelte {
+    background: linear-gradient(120deg, #ff3e00 60%, #f73c00 100%);
+}
+.card-svelte a {
+    background: linear-gradient(90deg, #f73c00 60%, #ff3e00 100%);
+}
+.card-svelte a:hover {
+    background: linear-gradient(90deg, #ff3e00 60%, #f73c00 100%);
+}
+
+/* Flask */
+.card-flask {
+    background: linear-gradient(120deg, #000000 60%, #ffffff 100%);
+}
+.card-flask a {
+    background: linear-gradient(90deg, #000000 60%, #ffffff 100%);
+    color: #000;
+}
+.card-flask a:hover {
+    background: linear-gradient(90deg, #ffffff 60%, #000000 100%);
+    color: #000;
+}
+
+/* Ruby */
+.card-ruby {
+    background: linear-gradient(120deg, #cc342d 60%, #a91e1e 100%);
+}
+.card-ruby a {
+    background: linear-gradient(90deg, #a91e1e 60%, #cc342d 100%);
+}
+.card-ruby a:hover {
+    background: linear-gradient(90deg, #cc342d 60%, #a91e1e 100%);
+}
+
+/* Go */
+.card-go {
+    background: linear-gradient(120deg, #00add8 60%, #007d9c 100%);
+}
+.card-go a {
+    background: linear-gradient(90deg, #007d9c 60%, #00add8 100%);
+}
+.card-go a:hover {
+    background: linear-gradient(90deg, #00add8 60%, #007d9c 100%);
+}
+
+/* Swift */
+.card-swift {
+    background: linear-gradient(120deg, #f05138 60%, #e44d2a 100%);
+}
+.card-swift a {
+    background: linear-gradient(90deg, #e44d2a 60%, #f05138 100%);
+}
+.card-swift a:hover {
+    background: linear-gradient(90deg, #f05138 60%, #e44d2a 100%);
+}
+
+/* Kotlin */
+.card-kotlin {
+    background: linear-gradient(120deg, #7f52ff 60%, #5e35b1 100%);
+}
+.card-kotlin a {
+    background: linear-gradient(90deg, #5e35b1 60%, #7f52ff 100%);
+}
+.card-kotlin a:hover {
+    background: linear-gradient(90deg, #7f52ff 60%, #5e35b1 100%);
+}
+
+/* Rust */
+.card-rust {
+    background: linear-gradient(120deg, #000000 60%, #dea584 100%);
+}
+.card-rust a {
+    background: linear-gradient(90deg, #dea584 60%, #000000 100%);
+    color: #000;
+}
+.card-rust a:hover {
+    background: linear-gradient(90deg, #000000 60%, #dea584 100%);
+    color: #fff;
+}
+
 /* Ressources */
 .resources {
     display: grid;

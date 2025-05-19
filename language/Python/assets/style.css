@@ -1,7 +1,7 @@
 :root {
     /* Palette de couleurs - Python */
     --python-blue: #3572A5;       /* Bleu Python principal */
-    --python-yellow: #FFD343;     /* Jaune Python principal */
+    --python-yellow : #FFD343;     /* Jaune Python principal */
     --python-dark: #2C3E50;       /* Bleu foncé pour contrastes */
     --python-light: #EAF3FA;      /* Bleu très clair pour les arrière-plans */
     --python-white: #ffffff;
@@ -40,7 +40,7 @@
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     background: linear-gradient(120deg, #e0e0f0 0%, #f9f9ff 100%);
-    color: var(--python-dark);
+    color: var(--python-dark );
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
@@ -90,6 +90,28 @@ h3 {
     margin-bottom: 0.5em;
     letter-spacing: 0.03em;
 }
+
+h5 {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: white !important;
+    margin-bottom: 1em !important;
+    letter-spacing: 0.03em;
+    margin: 10px;
+    background: linear-gradient(90deg, #a00000, #cc0000) !important;
+
+    border-radius: var(--radius-md) !important;
+    padding: 0.6em 1.2em !important;
+
+    text-align: center;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    z-index: 2;
+}
+
 
 /* En-tête */
 header {
@@ -207,6 +229,37 @@ main {
     box-shadow: 0 4px 16px rgba(90,105,166,0.18);
 }
 
+/* Styles spécifiques pour les cartes de travaux pratiques */
+.chapter-card.TP {
+    background: linear-gradient(120deg, #fff8f8 60%, #ffe0e0 100%) !important;
+    box-shadow: 0 4px 24px rgba(190, 136, 136, 0.13), 0 1.5px 6px rgba(166, 90, 90, 0.07) !important;
+    border-left: 4px solid #cc0000;
+}
+
+.chapter-card.TP::before {
+    background: radial-gradient(circle, #cc0000 0%, transparent 70%) !important;
+    opacity: 0.08 !important;
+}
+
+.chapter-card.TP:hover {
+    background: linear-gradient(120deg, #ffe0e0 60%, #fff8f8 100%) !important;
+    box-shadow: 0 8px 32px rgba(166, 90, 90, 0.18), 0 2px 8px rgba(147, 76, 76, 0.10) !important;
+}
+
+.chapter-card.TP h3 {
+    color: #a00000 !important;
+}
+
+.chapter-card.TP .btn {
+    background: linear-gradient(90deg, #a00000 60%, #cc0000 100%) !important;
+    box-shadow: 0 2px 8px rgba(190, 136, 136, 0.10) !important;
+}
+
+.chapter-card.TP .btn:hover {
+    background: linear-gradient(90deg, #cc0000 60%, #a00000 100%) !important;
+    box-shadow: 0 4px 16px rgba(166, 90, 90, 0.18) !important;
+}
+
 /* Liens */
 a {
     color: var(--python-blue);
@@ -217,7 +270,7 @@ a {
 }
 
 a:hover {
-    color: var(--python-dark);
+    color: var(--python-dark );
     transform: scale(1.05);
     text-shadow: 0 1px 4px rgba(90,105,166,0.07);
 }
@@ -229,7 +282,7 @@ code {
     border-radius: var(--radius-sm);
     font-family: 'Fira Code', 'Courier New', monospace;
     font-size: 0.98em;
-    color: var(--python-dark);
+    color: var(--python-dark );
 }
 
 pre {
@@ -269,7 +322,7 @@ footer {
     padding: var(--space-md);
     margin-top: var(--space-xl);
     border-top: 1px solid var(--python-gray);
-    color: var(--python-dark);
+    color: var(--python-dark );
     font-size: 1rem;
     background: linear-gradient(90deg, #f9f9ff 60%, #e0e0f0 100%);
     border-radius: 0 0 16px 16px;
@@ -303,6 +356,12 @@ footer {
     h2 {
         font-size: 1.3rem;
     }
+    h5 {
+        margin: -1.5rem 0 1rem -0.8rem !important;
+        font-size: 0.8rem;
+        padding: 0.5em 1em !important;
+    }
+
     .chapter-card {
         padding: 1.2rem 0.8rem 1rem 0.8rem;
     }
