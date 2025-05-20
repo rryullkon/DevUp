@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React - JSX et Composants</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Guide de démarrage de React avec JSX</h1>
+        <p>Apprenez à utiliser JSX et créez vos premiers composants React.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 3: JSX et les composants</h1>
+
+        <h2>1. Qu'est-ce que JSX ?</h2>
+        <p>
+            JSX (JavaScript XML) est une extension de syntaxe pour JavaScript qui permet d’écrire du HTML dans du code JavaScript.
+            C’est utilisé avec React pour décrire l’interface utilisateur de manière déclarative.
+        </p>
+
+        <h3>Exemple simple :</h3>
+        <pre>
+const element = &lt;h1&gt;Bonjour, monde !&lt;/h1&gt;;
+        </pre>
+        <p>
+            Cette syntaxe sera transformée en code JavaScript équivalent à :
+        </p>
+        <pre>
+const element = React.createElement('h1', null, 'Bonjour, monde !');
+        </pre>
+
+        <h2>2. Créer un composant React</h2>
+        <p>
+            Un composant React est une fonction JavaScript qui retourne du JSX. Voici un exemple de composant simple :
+        </p>
+        <pre>
+function Bonjour() {
+  return &lt;h1&gt;Salut à tous !&lt;/h1&gt;;
+}
+        </pre>
+
+        <h2>3. Utiliser un composant</h2>
+        <p>
+            Pour afficher un composant, vous l’utilisez comme une balise HTML personnalisée :
+        </p>
+        <pre>
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Bonjour /&gt;
+    &lt;/div&gt;
+  );
+}
+        </pre>
+
+        <h2>4. Composants dans des fichiers séparés</h2>
+        <p>
+            Vous pouvez créer un composant dans un fichier à part, par exemple <code>Bonjour.js</code> :
+        </p>
+        <pre>
+// Bonjour.js
+function Bonjour() {
+  return &lt;h1&gt;Bonjour depuis un fichier séparé !&lt;/h1&gt;;
+}
+
+export default Bonjour;
+        </pre>
+        <p>
+            Et l’importer dans votre composant principal :
+        </p>
+        <pre>
+// App.js
+import Bonjour from './Bonjour';
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Bonjour /&gt;
+    &lt;/div&gt;
+  );
+}
+        </pre>
+
+        <h2>5. Règles à retenir</h2>
+        <ul>
+            <li>Les composants doivent commencer par une majuscule.</li>
+            <li>Chaque composant doit retourner un seul élément parent.</li>
+            <li>Utilisez <code>className</code> au lieu de <code>class</code> pour définir des classes CSS.</li>
+        </ul>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage React &copy; 2025 | Pour en savoir plus, consultez la <a
+                href="https://fr.reactjs.org">documentation officielle React</a></p>
+    </footer>
+</body>
+
+</html>

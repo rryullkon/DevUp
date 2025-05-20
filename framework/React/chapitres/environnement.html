@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React - Configuration de l'environnement</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Configuration de React</h1>
+        <p>Installez Node.js, npm et configurez Create React App pour démarrer vos projets.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 2: Configuration de l'environnement</h1>
+
+        <h2>1. Installer Node.js et npm</h2>
+        <p>
+            React nécessite <strong>Node.js</strong> et <strong>npm</strong> pour fonctionner.<br>
+            Rendez-vous sur le site officiel : <a href="https://nodejs.org">nodejs.org</a><br>
+            Téléchargez la version LTS (Long Term Support) recommandée.<br>
+            Lancez l'installateur et suivez les étapes par défaut.
+        </p>
+        <p>
+            Une fois l'installation terminée, ouvrez votre terminal et vérifiez les versions :
+        </p>
+        <pre>node -v
+npm -v</pre>
+
+        <h2>2. Installer Create React App</h2>
+        <p>
+            Create React App est un outil qui permet de démarrer rapidement un projet React sans configuration complexe.
+        </p>
+        <p>Dans le terminal, tapez :</p>
+        <pre>npm install -g create-react-app</pre>
+        <p>
+            Cela installe l'outil en global, pour l'utiliser n'importe où.
+        </p>
+
+        <h2>3. Créer un projet React</h2>
+        <p>
+            Une fois Create React App installé, vous pouvez créer un nouveau projet avec la commande :
+        </p>
+        <pre>npx create-react-app mon-projet</pre>
+        <p>
+            Remplacez <code>mon-projet</code> par le nom de votre application.<br>
+            Patientez pendant que les dépendances s’installent.
+        </p>
+
+        <h2>4. Lancer le projet</h2>
+        <p>
+            Pour démarrer le serveur de développement, utilisez les commandes suivantes :
+        </p>
+        <pre>
+cd mon-projet
+npm start
+        </pre>
+        <p>
+            Cela ouvrira automatiquement votre navigateur sur <code>http://localhost:3000</code> avec votre application React en fonctionnement.
+        </p>
+
+        <h2>5. Structure du projet</h2>
+        <p>Voici la structure de base générée :</p>
+        <pre>
+mon-projet/
+├── node_modules/
+├── public/
+├── src/
+│   └── App.js
+├── package.json
+└── README.md
+        </pre>
+
+        <h2>6. Modifier le projet</h2>
+        <p>
+            Vous pouvez maintenant éditer le fichier <code>src/App.js</code> pour commencer à développer votre propre interface React.
+        </p>
+        <p>
+            Chaque fois que vous enregistrez une modification, l’application se recharge automatiquement.
+        </p>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage React &copy; 2025 | Pour en savoir plus, consultez la <a
+                href="https://fr.reactjs.org">documentation officielle React</a></p>
+    </footer>
+</body>
+
+</html>
