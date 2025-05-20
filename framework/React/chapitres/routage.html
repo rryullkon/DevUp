@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React - Routage avec React Router</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Routage avec React Router</h1>
+        <p>Apprenez à implémenter la navigation entre pages avec React Router.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 9: Routage avec React Router</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            React Router est une bibliothèque qui permet de gérer la navigation dans une application React en créant des routes.
+        </p>
+
+        <h2>2. Installation</h2>
+        <pre>
+npm install react-router-dom
+        </pre>
+
+        <h2>3. Configuration basique</h2>
+        <pre>
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
+function Accueil() {
+  return &lt;h2&gt;Page d'accueil&lt;/h2&gt;;
+}
+
+function APropos() {
+  return &lt;h2&gt;À propos&lt;/h2&gt;;
+}
+
+function App() {
+  return (
+    &lt;Router&gt;
+      &lt;nav&gt;
+        &lt;Link to="/"&gt;Accueil&lt;/Link&gt; | 
+        &lt;Link to="/apropos"&gt;À propos&lt;/Link&gt;
+      &lt;/nav&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;Accueil /&gt;} /&gt;
+        &lt;Route path="/apropos" element={&lt;APropos /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/Router&gt;
+  );
+}
+        </pre>
+
+        <h2>4. Concepts clés</h2>
+        <ul>
+            <li><code>Router</code> : conteneur principal qui active la navigation.</li>
+            <li><code>Routes</code> : conteneur pour définir les différentes routes.</li>
+            <li><code>Route</code> : définit un chemin et le composant à afficher.</li>
+            <li><code>Link</code> : remplace la balise &lt;a&gt; pour une navigation sans rechargement.</li>
+        </ul>
+
+        <h2>5. Navigation programmée</h2>
+        <pre>
+import { useNavigate } from 'react-router-dom';
+
+function MonComposant() {
+  const navigate = useNavigate();
+
+  function allerAccueil() {
+    navigate('/');
+  }
+
+  return &lt;button onClick={allerAccueil}&gt;Retour à l'accueil&lt;/button&gt;;
+}
+        </pre>
+
+        <h2>6. Bonnes pratiques</h2>
+        <ul>
+            <li>Organisez vos routes dans des fichiers séparés si elles sont nombreuses.</li>
+            <li>Utilisez des routes imbriquées pour une meilleure hiérarchie.</li>
+            <li>Testez la navigation pour s’assurer que les liens fonctionnent correctement.</li>
+        </ul>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage React &copy; 2025 | Pour en savoir plus, consultez la <a
+                href="https://fr.reactjs.org">documentation officielle React</a></p>
+    </footer>
+</body>
+
+</html>

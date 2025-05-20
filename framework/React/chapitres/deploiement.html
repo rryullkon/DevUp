@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React - Déploiement d'une application React</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Déploiement d'une application React</h1>
+        <p>Apprenez à déployer votre application sur Netlify, Vercel ou d'autres plateformes.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 14: Déploiement d'une application React</h1>
+
+        <h2>1. Préparer votre application</h2>
+        <p>
+            Avant de déployer, construisez votre application en mode production avec la commande :
+        </p>
+        <pre>
+npm run build
+        </pre>
+        <p>
+            Cela génère un dossier <code>build</code> contenant les fichiers optimisés à déployer.
+        </p>
+
+        <h2>2. Déploiement sur Netlify</h2>
+        <p>
+            Netlify est une plateforme simple et gratuite pour déployer des sites statiques et applications React.
+        </p>
+        <ol>
+            <li>Créez un compte sur <a href="https://www.netlify.com" target="_blank">Netlify</a>.</li>
+            <li>Connectez votre dépôt GitHub, GitLab ou Bitbucket.</li>
+            <li>Configurez la branche à déployer (ex: <code>main</code>) et la commande de build (<code>npm run build</code>).</li>
+            <li>Définissez le dossier de publication sur <code>build</code>.</li>
+            <li>Lancez le déploiement, votre site sera accessible en quelques secondes.</li>
+        </ol>
+
+        <h2>3. Déploiement sur Vercel</h2>
+        <p>
+            Vercel est une autre plateforme populaire pour déployer facilement vos applications React.
+        </p>
+        <ol>
+            <li>Créez un compte sur <a href="https://vercel.com" target="_blank">Vercel</a>.</li>
+            <li>Importez votre projet depuis GitHub, GitLab ou Bitbucket.</li>
+            <li>Vercel détecte automatiquement les projets React et configure la build (<code>npm run build</code>) et le dossier de sortie (<code>build</code>).</li>
+            <li>Démarrez le déploiement et votre application sera disponible rapidement.</li>
+        </ol>
+
+        <h2>4. Autres plateformes</h2>
+        <p>
+            Vous pouvez aussi déployer votre application sur :
+        </p>
+        <ul>
+            <li>GitHub Pages (pour des sites statiques)</li>
+            <li>Firebase Hosting</li>
+            <li>Amazon S3 + CloudFront</li>
+            <li>Heroku (avec Node.js pour SSR ou API)</li>
+        </ul>
+
+        <h2>5. Conseils pratiques</h2>
+        <ul>
+            <li>Configurez un fichier <code>_redirects</code> (Netlify) ou <code>vercel.json</code> pour gérer le routage côté client (SPA).</li>
+            <li>Utilisez un domaine personnalisé pour votre site.</li>
+            <li>Surveillez les performances et erreurs après déploiement.</li>
+            <li>Automatisez le déploiement avec les pipelines CI/CD de votre plateforme.</li>
+        </ul>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage React &copy; 2025 | Pour en savoir plus, consultez la <a
+                href="https://fr.reactjs.org">documentation officielle React</a></p>
+    </footer>
+</body>
+
+</html>

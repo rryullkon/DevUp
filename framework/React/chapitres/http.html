@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React - Requêtes HTTP avec Axios</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Requêtes HTTP avec Axios</h1>
+        <p>Apprenez à effectuer des requêtes API dans vos applications React.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 11: Requêtes HTTP avec Axios</h1>
+
+        <h2>1. Qu'est-ce qu'Axios ?</h2>
+        <p>
+            Axios est une bibliothèque JavaScript permettant de faire des requêtes HTTP depuis le navigateur ou Node.js.
+            Elle simplifie les appels API en offrant une interface claire et puissante.
+        </p>
+
+        <h2>2. Installation</h2>
+        <pre>
+npm install axios
+        </pre>
+
+        <h2>3. Utilisation basique</h2>
+        <pre>
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+function Donnees() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() =&gt; {
+    axios.get('https://jsonplaceholder.typicode.com/posts/1')
+      .then(response =&gt; {
+        setData(response.data);
+        setLoading(false);
+      })
+      .catch(err =&gt; {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return &lt;p&gt;Chargement...&lt;/p&gt;;
+  if (error) return &lt;p&gt;Erreur : {error}&lt;/p&gt;;
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Titre : {data.title}&lt;/h2&gt;
+      &lt;p&gt;Contenu : {data.body}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+        </pre>
+
+        <h2>4. Envoyer des données (POST)</h2>
+        <pre>
+axios.post('https://jsonplaceholder.typicode.com/posts', {
+  title: 'foo',
+  body: 'bar',
+  userId: 1
+})
+.then(response =&gt; {
+  console.log(response.data);
+})
+.catch(error =&gt; {
+  console.error(error);
+});
+        </pre>
+
+        <h2>5. Gérer les erreurs</h2>
+        <p>
+            Axios permet de récupérer facilement les erreurs dans le bloc <code>catch</code>. Vous pouvez accéder au code d'erreur, message, ou réponse du serveur.
+        </p>
+
+        <h2>6. Intercepteurs</h2>
+        <p>
+            Axios propose des intercepteurs pour modifier les requêtes ou réponses avant qu'elles ne soient traitées, par exemple pour ajouter un token d’authentification.
+        </p>
+        <pre>
+axios.interceptors.request.use(config =&gt; {
+  config.headers.Authorization = 'Bearer token';
+  return config;
+});
+        </pre>
+
+        <h2>7. Bonnes pratiques</h2>
+        <ul>
+            <li>Gérer les états de chargement et d’erreur dans vos composants.</li>
+            <li>Centraliser les appels API dans des services dédiés.</li>
+            <li>Utiliser des intercepteurs pour gérer les tokens ou erreurs globales.</li>
+            <li>Nettoyer les effets avec un mécanisme d’annulation si nécessaire.</li>
+        </ul>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage React &copy; 2025 | Pour en savoir plus, consultez la <a
+                href="https://fr.reactjs.org">documentation officielle React</a></p>
+    </footer>
+</body>
+
+</html>

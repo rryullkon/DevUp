@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Travaux pratique - E-commerce (panier)</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>E-commerce (panier)</h1>
+        <p>Créez un mini site e-commerce avec gestion de panier et paiement simulé.</p>
+    </header>
+
+    <main>
+        <h1>Travaux pratique - Chapitre 17 : E-commerce (panier)</h1>
+
+        <h2>Objectif</h2>
+        <p>
+            Concevez une application React simple permettant d’afficher une liste de produits, d’ajouter des articles à un panier, 
+            de modifier les quantités, de visualiser le total et de simuler un paiement.
+            Ce projet mettra en œuvre la gestion d’état avancée, la manipulation des listes et la gestion d’événements.
+        </p>
+
+        <h2>Étapes détaillées</h2>
+
+        <h3>1. Préparer les données produits</h3>
+        <p>
+            Créez une liste statique de produits avec un identifiant, un nom, un prix et une image (optionnelle).
+        </p>
+        <pre>
+const produits = [
+  { id: 1, nom: 'T-shirt React', prix: 20 },
+  { id: 2, nom: 'Casquette JavaScript', prix: 15 },
+  { id: 3, nom: 'Sticker CSS', prix: 5 },
+];
+        </pre>
+
+        <h3>2. Afficher la liste des produits</h3>
+        <p>
+            Affichez les produits avec un bouton "Ajouter au panier" pour chaque article.
+        </p>
+
+        <h3>3. Gestion du panier</h3>
+        <p>
+            Utilisez <code>useState</code> pour gérer le contenu du panier sous forme de tableau d’objets produits avec quantité.
+        </p>
+        <ul>
+            <li>Ajouter un produit au panier (ou augmenter la quantité s’il y est déjà).</li>
+            <li>Supprimer un produit ou diminuer la quantité.</li>
+            <li>Calculer le total du panier.</li>
+        </ul>
+
+        <h3>4. Afficher le panier</h3>
+        <p>
+            Montrez la liste des articles du panier avec la quantité et le prix total.
+        </p>
+
+        <h3>5. Simuler le paiement</h3>
+        <p>
+            Ajoutez un bouton "Payer" qui vide le panier et affiche un message de confirmation.
+        </p>
+
+        <h2>Exemple de structure React simplifiée</h2>
+        <pre>
+import React, { useState } from 'react';
+
+const produits = [
+  { id: 1, nom: 'T-shirt React', prix: 20 },
+  { id: 2, nom: 'Casquette JavaScript', prix: 15 },
+  { id: 3, nom: 'Sticker CSS', prix: 5 },
+];
+
+function App() {
+  const [panier, setPanier] = useState([]);
+
+  function ajouterAuPanier(produit) {
+    const exist = panier.find(item =&gt; item.id === produit.id);
+    if (exist) {
+      setPanier(
+        panier.map(item =>
+          item.id === produit.id ? { ...exist, quantite: exist.quantite + 1 } : item
+        )
+      );
+    } else {
+      setPanier([...panier, { ...produit, quantite: 1 }]);
+    }
+  }
+
+  function retirerDuPanier(produit) {
+    const exist = panier.find(item =&gt; item.id === produit.id);
+    if (exist.quantite === 1) {
+      setPanier(panier.filter(item =&gt; item.id !== produit.id));
+    } else {
+      setPanier(
+        panier.map(item =>
+          item.id === produit.id ? { ...exist, quantite: exist.quantite - 1 } : item
+        )
+      );
+    }
+  }
+
+  function payer() {
+    alert('Paiement effectué avec succès ! Merci pour votre achat.');
+    setPanier([]);
+  }
+
+  const total = panier.reduce((acc, item) =&gt; acc + item.prix * item.quantite, 0);
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Mini site e-commerce&lt;/h1&gt;
+
+      &lt;h2&gt;Produits&lt;/h2&gt;
+      &lt;ul&gt;
+        {produits.map(produit =&gt; (
+          &lt;li key={produit.id}&gt;
+            {produit.nom} - {produit.prix} €
+            &lt;button onClick={() =&gt; ajouterAuPanier(produit)}&gt;Ajouter au panier&lt;/button&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+
+      &lt;h2&gt;Panier&lt;/h2&gt;
+      {panier.length === 0 ? (
+        &lt;p&gt;Votre panier est vide.&lt;/p&gt;
+      ) : (
+        &lt;div&gt;
+          &lt;ul&gt;
+            {panier.map(item =&gt; (
+              &lt;li key={item.id}&gt;
+                {item.nom} x {item.quantite} = {item.prix * item.quantite} €
+                &lt;button onClick={() =&gt; retirerDuPanier(item)}&gt;-&lt;/button&gt;
+                &lt;button onClick={() =&gt; ajouterAuPanier(item)}&gt;+&lt;/button&gt;
+              &lt;/li&gt;
+            ))}
+          &lt;/ul&gt;
+          &lt;p&gt;Total : {total} €&lt;/p&gt;
+          &lt;button onClick={payer}&gt;Payer&lt;/button&gt;
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+        </pre>
+
+        <h2>Conseils</h2>
+        <ul>
+            <li>Ajoutez du style CSS pour améliorer l’interface.</li>
+            <li>Vous pouvez étendre avec une gestion de panier persistante (localStorage).</li>
+            <li>Simulez différents modes de paiement ou une confirmation plus avancée.</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>
+            Ce projet vous permettra d’approfondir la gestion d’état complexe, la manipulation de listes, et la gestion d’interactions en React.
+        </p>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage React &copy; 2025 | Pour en savoir plus, consultez la <a
+                href="https://fr.reactjs.org">documentation officielle React</a></p>
+    </footer>
+</body>
+
+</html>

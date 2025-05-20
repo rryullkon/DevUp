@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React - Gestion d'état avancée (Context API, Redux)</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Gestion d'état avancée (Context API, Redux)</h1>
+        <p>Découvrez comment gérer l'état global de votre application.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 10: Gestion d'état avancée (Context API, Redux)</h1>
+
+        <h2>1. Pourquoi gérer l'état global ?</h2>
+        <p>
+            Dans une application React, certains états doivent être partagés entre plusieurs composants éloignés dans l'arborescence.
+            Gérer cet état de manière locale devient compliqué et source d’erreurs.
+            C’est pourquoi on utilise des solutions pour gérer un état global centralisé.
+        </p>
+
+        <h2>2. Context API</h2>
+        <p>
+            La <strong>Context API</strong> est une solution native de React qui permet de partager des données (état, fonctions) à travers la hiérarchie de composants sans avoir à passer explicitement des props à chaque niveau.
+        </p>
+        <pre>
+// Création du contexte
+import React, { createContext, useState } from 'react';
+
+const ThemeContext = createContext();
+
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('clair');
+
+  return (
+    &lt;ThemeContext.Provider value={{ theme, setTheme }}&gt;
+      {children}
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+export { ThemeContext, ThemeProvider };
+        </pre>
+        <p>
+            Puis, dans un composant enfant, on peut accéder au contexte avec <code>useContext</code> :
+        </p>
+        <pre>
+import React, { useContext } from 'react';
+import { ThemeContext } from './ThemeContext';
+
+function BoutonTheme() {
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  return (
+    &lt;button onClick={() =&gt; setTheme(theme === 'clair' ? 'sombre' : 'clair')}&gt;
+      Thème actuel : {theme}
+    &lt;/button&gt;
+  );
+}
+        </pre>
+
+        <h2>3. Redux</h2>
+        <p>
+            Redux est une bibliothèque externe très populaire qui permet de gérer un état global avec un pattern prévisible et strict : le state est immuable et ne peut être modifié qu’avec des actions.
+        </p>
+        <p>
+            <strong>Concepts clés de Redux :</strong>
+        </p>
+        <ul>
+            <li><strong>Store</strong> : Contient l’état global de l’application.</li>
+            <li><strong>Actions</strong> : Objets décrivant ce qui doit changer.</li>
+            <li><strong>Reducers</strong> : Fonctions pures qui reçoivent l’état actuel et une action, et retournent un nouvel état.</li>
+            <li><strong>Dispatch</strong> : Fonction qui envoie une action au store pour modifier l’état.</li>
+        </ul>
+
+        <h3>Exemple simple de Redux</h3>
+        <pre>
+// actions.js
+export const increment = () =&gt; ({ type: 'INCREMENT' });
+
+// reducer.js
+const initialState = { count: 0 };
+
+function compteurReducer(state = initialState, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    default:
+      return state;
+  }
+}
+
+export default compteurReducer;
+
+// store.js
+import { createStore } from 'redux';
+import compteurReducer from './reducer';
+
+const store = createStore(compteurReducer);
+
+export default store;
+
+// App.js
+import React from 'react';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import store from './store';
+
+function Compteur() {
+  const count = useSelector(state =&gt; state.count);
+  const dispatch = useDispatch();
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Compteur : {count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; dispatch({ type: 'INCREMENT' })}&gt;Incrémenter&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+function App() {
+  return (
+    &lt;Provider store={store}&gt;
+      &lt;Compteur /&gt;
+    &lt;/Provider&gt;
+  );
+}
+
+export default App;
+        </pre>
+
+        <h2>4. Quand choisir Context API ou Redux ?</h2>
+        <ul>
+            <li><strong>Context API</strong> est idéale pour un partage simple et modéré de données comme le thème, la langue, ou un utilisateur connecté.</li>
+            <li><strong>Redux</strong> est recommandé pour des applications plus complexes avec beaucoup d’états globaux, de la logique métier importante, ou des outils de debugging avancés.</li>
+        </ul>
+
+        <h2>5. Bonnes pratiques</h2>
+        <ul>
+            <li>Ne pas surutiliser le contexte pour éviter des re-render inutiles.</li>
+            <li>Utiliser des sélecteurs pour limiter la portée des mises à jour.</li>
+            <li>Maintenir les reducers purs et simples.</li>
+            <li>Documenter les actions et la structure du state pour faciliter la maintenance.</li>
+        </ul>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage React &copy; 2025 | Pour en savoir plus, consultez la <a
+                href="https://fr.reactjs.org">documentation officielle React</a></p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>React - Cycle de vie des composants</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Cycle de vie des composants</h1>
+        <p>Comprenez le cycle de vie des composants et les méthodes associées.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 5: Cycle de vie des composants</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Le cycle de vie d’un composant React correspond aux différentes phases que traverse un composant depuis sa création
+            jusqu’à sa suppression. React fournit des méthodes pour interagir avec ces phases.
+        </p>
+
+        <h2>2. Les phases principales</h2>
+        <ul>
+            <li><strong>Montage (Mounting)</strong> : Le composant est créé et inséré dans le DOM.</li>
+            <li><strong>Mise à jour (Updating)</strong> : Le composant est mis à jour suite à un changement de props ou d’état.</li>
+            <li><strong>Demontage (Unmounting)</strong> : Le composant est retiré du DOM.</li>
+        </ul>
+
+        <h2>3. Méthodes du cycle de vie avec les composants de classe</h2>
+        <pre>
+class Exemple extends React.Component {
+  componentDidMount() {
+    console.log("Composant monté !");
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("Composant mis à jour !");
+  }
+
+  componentWillUnmount() {
+    console.log("Composant démonté !");
+  }
+
+  render() {
+    return &lt;div&gt;Bonjour !&lt;/div&gt;;
+  }
+}
+        </pre>
+
+        <h2>4. Hooks et cycle de vie avec les composants fonctionnels</h2>
+        <p>
+            Avec les hooks, vous pouvez gérer le cycle de vie dans les composants fonctionnels à l’aide de <code>useEffect</code>.
+        </p>
+        <pre>
+import { useEffect } from 'react';
+
+function Exemple() {
+  useEffect(() => {
+    console.log("Composant monté !");
+    
+    return () => {
+      console.log("Composant démonté !");
+    };
+  }, []);
+
+  return &lt;div&gt;Bonjour !&lt;/div&gt;;
+}
+        </pre>
+
+        <h2>5. Bonnes pratiques</h2>
+        <ul>
+            <li>Utilisez <code>useEffect</code> pour gérer les effets de bord dans les composants fonctionnels.</li>
+            <li>Nettoyez les effets pour éviter les fuites de mémoire.</li>
+            <li>Préférez les composants fonctionnels modernes avec hooks plutôt que les classes sauf si nécessaire.</li>
+        </ul>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage React &copy; 2025 | Pour en savoir plus, consultez la <a
+                href="https://fr.reactjs.org">documentation officielle React</a></p>
+    </footer>
+</body>
+
+</html>
