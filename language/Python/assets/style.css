@@ -91,13 +91,34 @@ h3 {
     letter-spacing: 0.03em;
 }
 
-h5 {
+.chapter-card.TP h5 {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     color: white !important;
     margin-bottom: 1em !important;
     letter-spacing: 0.03em;
     margin: 10px;
     background: linear-gradient(90deg, #a00000, #cc0000) !important;
+
+    border-radius: var(--radius-md) !important;
+    padding: 0.6em 1.2em !important;
+
+    text-align: center;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    z-index: 2;
+}
+
+.chapter-card.EX h5 {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: white !important;
+    margin-bottom: 1em !important;
+    letter-spacing: 0.03em;
+    margin: 10px;
+    background: linear-gradient(90deg, #006600 60%, #00aa00 100%) !important;
 
     border-radius: var(--radius-md) !important;
     padding: 0.6em 1.2em !important;
@@ -258,6 +279,37 @@ main {
 .chapter-card.TP .btn:hover {
     background: linear-gradient(90deg, #cc0000 60%, #a00000 100%) !important;
     box-shadow: 0 4px 16px rgba(166, 90, 90, 0.18) !important;
+}
+
+/* Styles spécifiques pour les cartes d'exercices */
+.chapter-card.EX {
+    background: linear-gradient(120deg, #f8fff8 60%, #e0ffe0 100%) !important;
+    box-shadow: 0 4px 24px rgba(136, 190, 136, 0.13), 0 1.5px 6px rgba(90, 166, 90, 0.07) !important;
+    border-left: 4px solid #00aa00;
+}
+
+.chapter-card.EX::before {
+    background: radial-gradient(circle, #00aa00 0%, transparent 70%) !important;
+    opacity: 0.08 !important;
+}
+
+.chapter-card.EX:hover {
+    background: linear-gradient(120deg, #e0ffe0 60%, #f8fff8 100%) !important;
+    box-shadow: 0 8px 32px rgba(90, 166, 90, 0.18), 0 2px 8px rgba(76, 147, 76, 0.10) !important;
+}
+
+.chapter-card.EX h3 {
+    color: #006600 !important;
+}
+
+.chapter-card.EX .btn {
+    background: linear-gradient(90deg, #006600 60%, #00aa00 100%) !important;
+    box-shadow: 0 2px 8px rgba(136, 190, 136, 0.10) !important;
+}
+
+.chapter-card.EX .btn:hover {
+    background: linear-gradient(90deg, #00aa00 60%, #006600 100%) !important;
+    box-shadow: 0 4px 16px rgba(90, 166, 90, 0.18) !important;
 }
 
 /* Liens */

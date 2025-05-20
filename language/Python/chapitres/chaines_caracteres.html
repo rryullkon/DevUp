@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Python - Les chaînes de caractères</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Les chaînes de caractères en Python</h1>
+        <p>Manipuler et utiliser les chaînes de caractères efficacement</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 4: Les chaînes de caractères</h1>
+
+        <h2>1. Définition et création</h2>
+        <p>
+            En Python, les chaînes (type <code>str</code>) sont des séquences de caractères entourées de guillemets simples ou doubles :
+        </p>
+        <pre>
+chaine1 = 'Bonjour'
+chaine2 = "Python"
+chaine3 = '''Ceci est une
+chaîne sur plusieurs
+lignes'''
+        </pre>
+
+        <h2>2. Opérations de base</h2>
+        <h3>Concaténation</h3>
+        <pre>
+prenom = "Alice"
+nom = "Dupont"
+nom_complet = prenom + " " + nom  # "Alice Dupont"
+        </pre>
+
+        <h3>Répétition</h3>
+        <pre>
+separateur = "-" * 20  # "--------------------"
+        </pre>
+
+        <h3>Accès aux caractères</h3>
+        <pre>
+langage = "Python"
+premiere_lettre = langage[0]  # "P" (indexation à partir de 0)
+derniere_lettre = langage[-1] # "n"
+        </pre>
+
+        <h2>3. Méthodes utiles</h2>
+        <table>
+            <tr>
+                <th>Méthode</th>
+                <th>Description</th>
+                <th>Exemple</th>
+            </tr>
+            <tr>
+                <td><code>.upper()</code></td>
+                <td>Convertit en majuscules</td>
+                <td><code>"hello".upper() → "HELLO"</code></td>
+            </tr>
+            <tr>
+                <td><code>.lower()</code></td>
+                <td>Convertit en minuscules</td>
+                <td><code>"HELLO".lower() → "hello"</code></td>
+            </tr>
+            <tr>
+                <td><code>.strip()</code></td>
+                <td>Supprime les espaces en début/fin</td>
+                <td><code>"  text  ".strip() → "text"</code></td>
+            </tr>
+            <tr>
+                <td><code>.split()</code></td>
+                <td>Découpe la chaîne en liste</td>
+                <td><code>"a,b,c".split(",") → ["a","b","c"]</code></td>
+            </tr>
+            <tr>
+                <td><code>.replace()</code></td>
+                <td>Remplace une sous-chaîne</td>
+                <td><code>"hello".replace("e","a") → "hallo"</code></td>
+            </tr>
+            <tr>
+                <td><code>.format()</code></td>
+                <td>Formatage de chaîne</td>
+                <td><code>"Bonjour {}".format("Alice") → "Bonjour Alice"</code></td>
+            </tr>
+        </table>
+
+        <h2>4. Les f-strings (Python 3.6+)</h2>
+        <p>
+            Méthode moderne de formatage des chaînes :
+        </p>
+        <pre>
+nom = "Alice"
+age = 25
+message = f"Je m'appelle {nom} et j'ai {age} ans"
+# Résultat: "Je m'appelle Alice et j'ai 25 ans"
+        </pre>
+
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage Python &copy; 2025 | Pour toute question, consultez la <a
+                href="https://docs.python.org/fr/3/">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>
