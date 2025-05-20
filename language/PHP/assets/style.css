@@ -45,6 +45,40 @@ body {
     letter-spacing: 0.01em;
 }
 
+.progress-container {
+    width: 80%;
+    max-width: 500px;
+    background-color: var(--php-gray);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xs);
+    box-shadow: var(--shadow-md);
+    margin: 10px;
+}
+
+.progress-bar {
+    height: 30px;
+    background-color: var(--php-blue);
+    border-radius: var(--radius-md);
+    width: 16%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--php-white);
+    font-weight: bold;
+    transition: width 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.progress-text {
+    position: absolute;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    margin-top: var(--space-md);
+    color: var(--php-dark);
+    font-weight: bold;
+}
+
 /* Typographie */
 h1,
 h2,

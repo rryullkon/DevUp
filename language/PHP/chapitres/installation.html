@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Installation de PHP</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Installation de PHP</h1>
+        <p>Guide complet pour installer PHP sur Windows, Linux et macOS.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 2: Installation de PHP</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Avant de pouvoir développer des applications en PHP, il est nécessaire d’installer l’interpréteur PHP sur votre système. PHP est compatible avec les trois principaux systèmes d'exploitation : Windows, Linux et macOS.
+        </p>
+
+        <h2>2. Installation sur Windows</h2>
+        <ol>
+            <li>Téléchargez <a href="https://www.apachefriends.org/fr/index.html">XAMPP</a> ou <a href="https://www.wampserver.com/">WampServer</a>.</li>
+            <li>Installez l’un de ces serveurs qui intègrent PHP, Apache et MySQL.</li>
+            <li>Lancez le panneau de contrôle et démarrez le serveur Apache.</li>
+            <li>Placez vos fichiers PHP dans le dossier <code>htdocs</code> de XAMPP ou <code>www</code> de WAMP.</li>
+        </ol>
+
+        <h2>3. Installation sur macOS</h2>
+        <ol>
+            <li>Installez <a href="https://brew.sh/">Homebrew</a> si ce n’est pas déjà fait.</li>
+            <li>Ouvrez le Terminal et exécutez la commande : <code>brew install php</code></li>
+            <li>Vérifiez l’installation avec : <code>php -v</code></li>
+        </ol>
+
+        <h2>4. Installation sur Linux (Ubuntu)</h2>
+        <ol>
+            <li>Ouvrez un terminal.</li>
+            <li>Mettez à jour les paquets : <code>sudo apt update</code></li>
+            <li>Installez PHP avec la commande : <code>sudo apt install php</code></li>
+            <li>Vérifiez l’installation avec : <code>php -v</code></li>
+        </ol>
+
+        <h2>5. Tester l'installation</h2>
+        <p>
+            Créez un fichier <code>test.php</code> contenant le code suivant :
+        </p>
+        <pre>
+&lt;?php
+phpinfo();
+?&gt;
+        </pre>
+        <p>
+            Placez ce fichier dans le dossier approprié de votre serveur (par exemple, <code>htdocs</code> avec XAMPP), puis accédez-y via votre navigateur : <code>http://localhost/test.php</code>.
+        </p>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour toute question, consultez la <a
+                href="https://www.php.net/manual/fr/">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>

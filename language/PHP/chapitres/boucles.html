@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Boucles</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Boucles</h1>
+        <p>for, while, do-while, foreach et contrôle des boucles.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 9: Boucles</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Les boucles permettent d’exécuter un bloc de code plusieurs fois tant qu’une condition est vraie ou selon un compteur.
+        </p>
+
+        <h2>2. La boucle for</h2>
+        <p>Utilisée quand on connaît le nombre d’itérations à effectuer.</p>
+        <pre>
+&lt;?php
+for ($i = 0; $i &lt; 5; $i++) {
+    echo "Itération $i<br>";
+}
+?&gt;
+        </pre>
+
+        <h2>3. La boucle while</h2>
+        <p>Exécute le bloc tant que la condition est vraie.</p>
+        <pre>
+&lt;?php
+$i = 0;
+while ($i &lt; 5) {
+    echo "Itération $i<br>";
+    $i++;
+}
+?&gt;
+        </pre>
+
+        <h2>4. La boucle do-while</h2>
+        <p>Exécute le bloc au moins une fois puis répète tant que la condition est vraie.</p>
+        <pre>
+&lt;?php
+$i = 0;
+do {
+    echo "Itération $i<br>";
+    $i++;
+} while ($i &lt; 5);
+?&gt;
+        </pre>
+
+        <h2>5. La boucle foreach</h2>
+        <p>Spécialement conçue pour parcourir les tableaux et objets itérables.</p>
+        <pre>
+&lt;?php
+$fruits = ["pomme", "banane", "cerise"];
+
+foreach ($fruits as $fruit) {
+    echo $fruit . "&lt;br&gt;";
+}
+?&gt;
+        </pre>
+
+        <h2>6. Contrôle des boucles</h2>
+        <ul>
+            <li><code>break</code> : sortir immédiatement de la boucle</li>
+            <li><code>continue</code> : passer directement à l’itération suivante</li>
+        </ul>
+        <pre>
+&lt;?php
+for ($i = 0; $i &lt; 10; $i++) {
+    if ($i == 5) {
+        break; // sort de la boucle dès que $i vaut 5
+    }
+    if ($i % 2 == 0) {
+        continue; // saute les nombres pairs
+    }
+    echo "Valeur impaire: $i&lt;br&gt;";
+}
+?&gt;
+        </pre>
+
+        <h2>7. Résumé</h2>
+        <table border="1" cellpadding="8">
+            <thead>
+                <tr>
+                    <th>Type de boucle</th>
+                    <th>Quand l'utiliser ?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>for</td>
+                    <td>Nombre précis d’itérations</td>
+                </tr>
+                <tr>
+                    <td>while</td>
+                    <td>Condition préalable à chaque itération</td>
+                </tr>
+                <tr>
+                    <td>do-while</td>
+                    <td>Exécution au moins une fois</td>
+                </tr>
+                <tr>
+                    <td>foreach</td>
+                    <td>Parcours d’un tableau ou d’un objet itérable</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour toute question, consultez la <a
+                href="https://www.php.net/manual/fr/language.loops.php">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>

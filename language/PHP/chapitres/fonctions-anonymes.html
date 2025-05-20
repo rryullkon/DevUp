@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Fonctions anonymes</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Fonctions anonymes</h1>
+        <p>Closures et callables en PHP.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 14: Fonctions anonymes</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Une fonction anonyme est une fonction sans nom, souvent utilisée pour créer des closures ou passer une fonction en argument.
+        </p>
+
+        <h2>2. Déclaration d’une fonction anonyme</h2>
+        <pre>
+&lt;?php
+$saluer = function($nom) {
+    echo "Bonjour, $nom !&lt;br&gt;";
+};
+
+$saluer("Alice"); // Affiche "Bonjour, Alice !"
+?&gt;
+        </pre>
+
+        <h2>3. Utilisation des closures</h2>
+        <p>
+            Les closures sont des fonctions anonymes qui peuvent capturer des variables du contexte extérieur avec le mot-clé <code>use</code>.
+        </p>
+        <pre>
+&lt;?php
+$message = "Bienvenue";
+
+$afficherMessage = function($nom) use ($message) {
+    echo "$message, $nom !&lt;br&gt;";
+};
+
+$afficherMessage("Paul"); // Affiche "Bienvenue, Paul !"
+?&gt;
+        </pre>
+
+        <h2>4. Callables</h2>
+        <p>
+            Un callable est une structure représentant une fonction ou méthode pouvant être appelée. Une fonction anonyme est un exemple de callable.
+        </p>
+        <pre>
+&lt;?php
+function executer(callable $fonction, $param) {
+    $fonction($param);
+}
+
+executer(function($nom) {
+    echo "Salut, $nom !&lt;br&gt;";
+}, "Marie");
+?&gt;
+        </pre>
+
+        <h2>5. Exemple pratique : tri personnalisé</h2>
+        <p>
+            Utilisation d’une fonction anonyme comme callback pour trier un tableau.
+        </p>
+        <pre>
+&lt;?php
+$notes = [15, 8, 20, 12];
+
+usort($notes, function($a, $b) {
+    return $b - $a; // Tri décroissant
+});
+
+print_r($notes);
+?&gt;
+        </pre>
+
+        <h2>6. Résumé</h2>
+        <ul>
+            <li>Fonctions anonymes : fonctions sans nom assignées à des variables</li>
+            <li>Closures : fonctions anonymes capturant des variables externes</li>
+            <li>Callables : fonctions ou méthodes pouvant être passées en argument</li>
+            <li>Très utiles pour la programmation fonctionnelle et les callbacks</li>
+        </ul>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour toute question, consultez la <a
+                href="https://www.php.net/manual/fr/functions.anonymous.php">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>

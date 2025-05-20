@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Opérateurs</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Opérateurs</h1>
+        <p>Opérateurs arithmétiques, de comparaison, logiques et autres.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 7: Opérateurs</h1>
+
+        <h2>1. Qu'est-ce qu'un opérateur ?</h2>
+        <p>
+            Un opérateur permet d’effectuer des opérations sur des variables ou des valeurs. PHP propose plusieurs catégories d’opérateurs selon le type d’opération souhaitée.
+        </p>
+
+        <h2>2. Opérateurs arithmétiques</h2>
+        <p>Utilisés pour les calculs mathématiques :</p>
+        <ul>
+            <li><code>+</code> : addition</li>
+            <li><code>-</code> : soustraction</li>
+            <li><code>*</code> : multiplication</li>
+            <li><code>/</code> : division</li>
+            <li><code>%</code> : modulo (reste de la division entière)</li>
+        </ul>
+
+        <pre>
+&lt;?php
+$a = 10;
+$b = 3;
+
+echo $a + $b; // 13
+echo $a % $b; // 1
+?&gt;
+        </pre>
+
+        <h2>3. Opérateurs d'affectation</h2>
+        <p>Permettent d’assigner une valeur à une variable :</p>
+        <ul>
+            <li><code>=</code> : affectation simple</li>
+            <li><code>+=</code> : addition puis affectation</li>
+            <li><code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code> : même logique</li>
+        </ul>
+
+        <pre>
+&lt;?php
+$x = 5;
+$x += 3; // équivaut à $x = $x + 3;
+echo $x; // 8
+?&gt;
+        </pre>
+
+        <h2>4. Opérateurs de comparaison</h2>
+        <p>Utilisés dans les conditions (<code>if</code>, <code>while</code>, etc.) :</p>
+        <ul>
+            <li><code>==</code> : égalité (valeur)</li>
+            <li><code>===</code> : égalité stricte (valeur et type)</li>
+            <li><code>!=</code> ou <code>&lt;&gt;</code> : différence</li>
+            <li><code>!==</code> : différence stricte</li>
+            <li><code>&gt;</code>, <code>&lt;</code> : supérieur, inférieur</li>
+            <li><code>&gt;=</code>, <code>&lt;=</code> : supérieur ou égal, inférieur ou égal</li>
+        </ul>
+
+        <pre>
+&lt;?php
+$a = 5;
+$b = "5";
+
+var_dump($a == $b);  // true (valeurs égales)
+var_dump($a === $b); // false (types différents)
+?&gt;
+        </pre>
+
+        <h2>5. Opérateurs logiques</h2>
+        <p>Permettent de combiner plusieurs conditions :</p>
+        <ul>
+            <li><code>&&</code> ou <code>and</code> : ET logique</li>
+            <li><code>||</code> ou <code>or</code> : OU logique</li>
+            <li><code>!</code> : NON logique (négation)</li>
+        </ul>
+
+        <pre>
+&lt;?php
+$age = 20;
+$inscrit = true;
+
+if ($age &gt;= 18 && $inscrit) {
+    echo "Accès autorisé";
+}
+?&gt;
+        </pre>
+
+        <h2>6. Opérateur de concaténation</h2>
+        <p>Permet de coller plusieurs chaînes de caractères :</p>
+        <pre>
+&lt;?php
+$prenom = "Alice";
+$nom = "Dupont";
+
+echo $prenom . " " . $nom; // Affiche : Alice Dupont
+?&gt;
+        </pre>
+
+        <h2>7. Opérateur ternaire</h2>
+        <p>Opérateur conditionnel compact :</p>
+        <pre>
+&lt;?php
+$age = 17;
+$message = ($age &gt;= 18) ? "Majeur" : "Mineur";
+echo $message; // Affiche "Mineur"
+?&gt;
+        </pre>
+
+        <h2>8. Opérateur null coalescent (PHP 7+)</h2>
+        <p>Permet de fournir une valeur par défaut si une variable est <code>null</code> ou non définie :</p>
+        <pre>
+&lt;?php
+$nom = $_GET['nom'] ?? "Invité";
+echo "Bonjour $nom";
+?&gt;
+        </pre>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour toute question, consultez la <a
+                href="https://www.php.net/manual/fr/language.operators.php">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>

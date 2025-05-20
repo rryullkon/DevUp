@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Fonctions intégrées</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Fonctions intégrées</h1>
+        <p>Les fonctions les plus utiles de la bibliothèque standard PHP.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 11: Fonctions intégrées</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            PHP propose des centaines de fonctions intégrées pour manipuler les chaînes, les tableaux, les fichiers, etc. Voici une sélection des plus courantes et utiles.
+        </p>
+
+        <h2>2. Fonctions sur les chaînes de caractères</h2>
+        <ul>
+            <li><code>strlen($str)</code> : longueur d’une chaîne</li>
+            <li><code>strtoupper($str)</code> : convertir en majuscules</li>
+            <li><code>strtolower($str)</code> : convertir en minuscules</li>
+            <li><code>substr($str, $start, $length)</code> : extraire une sous-chaîne</li>
+            <li><code>strpos($str, $search)</code> : position de la première occurrence</li>
+            <li><code>str_replace($search, $replace, $str)</code> : remplacer dans une chaîne</li>
+        </ul>
+
+        <h2>3. Fonctions sur les tableaux</h2>
+        <ul>
+            <li><code>count($array)</code> : nombre d’éléments</li>
+            <li><code>array_merge($arr1, $arr2)</code> : fusionner des tableaux</li>
+            <li><code>array_keys($array)</code> : obtenir les clés</li>
+            <li><code>array_values($array)</code> : obtenir les valeurs</li>
+            <li><code>in_array($value, $array)</code> : vérifier la présence d’une valeur</li>
+        </ul>
+
+        <h2>4. Fonctions de manipulation de fichiers</h2>
+        <ul>
+            <li><code>file_get_contents($filename)</code> : lire un fichier en entier</li>
+            <li><code>file_put_contents($filename, $data)</code> : écrire dans un fichier</li>
+            <li><code>fopen(), fread(), fwrite(), fclose()</code> : accès fichier plus précis</li>
+            <li><code>unlink($filename)</code> : supprimer un fichier</li>
+        </ul>
+
+        <h2>5. Fonctions utiles diverses</h2>
+        <ul>
+            <li><code>date($format)</code> : afficher la date/heure formatée</li>
+            <li><code>empty($var)</code> : teste si une variable est vide</li>
+            <li><code>isset($var)</code> : teste si une variable est définie</li>
+            <li><code>var_dump($var)</code> : affiche le contenu détaillé d’une variable</li>
+        </ul>
+
+        <h2>6. Exemple d’utilisation</h2>
+        <pre>
+&lt;?php
+$texte = "Bonjour le monde";
+echo strtoupper($texte); // BONJOUR LE MONDE
+
+$fruits = ["pomme", "banane", "cerise"];
+if (in_array("banane", $fruits)) {
+    echo "Banane est dans le tableau.";
+}
+
+$fichier = "exemple.txt";
+file_put_contents($fichier, "Contenu du fichier");
+echo file_get_contents($fichier);
+?&gt;
+        </pre>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour toute question, consultez la <a
+                href="https://www.php.net/manual/fr/funcref.php">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>
