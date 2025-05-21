@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Cookies</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Cookies</h1>
+        <p>Création, lecture et suppression de cookies.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 36: Cookies</h1>
+
+        <h2>1. Qu'est-ce qu'un cookie ?</h2>
+        <p>
+            Un cookie est un petit fichier texte stocké sur l’ordinateur de l’utilisateur par le navigateur web.
+            Il permet de conserver des informations entre différentes pages ou visites, comme un identifiant de session, des préférences, etc.
+        </p>
+
+        <h2>2. Création d’un cookie en PHP</h2>
+        <p>
+            Pour créer un cookie, on utilise la fonction <code>setcookie()</code>, qui doit être appelée avant tout affichage HTML.
+            Les paramètres essentiels sont le nom du cookie, sa valeur et sa durée de vie (timestamp).
+        </p>
+        <pre>
+&lt;?php
+// Crée un cookie nommé "utilisateur" qui expire dans 7 jours
+setcookie("utilisateur", "JeanDupont", time() + 7 * 24 * 60 * 60);
+?&gt;
+        </pre>
+
+        <h2>3. Lire un cookie</h2>
+        <p>
+            Les cookies envoyés par le navigateur sont accessibles via la superglobale <code>$_COOKIE</code>.
+            On peut vérifier si un cookie existe et récupérer sa valeur.
+        </p>
+        <pre>
+&lt;?php
+if (isset($_COOKIE['utilisateur'])) {
+    echo "Bonjour, " . htmlspecialchars($_COOKIE['utilisateur']) . " !";
+} else {
+    echo "Bonjour, visiteur !";
+}
+?&gt;
+        </pre>
+
+        <h2>4. Supprimer un cookie</h2>
+        <p>
+            Pour supprimer un cookie, on le recrée avec une date d’expiration dans le passé.
+        </p>
+        <pre>
+&lt;?php
+// Supprime le cookie "utilisateur"
+setcookie("utilisateur", "", time() - 3600);
+?&gt;
+        </pre>
+
+        <h2>5. Paramètres avancés de setcookie()</h2>
+        <p>
+            La fonction <code>setcookie()</code> accepte d’autres paramètres optionnels pour :
+        </p>
+        <ul>
+            <li><strong>Path</strong> : définit le chemin sur le serveur où le cookie est accessible (ex : <code>"/"</code> pour tout le site)</li>
+            <li><strong>Domain</strong> : domaine pour lequel le cookie est valide</li>
+            <li><strong>Secure</strong> : si vrai, le cookie est envoyé uniquement via HTTPS</li>
+            <li><strong>HttpOnly</strong> : si vrai, le cookie n’est pas accessible via JavaScript, améliorant la sécurité</li>
+            <li><strong>SameSite</strong> : politique pour limiter l’envoi de cookie aux requêtes du même site (Lax, Strict, None)</li>
+        </ul>
+
+        <h2>6. Exemple complet avec options</h2>
+        <pre>
+&lt;?php
+setcookie(
+    "session_id",             // Nom du cookie
+    "abc123xyz",              // Valeur
+    time() + 3600,            // Expire dans 1 heure
+    "/",                      // Chemin accessible dans tout le site
+    "monsite.fr",             // Domaine
+    isset($_SERVER['HTTPS']), // Secure si HTTPS
+    true                      // HttpOnly
+);
+?&gt;
+        </pre>
+
+        <h2>7. Bonnes pratiques</h2>
+        <ul>
+            <li>Ne pas stocker d’informations sensibles dans les cookies</li>
+            <li>Utiliser le paramètre HttpOnly pour réduire les risques de vol via JavaScript</li>
+            <li>Limiter la durée de vie des cookies</li>
+            <li>Utiliser le paramètre Secure sur les sites HTTPS</li>
+        </ul>
+
+        <h2>8. Conclusion</h2>
+        <p>
+            Les cookies sont un moyen simple et efficace pour conserver des informations entre les visites utilisateur.
+            En maîtrisant leur création, lecture et suppression, vous pouvez améliorer l’expérience utilisateur tout en respectant la sécurité.
+        </p>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Documentation officielle PHP : <a href="https://www.php.net/manual/fr/function.setcookie.php">setcookie()</a></p>
+    </footer>
+</body>
+
+</html>

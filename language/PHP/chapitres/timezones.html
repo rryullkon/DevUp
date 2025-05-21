@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Fuseaux horaires</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Fuseaux horaires</h1>
+        <p>Gestion des timezones en PHP.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 39: Fuseaux horaires</h1>
+
+        <h2>1. Qu'est-ce qu'un fuseau horaire ?</h2>
+        <p>
+            Un fuseau horaire définit la différence de temps par rapport au Temps Universel Coordonné (UTC).
+            Il permet d'afficher les heures locales correctes selon la localisation géographique.
+        </p>
+
+        <h2>2. Pourquoi gérer les fuseaux horaires en PHP ?</h2>
+        <p>
+            Pour afficher correctement les dates et heures selon la région de l’utilisateur ou les besoins de l’application,
+            la gestion des fuseaux horaires est essentielle, notamment pour les applications internationales.
+        </p>
+
+        <h2>3. La classe <code>DateTimeZone</code></h2>
+        <p>
+            PHP propose la classe <code>DateTimeZone</code> pour manipuler les fuseaux horaires.
+            Elle permet de définir, récupérer et convertir les dates selon un fuseau donné.
+        </p>
+
+        <h2>4. Définir un fuseau horaire lors de la création d’une date</h2>
+        <pre>
+&lt;?php
+$timezoneParis = new DateTimeZone('Europe/Paris');
+$dateParis = new DateTime('now', $timezoneParis);
+echo "Heure à Paris : " . $dateParis->format('d/m/Y H:i:s');
+?&gt;
+        </pre>
+
+        <h2>5. Modifier le fuseau horaire d’un objet DateTime</h2>
+        <p>
+            Vous pouvez changer le fuseau horaire d’une date existante avec la méthode <code>setTimezone()</code>.
+        </p>
+        <pre>
+&lt;?php
+$date = new DateTime('now', new DateTimeZone('UTC'));
+echo "UTC : " . $date->format('d/m/Y H:i:s') . "&lt;br&gt;";
+
+$date->setTimezone(new DateTimeZone('America/New_York'));
+echo "New York : " . $date->format('d/m/Y H:i:s');
+?&gt;
+        </pre>
+
+        <h2>6. Liste des fuseaux horaires disponibles</h2>
+        <p>
+            PHP propose une liste complète des fuseaux horaires reconnus. Vous pouvez l’afficher avec :
+        </p>
+        <pre>
+&lt;?php
+$zones = DateTimeZone::listIdentifiers();
+foreach ($zones as $zone) {
+    echo $zone . "&lt;br&gt;";
+}
+?&gt;
+        </pre>
+
+        <h2>7. Configuration du fuseau horaire par défaut</h2>
+        <p>
+            Pour définir un fuseau horaire par défaut global dans PHP, on utilise <code>date_default_timezone_set()</code>.
+        </p>
+        <pre>
+&lt;?php
+date_default_timezone_set('Europe/Paris');
+echo date('d/m/Y H:i:s');
+?&gt;
+        </pre>
+
+        <h2>8. Erreurs courantes</h2>
+        <ul>
+            <li>Ne pas définir de fuseau horaire peut provoquer des warnings et des erreurs.</li>
+            <li>Utiliser des noms incorrects de fuseaux horaires (ex : "Paris" au lieu de "Europe/Paris")</li>
+        </ul>
+
+        <h2>9. Conclusion</h2>
+        <p>
+            La gestion correcte des fuseaux horaires est cruciale pour les applications web modernes,
+            surtout lorsqu’elles doivent gérer des utilisateurs à travers le monde.
+            PHP fournit des outils simples et puissants pour manipuler ces fuseaux et assurer la cohérence des dates et heures.
+        </p>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Documentation officielle PHP : <a href="https://www.php.net/manual/fr/class.datetimezone.php">DateTimeZone</a></p>
+    </footer>
+</body>
+
+</html>

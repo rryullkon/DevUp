@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - SPL (Standard PHP Library)</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>SPL (Standard PHP Library)</h1>
+        <p>Les interfaces et classes de la bibliothèque standard.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 25: SPL (Standard PHP Library)</h1>
+
+        <h2>1. Qu’est-ce que la SPL ?</h2>
+        <p>
+            La <strong>Standard PHP Library (SPL)</strong> est une collection de classes et d’interfaces fournies avec PHP.
+            Elle facilite la gestion des structures de données, l’itération, l’autoloading, les exceptions et plus encore.
+        </p>
+
+        <h2>2. Interfaces courantes de la SPL</h2>
+        <ul>
+            <li><code>Iterator</code> – permet d’itérer sur une classe comme un tableau</li>
+            <li><code>Countable</code> – permet d’utiliser <code>count()</code> sur un objet</li>
+            <li><code>ArrayAccess</code> – permet d’accéder aux objets comme un tableau</li>
+            <li><code>SeekableIterator</code> – comme Iterator, mais avec possibilité de saut à un index spécifique</li>
+        </ul>
+
+        <h3>Exemple : Iterator + Countable</h3>
+        <pre>
+&lt;?php
+class MaListe implements Iterator, Countable {
+    private $donnees = ["pomme", "banane", "cerise"];
+    private $index = 0;
+
+    public function current() {
+        return $this->donnees[$this->index];
+    }
+
+    public function key() {
+        return $this->index;
+    }
+
+    public function next() {
+        ++$this->index;
+    }
+
+    public function rewind() {
+        $this->index = 0;
+    }
+
+    public function valid() {
+        return isset($this->donnees[$this->index]);
+    }
+
+    public function count() {
+        return count($this->donnees);
+    }
+}
+
+$liste = new MaListe();
+foreach ($liste as $fruit) {
+    echo $fruit . "&lt;br&gt;";
+}
+echo "Total : " . count($liste);
+?&gt;
+        </pre>
+
+        <h2>3. Classes utilitaires de la SPL</h2>
+        <ul>
+            <li><code>SplStack</code> – structure de pile (LIFO)</li>
+            <li><code>SplQueue</code> – file d’attente (FIFO)</li>
+            <li><code>SplFixedArray</code> – tableau à taille fixe, plus performant</li>
+            <li><code>SplFileObject</code> – simplifie la lecture/écriture de fichiers</li>
+        </ul>
+
+        <h3>Exemple : Utilisation de SplQueue</h3>
+        <pre>
+&lt;?php
+$queue = new SplQueue();
+$queue->enqueue("A");
+$queue->enqueue("B");
+$queue->enqueue("C");
+
+while (!$queue->isEmpty()) {
+    echo $queue->dequeue() . "&lt;br&gt;";
+}
+?&gt;
+        </pre>
+
+        <h2>4. Autoload avec SPL</h2>
+        <p>
+            SPL fournit <code>spl_autoload_register()</code> pour définir un chargeur automatique de classes.
+        </p>
+
+        <pre>
+&lt;?php
+spl_autoload_register(function($className) {
+    include "classes/" . $className . ".php";
+});
+?&gt;
+        </pre>
+
+        <h2>5. Autres fonctionnalités</h2>
+        <ul>
+            <li><code>SplObjectStorage</code> – stockage d'objets unique</li>
+            <li><code>SplPriorityQueue</code> – file d’attente avec priorités</li>
+            <li><code>SplObserver</code> et <code>SplSubject</code> – pour implémenter le pattern Observateur</li>
+        </ul>
+
+        <h2>6. Résumé</h2>
+        <ul>
+            <li>La SPL est incluse nativement dans PHP (pas besoin d’installation)</li>
+            <li>Elle fournit des structures efficaces et prêtes à l’emploi</li>
+            <li>Elle encourage la programmation orientée objet</li>
+            <li>Idéale pour améliorer les performances et la clarté du code</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour en savoir plus, consultez la 
+            <a href="https://www.php.net/manual/fr/book.spl.php">documentation SPL officielle</a></p>
+    </footer>
+</body>
+
+</html>

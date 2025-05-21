@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Gestion des erreurs</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Gestion des erreurs</h1>
+        <p>Error reporting, try/catch et exceptions.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 26: Gestion des erreurs</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            La gestion des erreurs en PHP permet d’identifier, d’afficher ou de gérer les problèmes qui peuvent survenir
+            lors de l'exécution du code, comme une division par zéro, une connexion à une base de données échouée, ou un fichier introuvable.
+        </p>
+
+        <h2>2. Error reporting</h2>
+        <p>PHP peut signaler différents types d’erreurs selon la configuration d’<code>error_reporting</code>.</p>
+
+        <pre>
+&lt;?php
+// Affiche toutes les erreurs
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?&gt;
+        </pre>
+
+        <p>Les types d’erreurs incluent : E_NOTICE, E_WARNING, E_ERROR, etc.</p>
+
+        <h2>3. Gestion des erreurs classiques</h2>
+        <p>
+            PHP affiche par défaut les erreurs critiques (<code>fatal errors</code>), mais pas forcément les avertissements ou notifications.
+        </p>
+
+        <pre>
+&lt;?php
+// Division par zéro
+$val = 10 / 0; // E_WARNING
+?&gt;
+        </pre>
+
+        <h2>4. Les exceptions</h2>
+        <p>
+            Les <strong>exceptions</strong> permettent une gestion plus propre des erreurs en interrompant le code 
+            dès qu’une erreur se produit, et en transférant le contrôle à un bloc <code>catch</code>.
+        </p>
+
+        <h3>Exemple simple :</h3>
+        <pre>
+&lt;?php
+try {
+    throw new Exception("Une erreur est survenue !");
+} catch (Exception $e) {
+    echo "Exception attrapée : " . $e->getMessage();
+}
+?&gt;
+        </pre>
+
+        <h3>Autre exemple avec une fonction :</h3>
+        <pre>
+&lt;?php
+function division($a, $b) {
+    if ($b === 0) {
+        throw new Exception("Division par zéro !");
+    }
+    return $a / $b;
+}
+
+try {
+    echo division(10, 0);
+} catch (Exception $e) {
+    echo "Erreur : " . $e->getMessage();
+}
+?&gt;
+        </pre>
+
+        <h2>5. finally</h2>
+        <p>Le bloc <code>finally</code> est exécuté quoi qu’il arrive (erreur ou pas).</p>
+
+        <pre>
+&lt;?php
+try {
+    echo "Code principal...&lt;br&gt;";
+    throw new Exception("Erreur !");
+} catch (Exception $e) {
+    echo "Attrapé : " . $e->getMessage() . "&lt;br&gt;";
+} finally {
+    echo "Bloc finally exécuté.&lt;br&gt;";
+}
+?&gt;
+        </pre>
+
+        <h2>6. Personnaliser les exceptions</h2>
+        <p>Vous pouvez créer vos propres classes d’exception :</p>
+
+        <pre>
+&lt;?php
+class MonErreur extends Exception {}
+
+try {
+    throw new MonErreur("Erreur personnalisée !");
+} catch (MonErreur $e) {
+    echo "Spécial : " . $e->getMessage();
+}
+?&gt;
+        </pre>
+
+        <h2>7. Résumé</h2>
+        <ul>
+            <li><code>error_reporting()</code> contrôle les types d’erreurs affichées</li>
+            <li>Les <code>try/catch</code> permettent de capturer les erreurs critiques</li>
+            <li><code>finally</code> est utile pour exécuter du code de nettoyage</li>
+            <li>Les exceptions personnalisées aident à structurer les erreurs métiers</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Consultez la <a
+                href="https://www.php.net/manual/fr/language.exceptions.php">documentation officielle</a> pour plus d’informations.</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Héritage</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Héritage</h1>
+        <p>Extension de classes et polymorphisme.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 19: Héritage</h1>
+
+        <h2>1. Qu’est-ce que l’héritage en POO ?</h2>
+        <p>
+            L’héritage permet à une classe (dite <strong>classe enfant</strong> ou <strong>sous-classe</strong>) de réutiliser les propriétés et méthodes d’une autre classe (la <strong>classe parent</strong> ou <strong>super-classe</strong>).
+            Cela favorise la réutilisation de code et une organisation hiérarchique des objets.
+        </p>
+
+        <h2>2. Déclaration d’une classe héritée</h2>
+        <pre>
+&lt;?php
+class Animal {
+    public function crier() {
+        echo "L'animal fait un bruit.&lt;br&gt;";
+    }
+}
+
+class Chien extends Animal {
+    public function crier() {
+        echo "Le chien aboie : Wouf!&lt;br&gt;";
+    }
+}
+
+$chien = new Chien();
+$chien->crier(); // Affiche "Le chien aboie : Wouf!"
+?&gt;
+        </pre>
+
+        <h2>3. Utiliser les propriétés héritées</h2>
+        <pre>
+&lt;?php
+class Vehicule {
+    public $marque;
+
+    public function afficherMarque() {
+        echo "Marque : $this->marque&lt;br&gt;";
+    }
+}
+
+class Voiture extends Vehicule {
+    public $modele;
+
+    public function afficherModele() {
+        echo "Modèle : $this->modele&lt;br&gt;";
+    }
+}
+
+$voiture = new Voiture();
+$voiture->marque = "Toyota";
+$voiture->modele = "Corolla";
+$voiture->afficherMarque();
+$voiture->afficherModele();
+?&gt;
+        </pre>
+
+        <h2>4. Appel du constructeur parent</h2>
+        <pre>
+&lt;?php
+class Personne {
+    protected $nom;
+
+    public function __construct($nom) {
+        $this->nom = $nom;
+    }
+}
+
+class Etudiant extends Personne {
+    public function afficherNom() {
+        echo "Nom : $this->nom&lt;br&gt;";
+    }
+}
+
+$etudiant = new Etudiant("Alice");
+$etudiant->afficherNom();
+?&gt;
+        </pre>
+
+        <h2>5. Le polymorphisme</h2>
+        <p>
+            Le <strong>polymorphisme</strong> permet d’utiliser une même méthode avec un comportement différent selon la classe.  
+            Cela permet de généraliser les traitements tout en ayant des comportements spécialisés.
+        </p>
+
+        <pre>
+&lt;?php
+class Forme {
+    public function dessiner() {
+        echo "Dessiner une forme générique.&lt;br&gt;";
+    }
+}
+
+class Cercle extends Forme {
+    public function dessiner() {
+        echo "Dessiner un cercle.&lt;br&gt;";
+    }
+}
+
+class Carre extends Forme {
+    public function dessiner() {
+        echo "Dessiner un carré.&lt;br&gt;";
+    }
+}
+
+$formes = [new Cercle(), new Carre(), new Forme()];
+
+foreach ($formes as $forme) {
+    $forme->dessiner();
+}
+?&gt;
+        </pre>
+
+        <h2>6. Résumé</h2>
+        <ul>
+            <li>Une classe peut hériter d’une autre via le mot-clé <code>extends</code></li>
+            <li>Le polymorphisme permet d’appeler des méthodes avec un comportement propre à chaque classe</li>
+            <li>On peut réécrire une méthode héritée (surcharge)</li>
+            <li>Le constructeur du parent peut être appelé depuis l’enfant</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour toute question, consultez la <a
+                href="https://www.php.net/manual/fr/language.oop5.inheritance.php">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>

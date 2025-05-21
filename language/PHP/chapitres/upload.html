@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Upload de fichiers</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Upload de fichiers</h1>
+        <p>Gestion sécurisée des uploads.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 35: Upload de fichiers</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Le téléchargement (upload) de fichiers permet aux utilisateurs d’envoyer des fichiers vers le serveur via un formulaire HTML.
+            Cette fonctionnalité est couramment utilisée pour les images, documents, ou autres médias.
+            Toutefois, elle nécessite une attention particulière pour garantir la sécurité du serveur.
+        </p>
+
+        <h2>2. Formulaire HTML pour l’upload</h2>
+        <p>
+            Pour permettre l’envoi de fichiers, le formulaire doit utiliser l’attribut <code>enctype="multipart/form-data"</code> 
+            et la méthode <code>POST</code>.
+        </p>
+
+        <pre>
+&lt;form action="upload.php" method="post" enctype="multipart/form-data"&gt;
+    &lt;label for="fichier"&gt;Choisissez un fichier :&lt;/label&gt;
+    &lt;input type="file" name="fichier" id="fichier" required&gt;
+    &lt;input type="submit" value="Envoyer"&gt;
+&lt;/form&gt;
+        </pre>
+
+        <h2>3. Répertoire de stockage</h2>
+        <p>
+            Les fichiers uploadés doivent être stockés dans un dossier sécurisé, souvent nommé <code>uploads/</code> situé 
+            dans le répertoire racine du projet ou ailleurs, mais toujours avec des permissions adaptées.
+        </p>
+        <p>Exemple d’arborescence :</p>
+        <pre>
+/mon-projet
+    /uploads       &lt;-- dossier pour fichiers uploadés (accessible en lecture uniquement)
+    /etc           &lt;-- dossier de configuration ou autres ressources
+    /public        &lt;-- racine web accessible par le navigateur
+    upload.php     &lt;-- script de gestion de l’upload
+        </pre>
+
+        <h2>4. Traitement PHP de l’upload</h2>
+        <p>
+            Le fichier envoyé est accessible via la superglobale <code>$_FILES</code>. On doit vérifier plusieurs points :
+        </p>
+        <ul>
+            <li>Erreur d’upload (code dans <code>$_FILES['fichier']['error']</code>)</li>
+            <li>Type MIME autorisé (images, PDF, etc.)</li>
+            <li>Taille maximale (ex : 2 Mo)</li>
+            <li>Nom de fichier sécurisé</li>
+            <li>Déplacement du fichier vers le dossier <code>uploads/</code></li>
+        </ul>
+
+        <h2>5. Exemple de script <code>upload.php</code></h2>
+        <pre>
+&lt;?php
+// Configuration
+$repertoireUpload = __DIR__ . '/uploads/';
+$tailleMax = 2 * 1024 * 1024; // 2 Mo
+$typesAutorises = ['image/jpeg', 'image/png', 'application/pdf'];
+
+// Vérifier si formulaire soumis
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_FILES['fichier']) && $_FILES['fichier']['error'] === UPLOAD_ERR_OK) {
+        $fichierTmp = $_FILES['fichier']['tmp_name'];
+        $nomFichier = basename($_FILES['fichier']['name']);
+        $typeMime = mime_content_type($fichierTmp);
+        $tailleFichier = $_FILES['fichier']['size'];
+
+        // Vérifications
+        if ($tailleFichier > $tailleMax) {
+            echo "Erreur : le fichier dépasse la taille maximale autorisée (2 Mo).";
+            exit;
+        }
+
+        if (!in_array($typeMime, $typesAutorises)) {
+            echo "Erreur : type de fichier non autorisé.";
+            exit;
+        }
+
+        // Nettoyer le nom du fichier pour éviter problèmes de sécurité
+        $nomFichier = preg_replace("/[^a-zA-Z0-9\.\-_]/", "_", $nomFichier);
+
+        // Déplacer le fichier vers le dossier uploads
+        if (move_uploaded_file($fichierTmp, $repertoireUpload . $nomFichier)) {
+            echo "Fichier uploadé avec succès : " . htmlspecialchars($nomFichier);
+        } else {
+            echo "Erreur lors du déplacement du fichier.";
+        }
+    } else {
+        echo "Erreur lors de l'upload du fichier.";
+    }
+}
+?&gt;
+        </pre>
+
+        <h2>6. Sécurisation supplémentaire</h2>
+        <ul>
+            <li>Renommer les fichiers uploadés pour éviter les collisions (ex. avec un hash ou timestamp).</li>
+            <li>Limiter les permissions du dossier <code>uploads/</code> (lecture seule pour le web, pas d’exécution).</li>
+            <li>Valider le contenu des fichiers (ex. vérifier les en-têtes des images).</li>
+            <li>Utiliser un .htaccess pour empêcher l’exécution de scripts dans <code>uploads/</code> si serveur Apache.</li>
+            <li>Limiter le nombre d’upload et la fréquence pour éviter les attaques par déni de service.</li>
+        </ul>
+
+        <h2>7. Conclusion</h2>
+        <p>
+            La gestion des uploads de fichiers est une fonctionnalité puissante mais sensible.
+            Respecter les bonnes pratiques est indispensable pour protéger le serveur et les utilisateurs.
+        </p>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Documentation officielle PHP : <a href="https://www.php.net/manual/fr/features.file-upload.php">Gestion des uploads de fichiers</a>.</p>
+    </footer>
+</body>
+
+</html>

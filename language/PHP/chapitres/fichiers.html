@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Manipulation de fichiers</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Manipulation de fichiers</h1>
+        <p>Lecture, écriture et manipulation de fichiers.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 28: Manipulation de fichiers</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            PHP offre plusieurs fonctions pour ouvrir, lire, écrire et fermer des fichiers, permettant de gérer des données
+            stockées dans des fichiers sur le serveur.
+        </p>
+
+        <h2>2. Ouvrir un fichier</h2>
+        <p>La fonction <code>fopen()</code> ouvre un fichier et retourne un pointeur de fichier :</p>
+
+        <pre>
+&lt;?php
+$fichier = fopen("exemple.txt", "r"); // mode lecture
+if (!$fichier) {
+    die("Impossible d'ouvrir le fichier");
+}
+?&gt;
+        </pre>
+
+        <h2>3. Lire un fichier</h2>
+        <p>Lecture ligne par ligne avec <code>fgets()</code> ou tout le contenu avec <code>file_get_contents()</code> :</p>
+
+        <pre>
+&lt;?php
+// Lire ligne par ligne
+while (($ligne = fgets($fichier)) !== false) {
+    echo $ligne . "&lt;br&gt;";
+}
+fclose($fichier);
+
+// Lire tout le fichier en une fois
+$contenu = file_get_contents("exemple.txt");
+echo nl2br($contenu);
+?&gt;
+        </pre>
+
+        <h2>4. Écrire dans un fichier</h2>
+        <p>On peut écrire ou ajouter du contenu avec <code>fwrite()</code> ou <code>file_put_contents()</code> :</p>
+
+        <pre>
+&lt;?php
+// Ouvrir en mode écriture (écrase le fichier)
+$fichier = fopen("exemple.txt", "w");
+fwrite($fichier, "Bonjour le monde !\n");
+fclose($fichier);
+
+// Ajouter du texte (mode 'a')
+$fichier = fopen("exemple.txt", "a");
+fwrite($fichier, "Ajout d'une ligne.\n");
+fclose($fichier);
+
+// Écriture rapide
+file_put_contents("exemple.txt", "Contenu rapide", FILE_APPEND);
+?&gt;
+        </pre>
+
+        <h2>5. Vérifier l'existence d'un fichier</h2>
+        <p>Avant d’ouvrir un fichier, il est conseillé de vérifier s’il existe :</p>
+
+        <pre>
+&lt;?php
+if (file_exists("exemple.txt")) {
+    echo "Le fichier existe.";
+} else {
+    echo "Fichier introuvable.";
+}
+?&gt;
+        </pre>
+
+        <h2>6. Supprimer un fichier</h2>
+        <p>Utilisez <code>unlink()</code> pour supprimer un fichier :</p>
+
+        <pre>
+&lt;?php
+if (file_exists("exemple.txt")) {
+    unlink("exemple.txt");
+    echo "Fichier supprimé.";
+} else {
+    echo "Fichier non trouvé.";
+}
+?&gt;
+        </pre>
+
+        <h2>7. Résumé</h2>
+        <ul>
+            <li><code>fopen()</code>, <code>fread()</code>, <code>fwrite()</code>, <code>fclose()</code> pour manipuler fichiers</li>
+            <li><code>file_get_contents()</code> et <code>file_put_contents()</code> pour lecture/écriture rapide</li>
+            <li>Vérifiez toujours l'existence du fichier avant d’agir</li>
+            <li>Utilisez <code>unlink()</code> pour supprimer un fichier</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Consultez la <a href="https://www.php.net/manual/fr/book.filesystem.php">documentation officielle</a> pour approfondir.</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Dates et heures</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Dates et heures</h1>
+        <p>Manipulation des dates avec DateTime.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 38: Dates et heures</h1>
+
+        <h2>1. Introduction à la gestion des dates en PHP</h2>
+        <p>
+            PHP offre plusieurs façons de gérer les dates et heures, mais la classe <code>DateTime</code> est la plus puissante et flexible.
+            Elle permet de créer, manipuler, formater et comparer des dates facilement.
+        </p>
+
+        <h2>2. Création d’un objet DateTime</h2>
+        <p>
+            Pour créer une date, on instancie la classe <code>DateTime</code>. Par défaut, elle représente la date et l’heure courantes.
+        </p>
+        <pre>
+&lt;?php
+$date = new DateTime();  // Date et heure actuelles
+echo $date->format('d/m/Y H:i:s');
+?&gt;
+        </pre>
+
+        <h2>3. Créer une date spécifique</h2>
+        <p>
+            On peut spécifier une date ou une heure précise lors de la création de l’objet.
+        </p>
+        <pre>
+&lt;?php
+$date = new DateTime('2025-05-21 15:30:00');
+echo $date->format('d/m/Y H:i');
+?&gt;
+        </pre>
+
+        <h2>4. Modifier une date</h2>
+        <p>
+            La méthode <code>modify()</code> permet de changer une date en ajoutant ou retirant un intervalle de temps.
+        </p>
+        <pre>
+&lt;?php
+$date = new DateTime();
+$date->modify('+1 week');  // Ajoute une semaine
+echo $date->format('d/m/Y');
+?&gt;
+        </pre>
+
+        <h2>5. Différence entre deux dates</h2>
+        <p>
+            La méthode <code>diff()</code> calcule la différence entre deux objets DateTime sous forme d’un objet <code>DateInterval</code>.
+        </p>
+        <pre>
+&lt;?php
+$date1 = new DateTime('2025-01-01');
+$date2 = new DateTime('2025-05-21');
+$interval = $date1->diff($date2);
+echo "Différence : " . $interval->days . " jours";
+?&gt;
+        </pre>
+
+        <h2>6. Formats de date</h2>
+        <p>
+            La méthode <code>format()</code> permet d’afficher une date selon un format personnalisé.
+            Voici quelques exemples :
+        </p>
+        <ul>
+            <li><code>d</code> : jour du mois (01 à 31)</li>
+            <li><code>m</code> : mois (01 à 12)</li>
+            <li><code>Y</code> : année sur 4 chiffres</li>
+            <li><code>H</code> : heure 24h (00 à 23)</li>
+            <li><code>i</code> : minutes (00 à 59)</li>
+            <li><code>s</code> : secondes (00 à 59)</li>
+        </ul>
+
+        <h2>7. Fuseaux horaires</h2>
+        <p>
+            On peut gérer les fuseaux horaires avec la classe <code>DateTimeZone</code> pour afficher ou manipuler des dates dans différents fuseaux.
+        </p>
+        <pre>
+&lt;?php
+$date = new DateTime('now', new DateTimeZone('Europe/Paris'));
+echo $date->format('d/m/Y H:i:s');
+?&gt;
+        </pre>
+
+        <h2>8. Exemple complet</h2>
+        <pre>
+&lt;?php
+// Création d'une date spécifique
+$date = new DateTime('2025-05-21 10:00:00', new DateTimeZone('Europe/Paris'));
+
+// Ajout de 3 jours et 2 heures
+$date->modify('+3 days +2 hours');
+
+// Affichage formaté
+echo "Nouvelle date : " . $date->format('d/m/Y H:i:s');
+?&gt;
+        </pre>
+
+        <h2>9. Conclusion</h2>
+        <p>
+            La classe <code>DateTime</code> en PHP est un outil indispensable pour gérer efficacement les dates et heures.
+            Elle offre une interface orientée objet simple à utiliser, remplaçant avantageusement les fonctions plus anciennes.
+        </p>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Documentation officielle PHP : <a href="https://www.php.net/manual/fr/class.datetime.php">DateTime</a></p>
+    </footer>
+</body>
+
+</html>

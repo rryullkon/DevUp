@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Classes abstraites</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Classes abstraites</h1>
+        <p>Définition et utilisation des classes abstraites.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 22: Classes abstraites</h1>
+
+        <h2>1. Qu’est-ce qu’une classe abstraite ?</h2>
+        <p>
+            Une <strong>classe abstraite</strong> est une classe qui ne peut pas être instanciée directement.  
+            Elle sert de modèle pour d'autres classes, en imposant certaines méthodes à implémenter.
+        </p>
+
+        <h2>2. Caractéristiques</h2>
+        <ul>
+            <li>Contient au moins une méthode abstraite (sans corps)</li>
+            <li>Peut contenir des méthodes normales (implémentées)</li>
+            <li>Doit être héritée et complétée par une sous-classe</li>
+        </ul>
+
+        <h2>3. Syntaxe d'une classe abstraite</h2>
+        <pre>
+&lt;?php
+abstract class Animal {
+    abstract public function parler();
+
+    public function respirer() {
+        echo "Je respire.&lt;br&gt;";
+    }
+}
+
+class Chien extends Animal {
+    public function parler() {
+        echo "Wouf !&lt;br&gt;";
+    }
+}
+
+$rex = new Chien();
+$rex->parler();    // Wouf !
+$rex->respirer();  // Je respire.
+?&gt;
+        </pre>
+
+        <h2>4. Utilité</h2>
+        <p>
+            Les classes abstraites sont utiles pour :
+        </p>
+        <ul>
+            <li>Définir une structure commune à plusieurs classes</li>
+            <li>Forcer certaines méthodes à être définies dans les classes enfants</li>
+            <li>Réduire la duplication de code avec des méthodes partagées</li>
+        </ul>
+
+        <h2>5. Différence avec une interface</h2>
+        <ul>
+            <li>Une interface ne contient que des méthodes sans corps (jusqu’à PHP 8.1)</li>
+            <li>Une classe abstraite peut avoir des méthodes avec ou sans implémentation</li>
+            <li>Une classe ne peut hériter que d'une seule classe abstraite, mais peut implémenter plusieurs interfaces</li>
+        </ul>
+
+        <h2>6. Exemple avec plusieurs classes</h2>
+        <pre>
+&lt;?php
+abstract class Forme {
+    abstract public function aire();
+
+    public function afficherType() {
+        echo "Ceci est une forme.&lt;br&gt;";
+    }
+}
+
+class Rectangle extends Forme {
+    private $longueur;
+    private $largeur;
+
+    public function __construct($l, $L) {
+        $this->longueur = $l;
+        $this->largeur = $L;
+    }
+
+    public function aire() {
+        return $this->longueur * $this->largeur;
+    }
+}
+
+$rect = new Rectangle(4, 5);
+$rect->afficherType();               // Ceci est une forme.
+echo "Aire : " . $rect->aire();     // Aire : 20
+?&gt;
+        </pre>
+
+        <h2>7. Résumé</h2>
+        <ul>
+            <li>On utilise le mot-clé <code>abstract</code> pour définir une classe ou une méthode abstraite</li>
+            <li>Les classes abstraites servent de base pour d'autres classes</li>
+            <li>Elles ne peuvent pas être instanciées directement</li>
+            <li>Elles aident à organiser et structurer un code orienté objet</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour toute question, consultez la <a
+                href="https://www.php.net/manual/fr/language.oop5.abstract.php">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>

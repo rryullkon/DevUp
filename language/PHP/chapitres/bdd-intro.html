@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Introduction aux bases de données</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Introduction aux bases de données</h1>
+        <p>Concepts fondamentaux des SGBD.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 40: Introduction aux bases de données</h1>
+
+        <h2>1. Qu'est-ce qu'une base de données ?</h2>
+        <p>
+            Une base de données est un ensemble organisé de données stockées de manière structurée afin de pouvoir être facilement consultées, manipulées et gérées.
+            Elle permet de centraliser les informations pour une application ou un service.
+        </p>
+
+        <h2>2. Le rôle d’un SGBD</h2>
+        <p>
+            Un Système de Gestion de Base de Données (SGBD) est un logiciel qui permet de créer, gérer et interagir avec les bases de données.
+            Il offre une interface pour stocker, modifier, rechercher et sécuriser les données.
+        </p>
+
+        <h2>3. Types de bases de données</h2>
+        <p>
+            Il existe plusieurs types de bases de données :
+        </p>
+        <ul>
+            <li><strong>Bases relationnelles</strong> (MySQL, PostgreSQL, SQLite) : données organisées en tables avec des relations entre elles.</li>
+            <li><strong>Bases NoSQL</strong> (MongoDB, Redis) : données non structurées ou semi-structurées, adaptées aux grands volumes et à la flexibilité.</li>
+            <li><strong>Bases orientées objets</strong> : stockent des objets selon la programmation orientée objet.</li>
+        </ul>
+
+        <h2>4. Concepts clés</h2>
+        <ul>
+            <li><strong>Table</strong> : structure contenant des lignes (enregistrements) et colonnes (champs).</li>
+            <li><strong>Clé primaire</strong> : identifiant unique d’un enregistrement dans une table.</li>
+            <li><strong>Relation</strong> : lien entre plusieurs tables pour organiser les données efficacement.</li>
+            <li><strong>Requête SQL</strong> : langage standard pour interagir avec les bases relationnelles (ex : SELECT, INSERT, UPDATE, DELETE).</li>
+        </ul>
+
+        <h2>5. Pourquoi utiliser une base de données ?</h2>
+        <p>
+            Les bases de données permettent de gérer des volumes importants de données de façon sécurisée, rapide et cohérente.
+            Elles facilitent la récupération et la manipulation des données complexes dans les applications.
+        </p>
+
+        <h2>6. Intégration avec PHP</h2>
+        <p>
+            PHP offre plusieurs extensions pour interagir avec les bases de données, notamment PDO (PHP Data Objects) et MySQLi,
+            permettant d’exécuter des requêtes SQL et de manipuler les résultats.
+        </p>
+
+        <h2>7. Exemple simple d’une requête SQL</h2>
+        <pre>
+SELECT * FROM utilisateurs WHERE age &gt; 18;
+        </pre>
+        <p>
+            Cette requête récupère tous les utilisateurs âgés de plus de 18 ans.
+        </p>
+
+        <h2>8. Conclusion</h2>
+        <p>
+            Comprendre les bases de données et les SGBD est fondamental pour développer des applications web dynamiques et performantes.
+            Les chapitres suivants détailleront l’utilisation pratique avec PHP.
+        </p>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Documentation officielle PHP : <a href="https://www.php.net/manual/fr/book.pdo.php">PDO</a></p>
+    </footer>
+</body>
+
+</html>

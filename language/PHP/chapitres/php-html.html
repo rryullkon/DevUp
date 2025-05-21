@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - PHP et HTML</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>PHP et HTML</h1>
+        <p>Intégration de PHP dans les pages HTML.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 31: PHP et HTML</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            PHP est souvent utilisé pour générer du contenu HTML dynamiquement. Il s'intègre directement dans les fichiers
+            HTML via des balises spéciales.
+        </p>
+
+        <h2>2. Syntaxe d’intégration</h2>
+        <p>
+            Le code PHP est inclus dans une page HTML entre les balises <code>&lt;?php ?&gt;</code> :
+        </p>
+
+        <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Page PHP&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;Bienvenue&lt;/h1&gt;
+
+&lt;?php
+    echo "&lt;p&gt;Bonjour depuis PHP !&lt;/p&gt;";
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+
+        <h2>3. Affichage dynamique</h2>
+        <p>
+            On peut insérer des variables, conditions, boucles, etc., pour créer du contenu adapté à chaque visite :
+        </p>
+
+        <pre>
+&lt;?php
+$heure = date("H");
+if ($heure &lt; 12) {
+    echo "&lt;p&gt;Bonjour !&lt;/p&gt;";
+} else {
+    echo "&lt;p&gt;Bonne après-midi !&lt;/p&gt;";
+}
+?&gt;
+        </pre>
+
+        <h2>4. Courte syntaxe</h2>
+        <p>
+            Pour afficher rapidement une variable, on peut utiliser la syntaxe abrégée <code>&lt;?= $variable ?&gt;</code> :
+        </p>
+
+        <pre>
+&lt;?php $nom = "Alice"; ?&gt;
+&lt;p&gt;Bonjour <?= $nom ?> !&lt;/p&gt;
+        </pre>
+
+        <h2>5. Mélanger PHP et HTML</h2>
+        <p>Le PHP peut être inséré n’importe où dans la page HTML, permettant un mélange souple :</p>
+
+        <pre>
+&lt;ul&gt;
+    &lt;?php
+    $fruits = ["Pomme", "Banane", "Cerise"];
+    foreach ($fruits as $fruit) {
+        echo "&lt;li&gt;$fruit&lt;/li&gt;";
+    }
+    ?&gt;
+&lt;/ul&gt;
+        </pre>
+
+        <h2>6. Résumé</h2>
+        <ul>
+            <li>PHP s’intègre directement dans le HTML via <code>&lt;?php ?&gt;</code></li>
+            <li>Syntaxe abrégée <code>&lt;?= ?&gt;</code> pour afficher rapidement</li>
+            <li>Possibilité de générer du contenu dynamique avec variables, conditions et boucles</li>
+            <li>Idéal pour créer des pages web dynamiques et interactives</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Plus d’infos sur <a href="https://www.php.net/manual/fr/lang.basic-syntax.php">la syntaxe PHP</a>.</p>
+    </footer>
+</body>
+
+</html>

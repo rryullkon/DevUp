@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Autoloading</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Autoloading</h1>
+        <p>Chargement automatique des classes.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 24: Autoloading</h1>
+
+        <h2>1. Qu'est-ce que l'autoloading ?</h2>
+        <p>
+            L’<strong>autoloading</strong> permet de charger automatiquement les fichiers de classes en PHP  
+            sans avoir besoin de faire des <code>require</code> ou <code>include</code> manuels à chaque fois.
+        </p>
+
+        <h2>2. Pourquoi utiliser l'autoloading ?</h2>
+        <ul>
+            <li>Simplifie l'organisation du code</li>
+            <li>Améliore la lisibilité et la maintenance</li>
+            <li>Essentiel pour utiliser des frameworks modernes (Laravel, Symfony...)</li>
+        </ul>
+
+        <h2>3. Exemple avec <code>spl_autoload_register()</code></h2>
+        <pre>
+&lt;?php
+// Fichier: classes/Utilisateur.php
+class Utilisateur {
+    public function saluer() {
+        echo "Bonjour, utilisateur !&lt;br&gt;";
+    }
+}
+?&gt;
+        </pre>
+
+        <pre>
+&lt;?php
+// Fichier principal
+spl_autoload_register(function($classe) {
+    require "classes/" . $classe . ".php";
+});
+
+$u = new Utilisateur();
+$u->saluer();
+?&gt;
+        </pre>
+
+        <p>
+            PHP appellera automatiquement la fonction d’autoload si la classe n’a pas encore été chargée.
+        </p>
+
+        <h2>4. PSR-4 : Autoloading avec Composer</h2>
+        <p>
+            Le standard <strong>PSR-4</strong> définit une manière de mapper les namespaces vers des répertoires.
+        </p>
+        <pre>
+composer init
+</pre>
+
+        <p>Extrait du fichier <code>composer.json</code> :</p>
+        <pre>
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
+        </pre>
+
+        <p>Commandes :</p>
+        <pre>
+composer dump-autoload
+</pre>
+
+        <p>Structure des fichiers :</p>
+        <pre>
+/src
+  /Controllers
+    HomeController.php
+</pre>
+
+        <p>Code :</p>
+        <pre>
+// src/Controllers/HomeController.php
+namespace App\Controllers;
+
+class HomeController {
+    public function index() {
+        echo "Bienvenue sur la page d'accueil !";
+    }
+}
+        </pre>
+
+        <pre>
+// index.php
+require 'vendor/autoload.php';
+
+use App\Controllers\HomeController;
+
+$ctrl = new HomeController();
+$ctrl->index();
+        </pre>
+
+        <h2>5. Résumé</h2>
+        <ul>
+            <li>L'autoloading permet de charger automatiquement les classes au moment où elles sont utilisées</li>
+            <li><code>spl_autoload_register()</code> est la méthode native pour définir un chargeur personnalisé</li>
+            <li>Le standard PSR-4 via Composer est recommandé pour les projets modernes</li>
+            <li>Permet une structure propre et scalable du code</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Pour plus de détails, consultez la <a
+                href="https://www.php.net/manual/fr/language.oop5.autoload.php">documentation officielle</a> ou <a
+                href="https://www.php-fig.org/psr/psr-4/">la norme PSR-4</a>.</p>
+    </footer>
+</body>
+
+</html>
