@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - PDF avec PHP</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>PDF avec PHP</h1>
+        <p>Génération de PDF avec TCPDF et autres librairies.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 75: PDF avec PHP</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            La génération de fichiers PDF en PHP est une tâche courante pour créer des documents, factures, rapports ou brochures dynamiques.
+            Plusieurs bibliothèques permettent de générer facilement des PDF, parmi lesquelles TCPDF, FPDF ou Dompdf.
+        </p>
+
+        <h2>2. Bibliothèques populaires</h2>
+        <ul>
+            <li><strong>TCPDF :</strong> bibliothèque complète et puissante, supporte HTML, CSS, images et graphiques.</li>
+            <li><strong>FPDF :</strong> légère et simple, bonne pour des PDF basiques.</li>
+            <li><strong>Dompdf :</strong> convertit du HTML+CSS en PDF, pratique pour des documents stylés.</li>
+        </ul>
+
+        <h2>3. Exemple simple avec TCPDF</h2>
+        <pre><code>&lt;?php
+require_once('tcpdf_include.php');
+
+$pdf = new TCPDF();
+$pdf->AddPage();
+$pdf->SetFont('helvetica', '', 12);
+$pdf->Write(0, 'Bonjour, ceci est un PDF généré avec TCPDF en PHP.');
+$pdf->Output('exemple.pdf', 'I');
+?&gt;
+</code></pre>
+
+        <h2>4. Conseils pratiques</h2>
+        <ul>
+            <li>Installez la bibliothèque via Composer ou téléchargez-la directement.</li>
+            <li>Consultez la documentation officielle pour maîtriser les fonctionnalités avancées.</li>
+            <li>Testez la génération de PDF avec des petits exemples avant de passer à des documents complexes.</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>
+            Guide d'apprentissage PHP &copy; 2025 | Liens utiles : 
+            <a href="https://tcpdf.org/" target="_blank" rel="noopener noreferrer">Site officiel TCPDF</a> | 
+            <a href="https://www.fpdf.org/" target="_blank" rel="noopener noreferrer">Site officiel FPDF</a> | 
+            <a href="https://github.com/dompdf/dompdf" target="_blank" rel="noopener noreferrer">Dompdf sur GitHub</a>
+        </p>
+    </footer>
+</body>
+
+</html>

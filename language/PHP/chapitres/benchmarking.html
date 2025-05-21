@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - Benchmarking</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Benchmarking</h1>
+        <p>Mesure des performances de votre code.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 57: Benchmarking</h1>
+
+        <h2>1. Qu'est-ce que le benchmarking en PHP ?</h2>
+        <p>
+            Le benchmarking consiste à mesurer le temps d'exécution ou l'utilisation mémoire d'une portion de code. Cela permet d’identifier
+            les fonctions lentes ou inefficaces et d’optimiser les performances de votre application PHP.
+        </p>
+
+        <h2>2. Pourquoi faire du benchmarking ?</h2>
+        <ul>
+            <li>Identifier les goulots d’étranglement dans l'exécution du code.</li>
+            <li>Comparer plusieurs implémentations pour choisir la plus performante.</li>
+            <li>Justifier les optimisations appliquées par des données chiffrées.</li>
+        </ul>
+
+        <h2>3. Outils simples pour le benchmarking</h2>
+        <p>PHP propose des fonctions de base comme <code>microtime()</code> pour mesurer le temps d’exécution :</p>
+        <pre>
+&lt;?php
+$start = microtime(true);
+
+// Code à mesurer
+for ($i = 0; $i &lt; 1000000; $i++) {
+    sqrt($i);
+}
+
+$end = microtime(true);
+echo "Temps d'exécution : " . ($end - $start) . " secondes";
+?&gt;
+        </pre>
+
+        <h2>4. Comparaison de deux fonctions</h2>
+        <pre>
+&lt;?php
+function methode1() {
+    $result = [];
+    for ($i = 0; $i &lt; 10000; $i++) {
+        $result[] = $i;
+    }
+    return $result;
+}
+
+function methode2() {
+    return range(0, 9999);
+}
+
+$start = microtime(true);
+methode1();
+$m1 = microtime(true) - $start;
+
+$start = microtime(true);
+methode2();
+$m2 = microtime(true) - $start;
+
+echo "Methode1 : $m1 secondes\n";
+echo "Methode2 : $m2 secondes\n";
+?&gt;
+        </pre>
+
+        <h2>5. Mesurer l’utilisation mémoire</h2>
+        <pre>
+&lt;?php
+echo "Mémoire utilisée : " . memory_get_usage() . " octets\n";
+echo "Mémoire maximale : " . memory_get_peak_usage() . " octets\n";
+?&gt;
+        </pre>
+
+        <h2>6. Outils avancés de benchmarking</h2>
+        <ul>
+            <li><strong>Xdebug :</strong> pour profiler les fonctions PHP ligne par ligne.</li>
+            <li><strong>Blackfire :</strong> outil professionnel de profiling et benchmarking.</li>
+            <li><strong>PHPBench :</strong> framework dédié au benchmarking de code PHP.</li>
+        </ul>
+
+        <h2>7. Conseils pratiques</h2>
+        <ul>
+            <li>Exécutez les tests plusieurs fois pour obtenir une moyenne fiable.</li>
+            <li>Désactivez le cache (OPcache) pour tester des performances brutes.</li>
+            <li>Effectuez les tests dans un environnement stable (pas en production).</li>
+        </ul>
+
+        <h2>8. Conclusion</h2>
+        <p>
+            Le benchmarking est une étape clé pour améliorer les performances de votre code PHP.
+            En mesurant avec précision le temps et la mémoire utilisés, vous pouvez prendre des décisions techniques basées sur des faits,
+            et non des suppositions.
+        </p>
+    </main>
+
+    <footer>
+        <p>
+            Guide d'apprentissage PHP &copy; 2025 |
+            <a href="https://www.php.net/manual/fr/function.microtime.php" target="_blank" rel="noopener noreferrer">
+                Lire la documentation PHP sur la fonction microtime() pour le benchmarking
+            </a>
+        </p>
+    </footer>
+</body>
+
+</html>

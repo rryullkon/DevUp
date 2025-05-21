@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - Envoi d'emails</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Envoi d'emails avec PHP</h1>
+        <p>PHPMailer et envoi d'emails en PHP.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 77: Envoi d'emails</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Envoyer des emails depuis une application PHP est une fonctionnalité essentielle pour les notifications, 
+            confirmations, ou newsletters. La bibliothèque <strong>PHPMailer</strong> simplifie grandement cette tâche en 
+            gérant SMTP, pièces jointes, HTML, et bien plus.
+        </p>
+
+        <h2>2. Installation</h2>
+        <p>
+            La méthode recommandée est d’utiliser Composer :
+        </p>
+        <pre><code>composer require phpmailer/phpmailer</code></pre>
+
+        <h2>3. Exemple simple d’envoi d’email</h2>
+        <pre><code>&lt;?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+
+$mail = new PHPMailer(true);
+
+try {
+    // Configuration du serveur SMTP
+    $mail->isSMTP();
+    $mail->Host = 'smtp.example.com';  // Remplacez par votre serveur SMTP
+    $mail->SMTPAuth = true;
+    $mail->Username = 'votre_email@example.com'; // SMTP username
+    $mail->Password = 'votre_mot_de_passe';      // SMTP password
+    $mail->SMTPSecure = 'tls';                    // TLS ou SSL
+    $mail->Port = 587;                            // Port SMTP
+
+    // Destinataires
+    $mail->setFrom('from@example.com', 'Votre Nom');
+    $mail->addAddress('destinataire@example.com', 'Nom Destinataire');
+
+    // Contenu de l’email
+    $mail->isHTML(true);
+    $mail->Subject = 'Test d’envoi d’email avec PHPMailer';
+    $mail->Body    = '&lt;p&gt;Ceci est un email >HTML envoyé avec PHPMailer.&lt;/p&gt;';
+    $mail->AltBody = 'Ceci est un email texte.';
+
+    $mail->send();
+    echo 'Email envoyé avec succès';
+} catch (Exception $e) {
+    echo "Erreur lors de l'envoi de l'email: {$mail->ErrorInfo}";
+}
+?&gt;
+</code></pre>
+
+        <h2>4. Conseils</h2>
+        <ul>
+            <li>Configurez correctement votre serveur SMTP et assurez-vous que les ports sont ouverts.</li>
+            <li>Utilisez des emails d’expéditeur valides pour éviter le spam.</li>
+            <li>PHPMailer supporte aussi l’envoi via mail(), SMTP avec authentification, et OAuth.</li>
+            <li>Consultez la documentation officielle pour des fonctionnalités avancées.</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>
+            Guide d'apprentissage PHP &copy; 2025 | Liens utiles : 
+            <a href="https://github.com/PHPMailer/PHPMailer" target="_blank" rel="noopener noreferrer">PHPMailer sur GitHub</a> | 
+            <a href="https://github.com/PHPMailer/PHPMailer/wiki" target="_blank" rel="noopener noreferrer">Documentation PHPMailer</a>
+        </p>
+    </footer>
+</body>
+
+</html>

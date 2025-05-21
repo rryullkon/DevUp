@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - Symfony</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Symfony</h1>
+        <p>Introduction au framework Symfony.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 60: Symfony</h1>
+
+        <h2>1. Qu'est-ce que Symfony ?</h2>
+        <p>
+            Symfony est un framework PHP robuste et modulaire, utilisé pour développer des applications web professionnelles.
+            Il repose sur une architecture flexible, orientée objet, et s'appuie sur les bonnes pratiques du développement logiciel.
+            De nombreuses grandes entreprises et CMS (comme Drupal) utilisent Symfony.
+        </p>
+
+        <h2>2. Pourquoi choisir Symfony ?</h2>
+        <ul>
+            <li><strong>Fiabilité :</strong> utilisé dans des projets critiques et à grande échelle.</li>
+            <li><strong>Structure claire :</strong> architecture MVC bien définie.</li>
+            <li><strong>Composants réutilisables :</strong> chaque fonctionnalité est un composant indépendant.</li>
+            <li><strong>Interopérabilité :</strong> compatible avec d'autres bibliothèques PHP via Composer.</li>
+            <li><strong>Documentation et communauté :</strong> riches, bien organisées, support professionnel disponible.</li>
+        </ul>
+
+        <h2>3. Prérequis pour Symfony</h2>
+        <ul>
+            <li>PHP ≥ 8.1</li>
+            <li>Composer installé</li>
+            <li>Serveur local ou Symfony CLI</li>
+            <li>Base de données (MySQL, PostgreSQL, SQLite...)</li>
+        </ul>
+
+        <h2>4. Installation de Symfony</h2>
+        <pre>
+# Installer l'outil CLI Symfony
+curl -sS https://get.symfony.com/cli/installer | bash
+
+# Créer un nouveau projet Symfony
+symfony new mon-projet --webapp
+
+# Lancer le serveur
+cd mon-projet
+symfony serve
+        </pre>
+
+        <h2>5. Structure d’un projet Symfony</h2>
+        <ul>
+            <li><code>src/</code> : code source de l’application (contrôleurs, entités, services...)</li>
+            <li><code>templates/</code> : vues avec le moteur Twig</li>
+            <li><code>config/</code> : configuration de l’application</li>
+            <li><code>public/</code> : point d’entrée du site</li>
+            <li><code>var/</code> et <code>vendor/</code> : fichiers générés et dépendances</li>
+        </ul>
+
+        <h2>6. Exemple de route dans Symfony</h2>
+        <pre>
+// src/Controller/AccueilController.php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class AccueilController extends AbstractController
+{
+    #[Route('/bonjour', name: 'bonjour')]
+    public function index(): Response
+    {
+        return new Response('Bonjour depuis Symfony !');
+    }
+}
+        </pre>
+
+        <h2>7. Console Symfony</h2>
+        <p>
+            Symfony possède une interface CLI puissante pour générer du code, exécuter des migrations, vider le cache, etc.
+        </p>
+        <pre>
+php bin/console list          # Liste des commandes
+php bin/console make:controller MonController
+        </pre>
+
+        <h2>8. Conclusion</h2>
+        <p>
+            Symfony est un framework robuste et adapté aux projets complexes. Grâce à ses composants modulaires,
+            son écosystème complet et sa rigueur, il est un excellent choix pour les développeurs souhaitant construire
+            des applications PHP professionnelles.
+        </p>
+
+        <h2>9. Découvrir Symfony sur DevUp</h2>
+        <p>
+            Pour aller plus loin avec Symfony, découvrez des tutoriels, projets guidés et bonnes pratiques sur DevUp.
+        </p>
+        <p>
+            <a href="https://devup.io/ressources/symfony" target="_blank" rel="noopener noreferrer">
+                Explorer Symfony sur DevUp
+            </a>
+        </p>
+    </main>
+
+    <footer>
+        <p>
+            Guide d'apprentissage PHP &copy; 2025 |
+            <a href="https://symfony.com/doc/current/index.html" target="_blank" rel="noopener noreferrer">
+                Lire la documentation officielle de Symfony
+            </a>
+        </p>
+    </footer>
+</body>
+
+</html>
+<!-- 
+ -->

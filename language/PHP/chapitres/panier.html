@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - Panier e-commerce</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Panier e-commerce</h1>
+        <p>Développement d'un système de panier.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 71: Panier e-commerce</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Le panier est une fonctionnalité centrale des sites e-commerce, permettant aux utilisateurs de sélectionner des produits,
+            modifier les quantités et passer commande. Ce chapitre présente un système simple de gestion de panier en PHP utilisant les sessions.
+        </p>
+
+        <h2>2. Concepts clés</h2>
+        <ul>
+            <li>Stocker les articles sélectionnés dans la session utilisateur.</li>
+            <li>Ajouter, modifier, supprimer des articles dans le panier.</li>
+            <li>Calculer le total du panier.</li>
+            <li>Afficher le contenu du panier à l’utilisateur.</li>
+        </ul>
+
+        <h2>3. Exemple de catalogue de produits</h2>
+        <pre>
+&lt;?php
+$products = [
+    1 =&gt; ["name" =&gt; "Chaussures", "price" =&gt; 59.99],
+    2 =&gt; ["name" =&gt; "T-shirt", "price" =&gt; 19.99],
+    3 =&gt; ["name" =&gt; "Casquette", "price" =&gt; 14.99]
+];
+?&gt;
+        </pre>
+
+        <h2>4. Gestion du panier (panier.php)</h2>
+        <p>Voici un script PHP simple pour gérer le panier avec ajout, suppression et affichage :</p>
+        <pre>
+&lt;?php
+session_start();
+
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+$products = [
+    1 =&gt; ["name" =&gt; "Chaussures", "price" =&gt; 59.99],
+    2 =&gt; ["name" =&gt; "T-shirt", "price" =&gt; 19.99],
+    3 =&gt; ["name" =&gt; "Casquette", "price" =&gt; 14.99]
+];
+
+// Ajouter un produit au panier
+if (isset($_GET['add'])) {
+    $id = intval($_GET['add']);
+    if (isset($products[$id])) {
+        if (isset($_SESSION['cart'][$id])) {
+            $_SESSION['cart'][$id]++;
+        } else {
+            $_SESSION['cart'][$id] = 1;
+        }
+    }
+    header('Location: panier.php');
+    exit;
+}
+
+// Supprimer un produit du panier
+if (isset($_GET['remove'])) {
+    $id = intval($_GET['remove']);
+    if (isset($_SESSION['cart'][$id])) {
+        unset($_SESSION['cart'][$id]);
+    }
+    header('Location: panier.php');
+    exit;
+}
+
+// Vider le panier
+if (isset($_GET['clear'])) {
+    $_SESSION['cart'] = [];
+    header('Location: panier.php');
+    exit;
+}
+?&gt;
+        </pre>
+
+        <h2>5. Affichage du panier</h2>
+        <pre>
+&lt;h2&gt;Votre panier&lt;/h2&gt;
+
+&lt;?php if (empty($_SESSION['cart'])): ?&gt;
+    &lt;p&gt;Votre panier est vide.&lt;/p&gt;
+&lt;?php else: ?&gt;
+    &lt;table border="1" cellpadding="5"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Produit&lt;/th&gt;
+                &lt;th&gt;Quantité&lt;/th&gt;
+                &lt;th&gt;Prix unitaire&lt;/th&gt;
+                &lt;th&gt;Total&lt;/th&gt;
+                &lt;th&gt;Action&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;?php
+            $total = 0;
+            foreach ($_SESSION['cart'] as $id =&gt; $qty):
+                $product = $products[$id];
+                $subtotal = $product['price'] * $qty;
+                $total += $subtotal;
+            ?&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;&lt;?= htmlspecialchars($product['name']) ?&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;?= $qty ?&gt;&lt;/td&gt;
+                    &lt;td&gt;&lt;?= number_format($product['price'], 2, ',', ' ') ?&gt; €&lt;/td&gt;
+                    &lt;td&gt;&lt;?= number_format($subtotal, 2, ',', ' ') ?&gt; €&lt;/td&gt;
+                    &lt;td&gt;&lt;a href="panier.php?remove=&lt;?= $id ?&gt;"&gt;Supprimer&lt;/a&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;?php endforeach; ?&gt;
+            &lt;tr&gt;
+                &lt;td colspan="3"&gt;&lt;strong>Total&lt;/strong&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;strong&gt;&lt;?= number_format($total, 2, ',', ' ') ?&gt; €&lt;/strong&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;a href="panier.php?clear=1"&gt;Vider le panier&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;?php endif; ?&gt;
+        </pre>
+
+        <h2>6. Affichage du catalogue avec boutons d’ajout</h2>
+        <pre>
+&lt;h2&gt;Catalogue&lt;/h2&gt;
+&lt;ul&gt;
+&lt;?php foreach ($products as $id =&gt; $product): ?&gt;
+    &lt;li&gt;
+        &lt;?= htmlspecialchars($product['name']) ?&gt; - &lt;?= number_format($product['price'], 2, ',', ' ') ?&gt; € 
+        &lt;a href="panier.php?add=&lt;?= $id ?&gt;"&gt;Ajouter au panier&lt;/a&gt;
+    &lt;/li&gt;
+&lt;?php endforeach; ?&gt;
+&lt;/ul&gt;
+        </pre>
+
+        <h2>7. Conclusion</h2>
+        <p>
+            Ce système de panier simple permet d’ajouter, supprimer et visualiser les produits sélectionnés par l’utilisateur grâce aux sessions PHP.
+            Pour aller plus loin, vous pouvez intégrer une gestion des quantités plus fine, une base de données produits, et un système de paiement.
+        </p>
+    </main>
+
+    <footer>
+        <p>
+            Guide d'apprentissage PHP &copy; 2025
+        </p>
+    </footer>
+</body>
+
+</html>

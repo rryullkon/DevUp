@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - Système de connexion</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Système de connexion</h1>
+        <p>Authentification et autorisation sécurisées.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 70: Système de connexion</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            La gestion d'un système de connexion sécurisé est essentielle pour protéger les applications web et les données des utilisateurs.
+            Ce chapitre aborde les concepts clés d'authentification et d'autorisation en PHP, ainsi que des bonnes pratiques pour sécuriser vos systèmes.
+        </p>
+
+        <h2>2. Concepts clés</h2>
+        <ul>
+            <li><strong>Authentification :</strong> vérifier l’identité d’un utilisateur (exemple : login et mot de passe).</li>
+            <li><strong>Autorisation :</strong> contrôler l’accès aux ressources selon les droits de l’utilisateur authentifié.</li>
+            <li><strong>Gestion des sessions :</strong> maintenir la connexion de l’utilisateur à travers différentes pages.</li>
+            <li><strong>Stockage sécurisé des mots de passe :</strong> utiliser des fonctions de hachage robustes comme <code>password_hash()</code> et <code>password_verify()</code>.</li>
+        </ul>
+
+        <h2>3. Exemple de base de données utilisateurs</h2>
+        <pre>
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(20) DEFAULT 'user',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+        </pre>
+
+        <h2>4. Connexion à la base de données</h2>
+        <p>Utilisation de PDO pour une connexion sécurisée :</p>
+        <pre>
+&lt;?php
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=monapp;charset=utf8', 'root', '');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Erreur de connexion : " . $e->getMessage());
+}
+?&gt;
+        </pre>
+
+        <h2>5. Formulaire de connexion</h2>
+        <pre>
+&lt;form method="post" action="login.php"&gt;
+    &lt;label&gt;Nom d'utilisateur :&lt;/label&gt;
+    &lt;input type="text" name="username" required /&gt;&lt;br/&gt;
+
+    &lt;label&gt;Mot de passe :&lt;/label&gt;
+    &lt;input type="password" name="password" required /&gt;&lt;br/&gt;
+
+    &lt;button type="submit"&gt;Se connecter&lt;/button&gt;
+&lt;/form&gt;
+        </pre>
+
+        <h2>6. Traitement du formulaire de connexion (login.php)</h2>
+        <pre>
+&lt;?php
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    if (!$username || !$password) {
+        $error = "Veuillez remplir tous les champs.";
+    } else {
+        // Connexion à la base de données (exemple)
+        require 'db.php'; // fichier contenant la connexion $pdo
+
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->execute([$username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($password, $user['password'])) {
+            // Authentification réussie
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
+
+            header('Location: dashboard.php');
+            exit;
+        } else {
+            $error = "Identifiants incorrects.";
+        }
+    }
+}
+?&gt;
+
+&lt;?php if (isset($error)): ?&gt;
+    &lt;p style="color: red;"&gt;&lt;?= htmlspecialchars($error) ?&gt;&lt;/p&gt;
+&lt;?php endif; ?&gt;
+        </pre>
+
+        <h2>7. Gestion des sessions et autorisation</h2>
+        <p>
+            Pour protéger les pages réservées aux utilisateurs connectés, vérifiez la session au début de chaque page sécurisée :
+        </p>
+        <pre>
+&lt;?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    // Utilisateur non connecté, redirection vers la page de login
+    header('Location: login.php');
+    exit;
+}
+
+// Exemple de contrôle d'accès par rôle
+if ($_SESSION['role'] !== 'admin') {
+    die("Accès refusé : droits insuffisants.");
+}
+?&gt;
+        </pre>
+
+        <h2>8. Déconnexion sécurisée</h2>
+        <p>Pour déconnecter un utilisateur et nettoyer la session :</p>
+        <pre>
+&lt;?php
+session_start();
+session_unset();
+session_destroy();
+header('Location: login.php');
+exit;
+?&gt;
+        </pre>
+
+        <h2>9. Bonnes pratiques</h2>
+        <ul>
+            <li>Utilisez <code>password_hash()</code> pour stocker les mots de passe, et <code>password_verify()</code> pour les vérifier.</li>
+            <li>Utilisez des sessions sécurisées et régénérez l’ID de session après connexion (<code>session_regenerate_id()</code>).</li>
+            <li>Protégez les formulaires contre les attaques CSRF.</li>
+            <li>Utilisez HTTPS pour sécuriser la transmission des données.</li>
+            <li>Limitez le nombre de tentatives de connexion pour éviter le brute force.</li>
+        </ul>
+
+        <h2>10. Conclusion</h2>
+        <p>
+            Un système de connexion sécurisé est crucial pour toute application web. En combinant bonnes pratiques PHP et sécurités supplémentaires, vous
+            pouvez protéger efficacement vos utilisateurs et données sensibles.
+        </p>
+    </main>
+
+    <footer>
+        <p>
+            Guide d'apprentissage PHP &copy; 2025
+        </p>
+    </footer>
+</body>
+
+</html>

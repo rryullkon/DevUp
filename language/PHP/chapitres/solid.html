@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - Principes SOLID</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Principes SOLID</h1>
+        <p>Principes SOLID en PHP.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 80: SOLID Principles</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Les principes SOLID sont un ensemble de bonnes pratiques en programmation orientée objet visant à améliorer la
+            maintenabilité, la flexibilité et la compréhension du code.
+            Ils ont été popularisés par Robert C. Martin (Uncle Bob).
+        </p>
+
+        <h2>2. Les 5 principes SOLID</h2>
+        <ol>
+            <li>
+                <strong>S - Single Responsibility Principle (SRP)</strong><br />
+                Une classe doit avoir une seule responsabilité, une seule raison de changer.
+            </li>
+            <li>
+                <strong>O - Open/Closed Principle (OCP)</strong><br />
+                Les entités doivent être ouvertes à l’extension, mais fermées à la modification.
+            </li>
+            <li>
+                <strong>L - Liskov Substitution Principle (LSP)</strong><br />
+                Les objets d’une classe dérivée doivent pouvoir remplacer ceux de la classe de base sans altérer le comportement attendu.
+            </li>
+            <li>
+                <strong>I - Interface Segregation Principle (ISP)</strong><br />
+                Il vaut mieux plusieurs interfaces spécifiques que de grandes interfaces générales.
+            </li>
+            <li>
+                <strong>D - Dependency Inversion Principle (DIP)</strong><br />
+                Les modules de haut niveau ne doivent pas dépendre des modules de bas niveau, mais des abstractions.
+            </li>
+        </ol>
+
+        <h2>3. Exemples simples</h2>
+        <h3>Single Responsibility Principle (SRP)</h3>
+        <pre><code>&lt;?php
+// Mauvais exemple : une classe qui fait trop de choses
+class User {
+    public function save() {
+        // Code pour enregistrer l'utilisateur en base
+    }
+
+    public function sendEmail() {
+        // Code pour envoyer un email à l'utilisateur
+    }
+}
+
+// Bon exemple : séparer les responsabilités
+class User {
+    public function save() {
+        // Enregistrer l'utilisateur
+    }
+}
+
+class EmailSender {
+    public function sendEmail(User $user) {
+        // Envoyer un email
+    }
+}
+?&gt;
+</code></pre>
+
+        <h3>Open/Closed Principle (OCP)</h3>
+        <pre><code>&lt;?php
+interface Logger {
+    public function log(string $message);
+}
+
+class FileLogger implements Logger {
+    public function log(string $message) {
+        // Log dans un fichier
+    }
+}
+
+class Application {
+    private Logger $logger;
+
+    public function __construct(Logger $logger) {
+        $this->logger = $logger;
+    }
+
+    public function run() {
+        $this->logger->log("Application démarrée");
+    }
+}
+
+// On peut changer facilement le type de logger sans modifier Application
+$app = new Application(new FileLogger());
+$app->run();
+?&gt;
+</code></pre>
+
+        <h2>4. Conclusion</h2>
+        <p>
+            Appliquer les principes SOLID aide à écrire un code plus robuste, évolutif et plus facile à maintenir. 
+            Ces principes sont essentiels pour tout développeur PHP souhaitant produire un code de qualité professionnelle.
+        </p>
+    </main>
+
+    <footer>
+        <p>
+            Guide d'apprentissage PHP &copy; 2025 | Liens utiles : 
+            <a href="https://fr.wikipedia.org/wiki/Principes_SOLID" target="_blank" rel="noopener noreferrer">Principes SOLID (Wikipedia)</a> | 
+            <a href="https://phptherightway.com/#solid_principles" target="_blank" rel="noopener noreferrer">PHP The Right Way - SOLID</a>
+        </p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - Opcode caching</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Opcode caching</h1>
+        <p>Utilisation d'OPcache pour accélérer PHP.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 56: Opcode caching</h1>
+
+        <h2>1. Qu'est-ce que l'Opcode caching ?</h2>
+        <p>
+            L’Opcode caching permet de stocker en mémoire le code PHP compilé (opcodes), afin d’éviter de recompiler le même script à chaque exécution.
+            Cela réduit considérablement le temps de traitement et améliore les performances globales de votre application PHP.
+        </p>
+
+        <h2>2. Introduction à OPcache</h2>
+        <p>
+            OPcache est une extension officielle de PHP intégrée par défaut depuis PHP 5.5.
+            Elle améliore la rapidité d'exécution des scripts en mettant en cache les fichiers compilés.
+        </p>
+
+        <h2>3. Avantages d'utiliser OPcache</h2>
+        <ul>
+            <li>Réduction du temps d’exécution des scripts PHP.</li>
+            <li>Moins de charge sur le CPU du serveur.</li>
+            <li>Temps de réponse plus rapides pour les utilisateurs.</li>
+            <li>Amélioration des performances sans modifier le code source.</li>
+        </ul>
+
+        <h2>4. Activer OPcache</h2>
+        <p>Ajoutez ou vérifiez les lignes suivantes dans le fichier <code>php.ini</code> :</p>
+        <pre>
+opcache.enable=1
+opcache.memory_consumption=128
+opcache.interned_strings_buffer=8
+opcache.max_accelerated_files=10000
+opcache.validate_timestamps=1
+opcache.revalidate_freq=2
+        </pre>
+
+        <h2>5. Vérification de l’état d’OPcache</h2>
+        <p>Vous pouvez afficher les informations d’OPcache avec ce script :</p>
+        <pre>
+&lt;?php
+phpinfo();
+?&gt;
+        </pre>
+        <p>Ou en utilisant une fonction spécifique :</p>
+        <pre>
+&lt;?php
+print_r(opcache_get_status());
+?&gt;
+        </pre>
+
+        <h2>6. Bonnes pratiques avec OPcache</h2>
+        <ul>
+            <li>Gardez l’OPcache activé en production.</li>
+            <li>Ne désactivez pas la validation des timestamps en développement (pour détecter les modifications).</li>
+            <li>Surveillez le statut d’OPcache pour éviter qu’il ne sature (paramètre <code>opcache.memory_consumption</code>).</li>
+            <li>Redémarrez PHP-FPM ou le serveur web pour purger le cache si besoin.</li>
+        </ul>
+
+        <h2>7. Outils de gestion OPcache</h2>
+        <ul>
+            <li><strong>opcache-gui :</strong> interface web simple pour surveiller le cache.</li>
+            <li><strong>phpinfo() :</strong> permet de visualiser les directives OPcache chargées.</li>
+            <li><strong>opcache_reset() :</strong> vide manuellement le cache OPcache.</li>
+        </ul>
+
+        <h2>8. Conclusion</h2>
+        <p>
+            OPcache est un outil essentiel pour toute application PHP en production. Il offre une amélioration immédiate des performances
+            sans avoir besoin de modifier votre code. En l’activant et en le surveillant correctement, vous garantissez une exécution plus rapide
+            et plus stable de vos scripts PHP.
+        </p>
+    </main>
+
+    <footer>
+        <p>
+            Guide d'apprentissage PHP &copy; 2025 | 
+            <a href="https://www.php.net/manual/fr/book.opcache.php" target="_blank" rel="noopener noreferrer">
+                Découvrir la documentation complète d’OPcache sur PHP.net
+            </a>
+        </p>
+    </footer>
+</body>
+
+</html>

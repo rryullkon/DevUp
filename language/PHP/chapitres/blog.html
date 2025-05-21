@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - Blog PHP</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Blog PHP</h1>
+        <p>Création d'un blog complet avec PHP.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 69: Blog PHP</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Créer un blog complet en PHP est un excellent moyen de mettre en pratique vos connaissances en développement
+            web côté serveur.
+            Un blog typique inclut la gestion des articles, des commentaires, un système d'authentification, et une
+            interface d'administration.
+            Dans ce chapitre, nous allons explorer les bases de la création d'un blog en PHP, avec des exemples de code
+            et des explications détaillées.
+        </p>
+
+        <h2>2. Architecture générale</h2>
+        <p>
+            Un blog PHP classique est composé des éléments suivants :
+        </p>
+        <ul>
+            <li><strong>Base de données :</strong> stockage des articles, utilisateurs, commentaires.</li>
+            <li><strong>Page d'accueil :</strong> liste des articles publiés.</li>
+            <li><strong>Page article :</strong> affichage d'un article avec ses commentaires.</li>
+            <li><strong>Page d'administration :</strong> création, modification, suppression d'articles.</li>
+            <li><strong>Système d'authentification :</strong> pour sécuriser l'accès à l'administration.</li>
+        </ul>
+
+        <h2>3. Exemple de structure de base de données</h2>
+        <p>Voici un exemple simple en SQL pour créer les tables principales :</p>
+        <pre>
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE comments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    post_id INT NOT NULL,
+    author VARCHAR(100) NOT NULL,
+    content TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES posts(id)
+);
+        </pre>
+
+        <h2>4. Connexion à la base de données</h2>
+        <p>Voici un exemple de connexion à la base de données avec PDO, une méthode sécurisée et flexible :</p>
+        <pre>
+&lt;?php
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', '');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Erreur de connexion : " . $e->getMessage());
+}
+?&gt;
+        </pre>
+
+        <h2>5. Affichage de la liste des articles</h2>
+        <p>Une page PHP simple pour afficher la liste des articles :</p>
+        <pre>
+&lt;?php
+// Récupération des articles
+$stmt = $pdo-&gt;query("SELECT id, title, created_at FROM posts ORDER BY created_at DESC");
+$posts = $stmt-&gt;fetchAll(PDO::FETCH_ASSOC);
+?&gt;
+
+&lt;h2&gt;Liste des articles&lt;/h2&gt;
+&lt;ul&gt;
+&lt;?php foreach ($posts as $post): ?&gt;
+    &lt;li&gt;
+        &lt;a href="article.php?id=&lt;?= $post['id'] ?&gt;"&gt;&lt;?= htmlspecialchars($post['title']) ?&gt;&lt;/a&gt;
+        &lt;em&gt;(publié le &lt;?= $post['created_at'] ?&gt;)&lt;/em&gt;
+    &lt;/li&gt;
+&lt;?php endforeach; ?&gt;
+&lt;/ul&gt;
+</pre>
+
+
+        <h2>6. Affichage d'un article avec ses commentaires</h2>
+        <p>Exemple de code pour afficher un article et ses commentaires :</p>
+        <pre>
+&lt;?php
+$postId = $_GET['id'] ?? null;
+
+if (!$postId) {
+    die("Article non spécifié");
+}
+
+// Récupérer l'article
+$stmt = $pdo->prepare("SELECT * FROM posts WHERE id = ?");
+$stmt->execute([$postId]);
+$post = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$post) {
+    die("Article non trouvé");
+}
+
+// Récupérer les commentaires associés
+$stmt = $pdo->prepare("SELECT * FROM comments WHERE post_id = ? ORDER BY created_at ASC");
+$stmt->execute([$postId]);
+$comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?&gt;
+
+&lt;h2&gt;&lt;?= htmlspecialchars($post['title']) ?&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;?= nl2br(htmlspecialchars($post['content'])) ?&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h3&gt;Commentaires&lt;/h3&gt;
+
+&lt;?php if (empty($comments)): ?&gt;
+    &lt;p&gt;Pas encore de commentaires.&lt;/p&gt;
+&lt;?php else: ?&gt;
+    &lt;ul&gt;
+    &lt;?php foreach ($comments as $comment): ?&gt;
+        &lt;li&gt;&lt;strong&gt;&lt;?= htmlspecialchars($comment['author']) ?&gt;&lt;/strong&gt; :
+            &lt;?= nl2br(htmlspecialchars($comment['content'])) ?&gt; &lt;em&gt;(&lt;?= $comment['created_at'] ?&gt;)&lt;/em&gt;
+        &lt;/li&gt;
+    &lt;?php endforeach; ?&gt;
+    &lt;/ul&gt;
+&lt;?php endif; ?&gt;
+        </pre>
+
+        <h2>7. Ajout d'un commentaire</h2>
+        <p>Formulaire simple pour ajouter un commentaire à un article, et traitement du formulaire :</p>
+        <pre>
+&lt;?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $author = trim($_POST['author'] ?? '');
+    $content = trim($_POST['content'] ?? '');
+
+    if ($author && $content) {
+        $stmt = $pdo->prepare("INSERT INTO comments (post_id, author, content) VALUES (?, ?, ?)");
+        $stmt->execute([$postId, $author, $content]);
+        header("Location: article.php?id=" . $postId);
+        exit;
+    } else {
+        $error = "Veuillez remplir tous les champs.";
+    }
+}
+?&gt;
+
+&lt;form method="post"&gt;
+    &lt;label&gt;Nom :&lt;/label&gt;
+    &lt;input type="text" name="author" required /&gt;&lt;br /&gt;
+
+    &lt;label&gt;Commentaire :&lt;/label&gt;
+    &lt;textarea name="content" required&gt;&lt;/textarea&gt;&lt;br /&gt;
+
+    &lt;button type="submit"&gt;Envoyer&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;?php if (isset($error)): ?&gt;
+    &lt;p style="color:red;"&gt;&lt;?= htmlspecialchars($error) ?&gt;&lt;/p&gt;
+&lt;?php endif; ?&gt;
+        </pre>
+
+        <h2>8. Authentification simple</h2>
+        <p>
+            Pour gérer l’administration du blog (création, modification, suppression d’articles), il est important de
+            mettre en place un système d’authentification simple.
+            Voici un exemple d’authentification basique avec un formulaire de connexion.
+        </p>
+        <pre>
+&lt;?php
+// Exemple simplifié sans base de données pour l’authentification
+session_start();
+
+$users = [
+    'admin' =&gt; password_hash('motdepasse', PASSWORD_DEFAULT)
+];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    if (isset($users[$username]) && password_verify($password, $users[$username])) {
+        $_SESSION['user'] = $username;
+        header('Location: admin.php');
+        exit;
+    } else {
+        $error = "Identifiants incorrects";
+    }
+}
+?&gt;
+
+&lt;form method="post"&gt;
+    &lt;label&gt;Utilisateur :&lt;/label&gt;
+    &lt;input type="text" name="username" required /&gt;&lt;br /&gt;
+
+    &lt;label&gt;Mot de passe :&lt;/label&gt;
+    &lt;input type="password" name="password" required /&gt;&lt;br /&gt;
+
+    &lt;button type="submit"&gt;Se connecter&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;?php if (isset($error)): ?&gt;
+    &lt;p style="color:red;"&gt;&lt;?= htmlspecialchars($error) ?&gt;&lt;/p&gt;
+&lt;?php endif; ?&gt;
+        </pre>
+
+        <h2>9. Création d’un article (extrait)</h2>
+        <p>Exemple de code PHP pour ajouter un nouvel article :</p>
+        <pre>
+&lt;?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title = trim($_POST['title'] ?? '');
+    $content = trim($_POST['content'] ?? '');
+
+    if ($title && $content) {
+        $stmt = $pdo->prepare("INSERT INTO posts (title, content, user_id) VALUES (?, ?, ?)");
+        $stmt->execute([$title, $content, 1]); // user_id = 1 pour admin
+        header('Location: admin.php');
+        exit;
+    } else {
+        $error = "Tous les champs sont obligatoires.";
+    }
+}
+?&gt;
+
+&lt;form method="post"&gt;
+    &lt;label&gt;Titre :&lt;/label&gt;
+    &lt;input type="text" name="title" required /&gt;&lt;br /&gt;
+
+    &lt;label&gt;Contenu :&lt;/label&gt;
+    &lt;textarea name="content" required&gt;&lt;/textarea&gt;&lt;br /&gt;
+
+    &lt;button type="submit"&gt;Créer&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;?php if (isset($error)): ?&gt;
+    &lt;p style="color:red;"&gt;&lt;?= htmlspecialchars($error) ?&gt;&lt;/p&gt;
+&lt;?php endif; ?&gt;
+        </pre>
+
+        <h2>10. Conclusion</h2>
+        <p>
+            Ce chapitre vous a présenté les bases pour créer un blog complet en PHP, avec gestion des articles,
+            commentaires, et authentification.
+            Bien sûr, ce projet peut être enrichi par de nombreuses fonctionnalités supplémentaires :
+        </p>
+        <ul>
+            <li>Pagination des articles.</li>
+            <li>Éditeur WYSIWYG pour les contenus.</li>
+            <li>Modération des commentaires.</li>
+            <li>Gestion avancée des utilisateurs et rôles.</li>
+            <li>Utilisation de frameworks PHP pour plus de robustesse.</li>
+        </ul>
+        <p>
+            Créer un blog est une excellente occasion de développer vos compétences pratiques en PHP et de comprendre
+            comment fonctionnent les applications web complètes.
+        </p>
+    </main>
+
+    <footer>
+        <p>
+            Guide d'apprentissage PHP &copy; 2025
+        </p>
+    </footer>
+</body>
+
+</html>

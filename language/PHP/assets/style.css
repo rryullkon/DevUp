@@ -1,184 +1,256 @@
 :root {
-    /* Palette de couleurs */
+    /* Palette PHP étendue */
     --php-purple: #8892be;
     --php-dark: #4F5B93;
     --php-light: #E0E0F0;
     --php-white: #ffffff;
     --php-gray: #dcdcdc;
     --php-blue: #5A69A6;
-    --header-bg: #4F5B93;
-    --header-text: #ffffff;
-
+    --php-blue-light: #7B8AC8;
+    --php-purple-dark: #6A75A5;
+    --php-accent: #4d5988;
+    --php-code-bg: #f5f7ff;
+    
+    /* Dégradés PHP */
+    --gradient-php: linear-gradient(135deg, var(--php-purple) 0%, var(--php-blue) 100%);
+    --gradient-php-reverse: linear-gradient(135deg, var(--php-blue) 0%, var(--php-purple) 100%);
+    --gradient-php-dark: linear-gradient(135deg, var(--php-dark) 0%, var(--php-blue) 100%);
+    --gradient-table-header: linear-gradient(90deg, var(--php-dark) 60%, var(--php-purple) 100%);
+    
     /* Espacements */
     --space-xs: 0.5rem;
     --space-sm: 1rem;
     --space-md: 1.5rem;
     --space-lg: 2rem;
     --space-xl: 3rem;
-
+    
     /* Bordures */
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 12px;
-
+    --radius-xl: 16px;
+    
     /* Ombres */
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(76, 90, 147, 0.15);
+    --shadow-lg: 0 10px 25px rgba(76, 90, 147, 0.2);
+    --shadow-php: 0 5px 15px rgba(136, 146, 190, 0.4);
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
 }
 
-/* Reset et base */
+/* Reset amélioré */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+*::selection {
+    background-color: var(--php-purple);
+    color: white;
+}
+
+/* Base stylisée */
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(120deg, #e0e0f0 0%, #f9f9ff 100%);
+    background: linear-gradient(145deg, var(--php-light) 0%, var(--php-white) 100%);
     color: var(--php-dark);
-    line-height: 1.6;
+    line-height: 1.7;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     letter-spacing: 0.01em;
+    overflow-x: hidden;
 }
 
+/* Barre de progression PHP stylée */
 .progress-container {
     width: 80%;
-    max-width: 500px;
-    background-color: var(--php-gray);
-    border-radius: var(--radius-lg);
-    padding: var(--space-xs);
+    max-width: 600px;
+    background-color: var(--php-white);
+    border-radius: var(--radius-xl);
+    padding: 6px;
     box-shadow: var(--shadow-md);
-    margin: 10px;
+    margin: 20px auto;
+    border: 1px solid var(--php-gray);
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 .progress-bar {
     height: 30px;
-    background-color: var(--php-blue);
+    background: var(--gradient-php);
     border-radius: var(--radius-md);
-    width: 52%;
+    width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--php-white);
     font-weight: bold;
-    transition: width 0.3s ease;
-    box-shadow: var(--shadow-sm);
+    transition: width 0.5s ease, transform 0.3s ease;
+    box-shadow: 
+        inset 0 2px 4px rgba(255, 255, 255, 0.3),
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
 }
 
-.progress-text {
+.progress-bar::after {
+    content: '';
     position: absolute;
-    width: 80%;
-    max-width: 500px;
-    text-align: center;
-    margin-top: var(--space-md);
-    color: var(--php-dark);
-    font-weight: bold;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: progressShine 2.5s infinite;
 }
 
-/* Typographie */
-h1,
-h2,
-h3,
-h4 {
-    font-weight: 700;
+@keyframes progressShine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+
+
+/* Typographie améliorée */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 800;
     line-height: 1.2;
     margin-bottom: var(--space-sm);
     letter-spacing: 0.02em;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 h1 {
-    font-size: 2.8rem;
-    color: var(--header-text);
+    font-size: 3.2rem;
+    color: var(--php-white);
     margin-bottom: var(--space-xs);
-    text-shadow: 0 2px 8px rgba(76, 90, 147, 0.15);
+    text-shadow: 0 2px 10px rgba(76, 90, 147, 0.3);
     letter-spacing: 0.04em;
+    position: relative;
+    display: inline-block;
+    padding: 0 20px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 20%;
+    width: 60%;
+    height: 3px;
+    background: var(--php-accent);
+    border-radius: 3px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+h1:hover::after {
+    transform: scaleX(1);
 }
 
 h2 {
-    font-size: 2rem;
-    color: var(--php-purple);
+    font-size: 2.4rem;
+    color: var(--php-purple-dark);
     position: relative;
-    padding-left: var(--space-sm);
-    margin: var(--space-lg) 0 var(--space-md);
-    text-shadow: 0 1px 4px rgba(136, 146, 190, 0.08);
+    padding-left: var(--space-md);
+    margin: var(--space-xl) 0 var(--space-lg);
+    text-shadow: 0 1px 4px rgba(136, 146, 190, 0.1);
 }
 
 h2::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 0.2em;
-    bottom: 0.2em;
-    width: 5px;
-    background: linear-gradient(180deg, var(--php-purple), var(--php-blue));
-    border-radius: var(--radius-lg);
+    top: 0.15em;
+    bottom: 0.15em;
+    width: 8px;
+    background: var(--gradient-php);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
 }
 
 h3 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     color: var(--php-blue);
-    margin-bottom: 0.5em;
+    margin-bottom: 0.75em;
     letter-spacing: 0.03em;
-}
-
-/* Amélioration du style pour h5 (Travaux pratique) */
-.chapter-card.TP h5 {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    color: white !important;
-    margin-bottom: 1em !important;
-    letter-spacing: 0.03em;
-    margin: 10px;
-    background: linear-gradient(90deg, #a00000, #cc0000) !important;
-
-    border-radius: var(--radius-md) !important;
-    padding: 0.6em 1.2em !important;
-
-    text-align: center;
-    display: inline-block;
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    box-shadow: var(--shadow-sm);
     position: relative;
-    z-index: 2;
-}
-
-.chapter-card.EX h5 {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    color: white !important;
-    margin-bottom: 1em !important;
-    letter-spacing: 0.03em;
-    margin: 10px;
-    background: linear-gradient(90deg, #006600 60%, #00aa00 100%) !important;
-
-    border-radius: var(--radius-md) !important;
-    padding: 0.6em 1.2em !important;
-
-    text-align: center;
     display: inline-block;
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    box-shadow: var(--shadow-sm);
-    position: relative;
-    z-index: 2;
+    padding-bottom: 5px;
 }
 
+h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gradient-php);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease;
+}
 
-/* En-tête */
+h3:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* En-tête spectaculaire */
 header {
-    background: linear-gradient(90deg, var(--header-bg) 60%, var(--php-blue) 100%);
-    color: var(--header-text);
-    padding: var(--space-xl) var(--space-md) var(--space-lg) var(--space-md);
+    background: var(--gradient-php-dark);
+    color: var(--php-white);
+    padding: var(--space-xl) var(--space-md) var(--space-lg);
     text-align: center;
-    box-shadow: 0 8px 24px rgba(76, 90, 147, 0.10);
+    box-shadow: 0 10px 30px rgba(76, 90, 147, 0.2);
     position: relative;
     overflow: hidden;
-    border-radius: 0 0 32px 32px;
+    border-radius: 0 0 40px 40px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    transform: rotate(30deg);
+    z-index: -1;
+    animation: headerShine 15s infinite linear;
+}
+
+@keyframes headerShine {
+    0% { transform: rotate(30deg) translateX(-10%); }
+    100% { transform: rotate(30deg) translateX(10%); }
 }
 
 header::after {
@@ -187,119 +259,246 @@ header::after {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, var(--php-purple), var(--php-blue));
-    border-radius: 0 0 16px 16px;
+    height: 8px;
+    background: linear-gradient(90deg, var(--php-accent), var(--php-purple), var(--php-blue));
+    border-radius: 0 0 20px 20px;
+    opacity: 0.8;
 }
 
 header p {
     margin-top: var(--space-xs);
-    font-style: italic;
-    opacity: 0.95;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     letter-spacing: 0.02em;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: inline-block;
 }
 
-/* Contenu principal */
+header p::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 25%;
+    width: 50%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Contenu principal enrichi */
 main {
-    max-width: 1000px;
+    max-width: 1200px;
     width: 100%;
     margin: var(--space-xl) auto;
     padding: 0 var(--space-md);
     flex: 1;
+    position: relative;
 }
 
-/* Cartes de chapitres */
+main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M30,30 L70,30 L70,70 L30,70 Z" stroke="%238892be" stroke-width="0.5" fill="none" opacity="0.05"/></svg>');
+    opacity: 0.05;
+    z-index: -1;
+}
+
+/* Grille de cartes améliorée */
 .chapters {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.2rem;
-    margin-top: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+    perspective: 5000px;
 }
 
+/* Cartes de chapitres ultra stylisées */
 .chapter-card {
     border: none;
-    border-radius: var(--radius-lg);
-    padding: 2.2rem 1.5rem 1.5rem 1.5rem;
-    background: linear-gradient(120deg, #f9f9ff 60%, #e0e0f0 100%);
-    box-shadow: 0 4px 24px rgba(136, 146, 190, 0.13), 0 1.5px 6px rgba(90, 105, 166, 0.07);
-    transition: transform 0.22s cubic-bezier(.4, 2, .6, 1), box-shadow 0.22s;
+    border-radius: var(--radius-xl);
+    padding: 2.5rem 2rem 2rem;
+    background: linear-gradient(145deg, var(--php-white) 0%, var(--php-light) 100%);
+    box-shadow: 
+        0 6px 30px rgba(136, 146, 190, 0.15),
+        0 2px 8px rgba(90, 105, 166, 0.08);
+    transition: var(--transition-smooth);
     position: relative;
     overflow: hidden;
+    
+    z-index: 1;
+    border: 1px solid rgba(136, 146, 190, 0.2);
 }
 
 .chapter-card::before {
     content: '';
     position: absolute;
-    top: -40px;
-    right: -40px;
-    width: 90px;
-    height: 90px;
-    background: radial-gradient(circle, var(--php-purple) 0%, transparent 70%);
-    opacity: 0.13;
-    z-index: 0;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+
+    transform: rotate(45deg);
+    transition: var(--transition-smooth);
+    z-index: -1;
+}
+
+.chapter-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gradient-php);
+    opacity: 0;
+    transition: var(--transition-smooth);
 }
 
 .chapter-card:hover {
-    transform: translateY(-8px) scale(1.025);
-    box-shadow: 0 8px 32px rgba(90, 105, 166, 0.18), 0 2px 8px rgba(76, 90, 147, 0.10);
-    background: linear-gradient(120deg, #e0e0f0 60%, #f9f9ff 100%);
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 
+        0 15px 40px rgba(90, 105, 166, 0.25),
+        0 5px 15px rgba(76, 90, 147, 0.15);
+    border-color: rgba(136, 146, 190, 0.4);
+}
+
+.chapter-card:hover::before {
+    transform: rotate(45deg) translateX(20px);
+}
+
+.chapter-card:hover::after {
+    opacity: 1;
 }
 
 .chapter-card h3 {
     margin-top: 0;
     color: var(--php-blue);
-    z-index: 1;
-    position: relative;
+    z-index: 2;
+    font-size: 1.6rem;
 }
 
 .chapter-card p {
     color: #555;
-    margin-bottom: 1.2em;
-    z-index: 1;
-    position: relative;
-    font-size: 1.05rem;
+    margin-bottom: 1.5em;
+    z-index: 2;
+    font-size: 1.1rem;
+    line-height: 1.6;
 }
 
+/* Boutons PHP améliorés */
 .chapter-card .btn {
-    display: inline-block;
-    padding: 0.7em 1.6em;
-    background: linear-gradient(90deg, var(--php-purple) 60%, var(--php-blue) 100%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9em 2em;
+    background: var(--gradient-php);
     color: white;
     text-decoration: none;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    font-size: 1.05rem;
-    box-shadow: 0 2px 8px rgba(136, 146, 190, 0.10);
+    border-radius: var(--radius-lg);
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 
+        0 4px 15px rgba(136, 146, 190, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
     border: none;
-    transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
+    transition: var(--transition-smooth);
     cursor: pointer;
     letter-spacing: 0.03em;
-    z-index: 1;
+    z-index: 2;
     position: relative;
+    overflow: hidden;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.chapter-card .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: var(--transition-smooth);
 }
 
 .chapter-card .btn:hover {
-    background: linear-gradient(90deg, var(--php-blue) 60%, var(--php-purple) 100%);
-    transform: scale(1.06) translateY(-2px);
-    box-shadow: 0 4px 16px rgba(90, 105, 166, 0.18);
+    background: var(--gradient-php-reverse);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 7px 20px rgba(90, 105, 166, 0.4),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
-/* Styles spécifiques pour les cartes de travaux pratiques */
-.chapter-card.TP {
-    background: linear-gradient(120deg, #fff8f8 60%, #ffe0e0 100%) !important;
-    box-shadow: 0 4px 24px rgba(190, 136, 136, 0.13), 0 1.5px 6px rgba(166, 90, 90, 0.07) !important;
-    border-left: 4px solid #cc0000;
+.chapter-card .btn:hover::before {
+    left: 100%;
+}
+
+.chapter-card .btn i {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+/* Styles TP/EX améliorés */
+.chapter-card.TP, .chapter-card.EX {
+    position: relative;
+}
+
+.chapter-card.TP::before, .chapter-card.EX::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 60px 60px 0;
+    z-index: 3;
 }
 
 .chapter-card.TP::before {
-    background: radial-gradient(circle, #cc0000 0%, transparent 70%) !important;
-    opacity: 0.08 !important;
+    border-color: transparent #cc0000 transparent transparent;
+}
+
+.chapter-card.EX::before {
+    border-color: transparent #00aa00 transparent transparent;
+}
+
+.chapter-card.TP h5, .chapter-card.EX h5 {
+    position: absolute;
+    top: 8px;
+    right: 0;
+    transform: rotate(45deg) translateX(30%) translateY(-10px);
+    transform-origin: center;
+    font-size: 0.8rem;
+    padding: 0.3em 2em;
+    z-index: 4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* TP - Style amélioré */
+.chapter-card.TP {
+    background: linear-gradient(145deg, #fff8f8 0%, #ffecec 100%) !important;
+    box-shadow: 
+        0 6px 30px rgba(190, 136, 136, 0.15),
+        0 2px 8px rgba(166, 90, 90, 0.08) !important;
+    border-left: 6px solid #cc0000;
 }
 
 .chapter-card.TP:hover {
-    background: linear-gradient(120deg, #ffe0e0 60%, #fff8f8 100%) !important;
-    box-shadow: 0 8px 32px rgba(166, 90, 90, 0.18), 0 2px 8px rgba(147, 76, 76, 0.10) !important;
+    background: linear-gradient(145deg, #ffecec 0%, #fff8f8 100%) !important;
+    box-shadow: 
+        0 15px 40px rgba(166, 90, 90, 0.25),
+        0 5px 15px rgba(147, 76, 76, 0.15) !important;
 }
 
 .chapter-card.TP h3 {
@@ -307,30 +506,30 @@ main {
 }
 
 .chapter-card.TP .btn {
-    background: linear-gradient(90deg, #a00000 60%, #cc0000 100%) !important;
-    box-shadow: 0 2px 8px rgba(190, 136, 136, 0.10) !important;
+    background: linear-gradient(135deg, #a00000 0%, #cc0000 100%) !important;
+    box-shadow: 
+        0 4px 15px rgba(190, 136, 136, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
 }
 
 .chapter-card.TP .btn:hover {
-    background: linear-gradient(90deg, #cc0000 60%, #a00000 100%) !important;
-    box-shadow: 0 4px 16px rgba(166, 90, 90, 0.18) !important;
+    background: linear-gradient(135deg, #cc0000 0%, #a00000 100%) !important;
 }
 
-/* Styles spécifiques pour les cartes d'exercices */
+/* EX - Style amélioré */
 .chapter-card.EX {
-    background: linear-gradient(120deg, #f8fff8 60%, #e0ffe0 100%) !important;
-    box-shadow: 0 4px 24px rgba(136, 190, 136, 0.13), 0 1.5px 6px rgba(90, 166, 90, 0.07) !important;
-    border-left: 4px solid #00aa00;
-}
-
-.chapter-card.EX::before {
-    background: radial-gradient(circle, #00aa00 0%, transparent 70%) !important;
-    opacity: 0.08 !important;
+    background: linear-gradient(145deg, #f8fff8 0%, #e0ffe0 100%) !important;
+    box-shadow: 
+        0 6px 30px rgba(136, 190, 136, 0.15),
+        0 2px 8px rgba(90, 166, 90, 0.08) !important;
+    border-left: 6px solid #00aa00;
 }
 
 .chapter-card.EX:hover {
-    background: linear-gradient(120deg, #e0ffe0 60%, #f8fff8 100%) !important;
-    box-shadow: 0 8px 32px rgba(90, 166, 90, 0.18), 0 2px 8px rgba(76, 147, 76, 0.10) !important;
+    background: linear-gradient(145deg, #e0ffe0 0%, #f8fff8 100%) !important;
+    box-shadow: 
+        0 15px 40px rgba(90, 166, 90, 0.25),
+        0 5px 15px rgba(76, 147, 76, 0.15) !important;
 }
 
 .chapter-card.EX h3 {
@@ -338,58 +537,34 @@ main {
 }
 
 .chapter-card.EX .btn {
-    background: linear-gradient(90deg, #006600 60%, #00aa00 100%) !important;
-    box-shadow: 0 2px 8px rgba(136, 190, 136, 0.10) !important;
+    background: linear-gradient(135deg, #006600 0%, #00aa00 100%) !important;
+    box-shadow: 
+        0 4px 15px rgba(136, 190, 136, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
 }
 
 .chapter-card.EX .btn:hover {
-    background: linear-gradient(90deg, #00aa00 60%, #006600 100%) !important;
-    box-shadow: 0 4px 16px rgba(90, 166, 90, 0.18) !important;
+    background: linear-gradient(135deg, #00aa00 0%, #006600 100%) !important;
 }
 
-
-
-/* Liens */
-a {
-    color: var(--php-blue);
-    text-decoration: none;
-    font-weight: 500;
-    position: relative;
-    transition: color 0.3s, transform 0.3s;
+/* Effets au survol des cartes TP/EX */
+.chapter-card.TP:hover::after {
+    background: linear-gradient(90deg, #ff6b6b, #cc0000);
 }
 
-a:hover {
-    color: var(--php-dark);
-    transform: scale(1.05);
-    text-shadow: 0 1px 4px rgba(90, 105, 166, 0.07);
+.chapter-card.EX:hover::after {
+    background: linear-gradient(90deg, #6bff6b, #00aa00);
 }
 
-/* Code */
-code {
-    background-color: var(--php-gray);
-    padding: 0.2em 0.4em;
-    border-radius: var(--radius-sm);
-    font-family: 'Fira Code', 'Courier New', monospace;
-    font-size: 0.98em;
-    color: var(--php-dark);
+/* Styles pour les éléments de contenu */
+p {
+    margin-bottom: var(--space-md);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #444;
 }
 
-pre {
-    background-color: var(--php-white);
-    padding: var(--space-md);
-    border-radius: var(--radius-md);
-    overflow-x: auto;
-    box-shadow: var(--shadow-sm);
-    border-left: 4px solid var(--php-blue);
-    margin: var(--space-md) 0;
-    font-family: 'Fira Code', 'Courier New', monospace;
-    line-height: 1.5;
-    font-size: 1.02em;
-}
-
-/* Listes */
-ul,
-ol {
+ul, ol {
     padding-left: var(--space-lg);
     margin-bottom: var(--space-md);
 }
@@ -398,67 +573,250 @@ li {
     margin-bottom: var(--space-xs);
     position: relative;
     font-size: 1.04rem;
+    line-height: 1.6;
 }
 
 ul li::marker {
     color: var(--php-purple);
 }
 
-
-
-
-/* Pied de page */
-footer {
-    text-align: center;
-    padding: var(--space-md);
-    margin-top: var(--space-xl);
-    border-top: 1px solid var(--php-gray);
-    color: var(--php-dark);
-    font-size: 1rem;
-    background: linear-gradient(90deg, #f9f9ff 60%, #e0e0f0 100%);
-    border-radius: 0 0 16px 16px;
-    box-shadow: 0 -2px 8px rgba(136, 146, 190, 0.07);
+/* Styles pour les tableaux */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-md) 0 var(--space-lg);
+    background: var(--php-white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    font-size: 1.04rem;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-    main {
-        max-width: 98vw;
-        padding: 0 var(--space-xs);
-    }
+table thead {
+    background: var(--gradient-table-header);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
 
+table th {
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    font-weight: 600;
+    position: relative;
+}
+
+table th:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+table tbody tr {
+    transition: background 0.2s ease;
+}
+
+table tbody tr:nth-child(even) {
+    background: var(--php-light);
+}
+
+table tbody tr:hover {
+    background: rgba(136, 146, 190, 0.08);
+}
+
+table td {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--php-gray);
+    vertical-align: middle;
+}
+
+table td:first-child {
+    font-weight: 500;
+    color: var(--php-purple);
+}
+
+table caption {
+    caption-side: bottom;
+    padding: var(--space-sm);
+    font-style: italic;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* Styles pour le code */
+code {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    background-color: var(--php-code-bg);
+    padding: 0.2em 0.4em;
+    border-radius: var(--radius-sm);
+    font-size: 0.95em;
+    color: var(--php-dark);
+    border: 1px solid rgba(136, 146, 190, 0.2);
+}
+
+pre {
+    background-color: var(--php-code-bg);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--php-blue);
+    margin: var(--space-md) 0;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    tab-size: 4;
+}
+
+pre code {
+    background: transparent;
+    padding: 0;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+}
+
+/* Pied de page stylisé */
+footer {
+    text-align: center;
+    padding: var(--space-lg) var(--space-md);
+    margin-top: var(--space-xl);
+    color: var(--php-dark);
+    font-size: 1.05rem;
+    background: linear-gradient(145deg, var(--php-white) 0%, var(--php-light) 100%);
+    box-shadow: 0 -5px 20px rgba(136, 146, 190, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-php);
+    opacity: 0.7;
+}
+
+footer a {
+    color: var(--php-blue);
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+footer a:hover {
+    color: var(--php-dark);
+    text-decoration: underline;
+}
+
+/* Responsive amélioré */
+@media (max-width: 1024px) {
     .chapters {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
     }
-
-    header {
-        padding: var(--space-lg) var(--space-xs);
+    
+    h1 {
+        font-size: 2.8rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    h3 {
+        font-size: 1.4rem;
     }
 }
 
 @media (max-width: 768px) {
     :root {
-        --space-md: 1rem;
-        --space-lg: 1.5rem;
-        --space-xl: 2rem;
+        --space-md: 1.2rem;
+        --space-lg: 1.8rem;
+        --space-xl: 2.5rem;
     }
 
     h1 {
-        font-size: 2rem;
+        font-size: 2.4rem;
     }
 
     h2 {
+        font-size: 1.8rem;
+    }
+    
+    h3 {
         font-size: 1.3rem;
     }
 
-    h5 {
-        margin: -1.5rem 0 1rem -0.8rem !important;
-        font-size: 0.8rem;
-        padding: 0.5em 1em !important;
+    .chapter-card {
+        padding: 1.8rem 1.5rem 1.5rem;
+    }
+    
+    table {
+        font-size: 0.95rem;
+    }
+    
+    table th, table td {
+        padding: var(--space-xs) var(--space-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
     }
 
-    .chapter-card {
-        padding: 1.2rem 0.8rem 1rem 0.8rem;
+    .chapters {
+        grid-template-columns: 1fr;
     }
+
+    .progress-container {
+        width: 95%;
+    }
+    
+    pre {
+        padding: var(--space-sm);
+        font-size: 0.9rem;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+/* Animations supplémentaires */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.floating {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Effets de lumière */
+.light-effect {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(136, 146, 190, 0.1) 0%, rgba(136, 146, 190, 0) 70%);
+    pointer-events: none;
+    z-index: 0;
 }

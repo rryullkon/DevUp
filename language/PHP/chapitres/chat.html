@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - Chat en temps réel</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Chat en temps réel</h1>
+        <p>Utilisation de WebSockets avec PHP.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 72: Chat en temps réel</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Les WebSockets permettent une communication bidirectionnelle persistante entre un client et un serveur,
+            idéale pour des applications en temps réel comme un chat, notifications, jeux en ligne, etc.
+            Ce chapitre introduit la mise en place d’un chat en temps réel avec PHP en utilisant WebSockets.
+        </p>
+
+        <h2>2. Concepts clés des WebSockets</h2>
+        <ul>
+            <li><strong>Connexion persistante :</strong> contrairement au HTTP classique, le canal reste ouvert.</li>
+            <li><strong>Communication bidirectionnelle :</strong> serveur et client peuvent envoyer des messages à tout moment.</li>
+            <li><strong>Protocoles :</strong> WebSocket utilise un protocole spécifique, distinct du HTTP.</li>
+        </ul>
+
+        <h2>3. Mise en place avec Ratchet (bibliothèque PHP WebSocket)</h2>
+        <p>
+            Ratchet est une bibliothèque PHP populaire pour créer des serveurs WebSocket.
+            Elle s’installe via Composer :
+        </p>
+        <pre><code>composer require cboden/ratchet</code></pre>
+
+        <h2>4. Exemple simple de serveur WebSocket en PHP avec Ratchet</h2>
+        <pre><code>&lt;?php
+use Ratchet\MessageComponentInterface;
+use Ratchet\ConnectionInterface;
+
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+class Chat implements MessageComponentInterface {
+    protected $clients;
+
+    public function __construct() {
+        $this->clients = new \SplObjectStorage;
+    }
+
+    public function onOpen(ConnectionInterface $conn) {
+        $this->clients->attach($conn);
+        echo "Nouvelle connexion ({$conn->resourceId})\n";
+    }
+
+    public function onMessage(ConnectionInterface $from, $msg) {
+        foreach ($this->clients as $client) {
+            if ($from !== $client) {
+                $client->send($msg);
+            }
+        }
+    }
+
+    public function onClose(ConnectionInterface $conn) {
+        $this->clients->detach($conn);
+        echo "Connexion {$conn->resourceId} fermée\n";
+    }
+
+    public function onError(ConnectionInterface $conn, \Exception $e) {
+        echo "Erreur: {$e->getMessage()}\n";
+        $conn->close();
+    }
+}
+
+use Ratchet\Server\IoServer;
+use Ratchet\Http\HttpServer;
+use Ratchet\WebSocket\WsServer;
+
+$server = IoServer::factory(
+    new HttpServer(
+        new WsServer(
+            new Chat()
+        )
+    ),
+    8080
+);
+
+echo "Serveur WebSocket démarré sur le port 8080\n";
+
+$server->run();
+?&gt;
+</code></pre>
+
+        <h2>5. Exemple de client HTML/JavaScript</h2>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Chat en temps réel&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h2&gt;Chat WebSocket&lt;/h2&gt;
+
+&lt;div id="chat"&gt;&lt;/div&gt;
+
+&lt;input type="text" id="message" placeholder="Tapez votre message..." autocomplete="off"&gt;
+&lt;button id="sendBtn"&gt;Envoyer&lt;/button&gt;
+
+&lt;script&gt;
+    const ws = new WebSocket('ws://localhost:8080');
+
+    ws.onopen = () =&gt; {
+        console.log('Connexion établie');
+    };
+
+    ws.onmessage = (event) =&gt; {
+        const chat = document.getElementById('chat');
+        const message = document.createElement('div');
+        message.textContent = event.data;
+        chat.appendChild(message);
+    };
+
+    ws.onerror = (error) =&gt; {
+        console.error('Erreur WebSocket', error);
+    };
+
+    document.getElementById('sendBtn').onclick = () =&gt; {
+        const input = document.getElementById('message');
+        if (input.value.trim() !== '') {
+            ws.send(input.value);
+            input.value = '';
+        }
+    };
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+        <h2>6. Conclusion</h2>
+        <p>
+            Ce système simple montre comment démarrer un chat en temps réel avec PHP et WebSockets.
+            Pour un déploiement en production, pensez à gérer l’authentification, la sécurité et la scalabilité.
+        </p>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025</p>
+    </footer>
+</body>
+
+</html>

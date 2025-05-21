@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - FFI (Foreign Function Interface)</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>FFI (Foreign Function Interface)</h1>
+        <p>Appel de code C depuis PHP.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 68: FFI (Foreign Function Interface)</h1>
+
+        <h2>1. Qu'est-ce que FFI ?</h2>
+        <p>
+            FFI (Foreign Function Interface) est une extension PHP qui permet d'appeler directement des fonctions écrites en C
+            ou d'autres bibliothèques partagées depuis du code PHP, sans avoir à écrire une extension PHP complète.
+        </p>
+
+        <h2>2. Pourquoi utiliser FFI ?</h2>
+        <ul>
+            <li>Intégrer rapidement du code natif C dans une application PHP.</li>
+            <li>Réutiliser des bibliothèques C existantes sans recompilation.</li>
+            <li>Améliorer les performances sur des traitements spécifiques.</li>
+            <li>Éviter la complexité de création d'extensions en C.</li>
+        </ul>
+
+        <h2>3. Activation de l’extension FFI</h2>
+        <p>
+            FFI est disponible à partir de PHP 7.4. Il faut l’activer dans le fichier <code>php.ini</code> :
+        </p>
+        <pre>
+extension=ffi
+        </pre>
+        <p>
+            Attention : pour des raisons de sécurité, l’utilisation de FFI peut être restreinte en production.
+        </p>
+
+        <h2>4. Exemple simple d'utilisation</h2>
+        <pre>
+<?php
+// Déclaration des fonctions C à utiliser
+$ffi = FFI::cdef("
+    int printf(const char *format, ...);
+");
+
+// Appel de la fonction printf en C
+$ffi->printf("Bonjour depuis C avec FFI !\n");
+?>
+        </pre>
+
+        <h2>5. Chargement d’une bibliothèque partagée</h2>
+        <p>Il est possible de charger une bibliothèque dynamique (ex: .so sous Linux, .dll sous Windows) :</p>
+        <pre>
+<?php
+$ffi = FFI::cdef("
+    int add(int a, int b);
+", "libmylib.so");
+
+echo $ffi->add(10, 20);
+?>
+        </pre>
+
+        <h2>6. Bonnes pratiques</h2>
+        <ul>
+            <li>Limiter l'utilisation de FFI aux cas où la performance est critique.</li>
+            <li>Valider soigneusement les entrées et sorties.</li>
+            <li>Être vigilant sur la gestion mémoire côté C.</li>
+            <li>Restreindre l’utilisation en production pour des raisons de sécurité.</li>
+        </ul>
+
+        <h2>7. Conclusion</h2>
+        <p>
+            FFI offre une méthode simple et flexible pour intégrer du code natif C dans vos applications PHP, ouvrant la voie à des optimisations avancées sans complexité majeure.
+        </p>
+    </main>
+
+    <footer>
+        <p>
+            Guide d'apprentissage PHP &copy; 2025 |
+            <a href="https://www.php.net/manual/fr/book.ffi.php" target="_blank" rel="noopener noreferrer">
+                Documentation officielle PHP sur FFI
+            </a>
+        </p>
+    </footer>
+</body>
+
+</html>

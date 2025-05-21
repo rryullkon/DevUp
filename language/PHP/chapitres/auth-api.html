@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - Authentification API</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Authentification API</h1>
+        <p>JWT et OAuth pour les API.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 53: Authentification API</h1>
+
+        <h2>1. Pourquoi une authentification dans une API ?</h2>
+        <p>
+            Une API ouverte sans authentification est vulnérable aux abus et aux accès non autorisés. Pour garantir la sécurité, il est essentiel d’authentifier les utilisateurs ou applications qui y accèdent.
+        </p>
+
+        <h2>2. JWT (JSON Web Token)</h2>
+        <p>
+            Le JWT est un standard ouvert (RFC 7519) qui permet l’échange sécurisé d’informations entre deux parties. Il est souvent utilisé pour l’authentification sans état dans les APIs REST.
+        </p>
+        <ul>
+            <li><strong>Structure :</strong> Header, Payload, Signature (encodés en base64).</li>
+            <li><strong>Fonctionnement :</strong> Le client s’authentifie une fois (login), puis reçoit un token JWT qu’il utilise dans les requêtes suivantes (généralement dans l’en-tête Authorization).</li>
+            <li><strong>Avantages :</strong> Léger, sans session côté serveur, facile à utiliser avec les clients web et mobiles.</li>
+        </ul>
+
+        <h3>Exemple de header HTTP avec JWT</h3>
+        <pre>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        </pre>
+
+        <h2>3. OAuth 2.0</h2>
+        <p>
+            OAuth 2.0 est un protocole d’autorisation standardisé, utilisé par de nombreuses grandes plateformes (Google, Facebook, etc.) pour déléguer l’accès sécurisé aux ressources sans partager les identifiants.
+        </p>
+        <ul>
+            <li><strong>Acteurs :</strong> Ressource Owner, Client, Authorization Server, Resource Server.</li>
+            <li><strong>Types de flux :</strong> Authorization Code (web), Implicit (SPA), Client Credentials (machine to machine), Password (non recommandé).</li>
+            <li><strong>Sécurité :</strong> Plus robuste que JWT simple, adapté aux applications avec des autorisations complexes ou des tiers.</li>
+        </ul>
+
+        <h3>Exemple de token OAuth</h3>
+        <pre>
+Authorization: Bearer ya29.a0ARrdaM8...
+        </pre>
+
+        <h2>4. Comparaison JWT vs OAuth</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Critère</th>
+                    <th>JWT</th>
+                    <th>OAuth 2.0</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Simplicité</td>
+                    <td>Facile à mettre en place</td>
+                    <td>Plus complexe (flux d’autorisation)</td>
+                </tr>
+                <tr>
+                    <td>Utilisation</td>
+                    <td>Authentification directe</td>
+                    <td>Délégation d’accès</td>
+                </tr>
+                <tr>
+                    <td>Sécurité</td>
+                    <td>Correcte, mais attention à la gestion des tokens</td>
+                    <td>Plus sécurisé pour les applications distribuées</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>5. Bonnes pratiques</h2>
+        <ul>
+            <li>Utiliser HTTPS pour toutes les communications.</li>
+            <li>Limiter la durée de vie des tokens (exp).</li>
+            <li>Vérifier la signature des JWT côté serveur.</li>
+            <li>Stocker les tokens de manière sécurisée côté client.</li>
+            <li>Révoquer les tokens compromis.</li>
+        </ul>
+
+        <h2>6. Outils utiles</h2>
+        <ul>
+            <li><strong>Firebase JWT :</strong> pour générer et valider des JWT en PHP.</li>
+            <li><strong>OAuth2 Server PHP :</strong> librairie complète pour implémenter un serveur OAuth 2.0.</li>
+            <li><strong>Postman :</strong> pour tester vos endpoints avec authentification.</li>
+        </ul>
+
+        <h2>7. Conclusion</h2>
+        <p>
+            L’authentification est une étape essentielle dans le développement d’une API sécurisée. Que vous choisissiez JWT pour sa simplicité ou OAuth pour sa robustesse, il est important d’implémenter des mécanismes sûrs pour contrôler l’accès à vos services.
+        </p>
+    </main>
+
+    <footer>
+        <p>
+            Guide d'apprentissage PHP &copy; 2025 | Documentation officielle PHP : 
+            <a href="https://www.php.net/manual/fr/features.http-auth.php" target="_blank" rel="noopener noreferrer">https://www.php.net/manual/fr/features.http-auth.php</a>
+        </p>
+    </footer>
+</body>
+
+</html>
