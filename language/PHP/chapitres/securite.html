@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - Sécurité en PHP</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Sécurité en PHP</h1>
+        <p>Bonnes pratiques de sécurité.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 46: Sécurité en PHP</h1>
+
+        <h2>1. Pourquoi la sécurité est-elle importante en PHP ?</h2>
+        <p>
+            PHP est un langage largement utilisé pour développer des applications web, souvent exposées à des utilisateurs externes. 
+            Il est donc crucial d’appliquer des bonnes pratiques pour protéger vos applications contre les attaques et vulnérabilités courantes.
+        </p>
+
+        <h2>2. Validation et assainissement des données</h2>
+        <p>
+            Ne faites jamais confiance aux données fournies par l’utilisateur. Il est indispensable de :
+        </p>
+        <ul>
+            <li>Valider les données (format, type, longueur, etc.) avec des fonctions comme <code>filter_var()</code>.</li>
+            <li>Assainir les données avant toute utilisation, en particulier avant l’insertion en base ou l’affichage.</li>
+        </ul>
+
+        <h2>3. Protection contre les injections SQL</h2>
+        <p>
+            Utilisez systématiquement des requêtes préparées avec PDO ou MySQLi pour éviter les injections SQL. Ne concaténez jamais directement les variables dans vos requêtes SQL.
+        </p>
+
+        <h2>4. Protection contre les attaques XSS (Cross-Site Scripting)</h2>
+        <p>
+            Échappez toujours les données affichées dans le HTML avec <code>htmlspecialchars()</code> pour empêcher l’injection de scripts malveillants dans les pages.
+        </p>
+
+        <h2>5. Gestion sécurisée des sessions</h2>
+        <ul>
+            <li>Utilisez <code>session_start()</code> correctement et sécurisez les cookies de session (<code>httponly</code>, <code>secure</code>).</li>
+            <li>Renouvelez régulièrement l’ID de session avec <code>session_regenerate_id()</code> pour éviter le détournement.</li>
+            <li>Stockez uniquement les données nécessaires en session.</li>
+        </ul>
+
+        <h2>6. Protection contre CSRF (Cross-Site Request Forgery)</h2>
+        <p>
+            Implémentez des tokens CSRF dans vos formulaires pour vérifier que les requêtes viennent bien de l’utilisateur authentifié et non d’une source externe.
+        </p>
+
+        <h2>7. Sécurisation des uploads de fichiers</h2>
+        <ul>
+            <li>Contrôlez le type et la taille des fichiers uploadés.</li>
+            <li>Ne stockez jamais directement les fichiers dans un répertoire accessible publiquement.</li>
+            <li>Générez des noms de fichiers uniques pour éviter les collisions.</li>
+            <li>Évitez l’exécution de scripts uploadés.</li>
+        </ul>
+
+        <h2>8. Gestion des erreurs et logs</h2>
+        <p>
+            Ne divulguez jamais d’informations sensibles via les messages d’erreur visibles à l’utilisateur. Activez le logging sécurisé des erreurs pour le débogage en local.
+        </p>
+
+        <h2>9. Mises à jour et dépendances</h2>
+        <p>
+            Maintenez votre environnement PHP, vos bibliothèques et frameworks à jour pour bénéficier des derniers correctifs de sécurité.
+        </p>
+
+        <h2>10. Utilisation de HTTPS</h2>
+        <p>
+            Utilisez toujours le protocole HTTPS pour chiffrer les échanges entre le client et le serveur, protégeant ainsi les données en transit.
+        </p>
+
+        <h2>11. Conclusion</h2>
+        <p>
+            La sécurité est un aspect fondamental du développement PHP. En appliquant ces bonnes pratiques, vous protégerez vos applications contre de nombreuses menaces courantes.
+        </p>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Documentation officielle PHP : 
+            <a href="https://www.php.net/manual/fr/security.php" target="_blank" rel="noopener noreferrer">https://www.php.net/manual/fr/security.php</a>
+        </p>
+    </footer>
+</body>
+
+</html>

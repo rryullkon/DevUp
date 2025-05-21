@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Préparer des requêtes</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Préparer des requêtes</h1>
+        <p>Requêtes préparées pour la sécurité.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 43: Préparer des requêtes</h1>
+
+        <h2>1. Pourquoi utiliser des requêtes préparées ?</h2>
+        <p>
+            Les requêtes préparées permettent de séparer le code SQL des données envoyées à la base, ce qui empêche les attaques par injection SQL, 
+            l'une des vulnérabilités les plus courantes en développement web.
+        </p>
+
+        <h2>2. Fonctionnement des requêtes préparées</h2>
+        <p>
+            Une requête préparée est composée de deux étapes :
+        </p>
+        <ol>
+            <li>Préparation : le serveur de base de données compile la requête SQL avec des paramètres placeholders (ex. : `?` ou `:nom`).</li>
+            <li>Exécution : les valeurs des paramètres sont envoyées séparément, et le moteur SQL les traite sans les considérer comme du code.</li>
+        </ol>
+
+        <h2>3. Avantages</h2>
+        <ul>
+            <li><strong>Sécurité renforcée</strong> : évite les injections SQL.</li>
+            <li><strong>Performance</strong> : la requête est compilée une seule fois et peut être exécutée plusieurs fois avec différents paramètres.</li>
+            <li><strong>Clarté du code</strong> : séparation nette entre la requête et les données.</li>
+        </ul>
+
+        <h2>4. Exemple avec PDO</h2>
+        <pre>
+&lt;?php
+// Connexion PDO (supposée déjà établie dans $pdo)
+$sql = "SELECT nom, email FROM utilisateurs WHERE age &gt; :age";
+$stmt = $pdo->prepare($sql);
+
+// Exécution avec le paramètre lié
+$stmt->execute(['age' => 18]);
+
+// Récupération des résultats
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($results as $row) {
+    echo "Nom : " . htmlspecialchars($row['nom']) . " - Email : " . htmlspecialchars($row['email']) . "&lt;br&gt;";
+}
+?&gt;
+        </pre>
+
+        <h2>5. Exemple avec MySQLi (orienté objet)</h2>
+        <pre>
+&lt;?php
+// Connexion MySQLi (supposée déjà établie dans $conn)
+$stmt = $conn->prepare("SELECT nom, email FROM utilisateurs WHERE age > ?");
+$age = 18;
+$stmt->bind_param("i", $age);
+
+$stmt->execute();
+$stmt->bind_result($nom, $email);
+
+while ($stmt->fetch()) {
+    echo "Nom : " . htmlspecialchars($nom) . " - Email : " . htmlspecialchars($email) . "&lt;br&gt;";
+}
+
+$stmt->close();
+?&gt;
+        </pre>
+
+        <h2>6. Conseils pratiques</h2>
+        <ul>
+            <li>Utilisez toujours les requêtes préparées pour toute entrée utilisateur.</li>
+            <li>Ne concaténez jamais directement les variables dans les requêtes SQL.</li>
+            <li>Sanitizez les sorties avec <code>htmlspecialchars()</code> pour éviter les attaques XSS.</li>
+        </ul>
+
+        <h2>7. Conclusion</h2>
+        <p>
+            Les requêtes préparées sont une étape essentielle pour sécuriser vos applications PHP qui manipulent des bases de données.
+            Elles doivent être la norme pour toutes les opérations SQL avec des données externes.
+        </p>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Documentation officielle PHP : <a href="https://www.php.net/manual/fr/pdo.prepared-statements.php">Requêtes préparées PDO</a></p>
+    </footer>
+</body>
+
+</html>

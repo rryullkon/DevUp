@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - PDO</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>PDO</h1>
+        <p>Accès aux bases de données avec PDO.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 42: PDO</h1>
+
+        <h2>1. Qu’est-ce que PDO ?</h2>
+        <p>
+            PDO (PHP Data Objects) est une extension PHP qui fournit une interface uniforme pour accéder aux bases de données.
+            Elle permet de se connecter à plusieurs types de bases (MySQL, PostgreSQL, SQLite, etc.) avec la même API.
+        </p>
+
+        <h2>2. Pourquoi utiliser PDO ?</h2>
+        <ul>
+            <li>Indépendance vis-à-vis du type de base de données utilisée.</li>
+            <li>Support des requêtes préparées pour sécuriser les interactions avec la base.</li>
+            <li>Gestion simplifiée des erreurs grâce aux exceptions.</li>
+            <li>Interface orientée objet moderne et flexible.</li>
+        </ul>
+
+        <h2>3. Connexion à une base de données avec PDO</h2>
+        <p>Exemple de connexion à une base MySQL :</p>
+        <pre>
+&lt;?php
+$host = 'localhost';
+$dbname = 'ma_base';
+$user = 'root';
+$password = 'votre_mdp';
+
+try {
+    $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+    $pdo = new PDO($dsn, $user, $password);
+    // Configuration pour lever des exceptions en cas d'erreur
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connexion réussie";
+} catch (PDOException $e) {
+    die("Erreur de connexion : " . $e->getMessage());
+}
+?&gt;
+        </pre>
+
+        <h2>4. Exécution d’une requête simple</h2>
+        <p>Exemple pour récupérer des données :</p>
+        <pre>
+&lt;?php
+$sql = "SELECT id, nom, email FROM utilisateurs";
+foreach ($pdo->query($sql) as $row) {
+    echo "ID: {$row['id']} - Nom: {$row['nom']} - Email: {$row['email']}&lt;br&gt;";
+}
+?&gt;
+        </pre>
+
+        <h2>5. Requêtes préparées avec PDO</h2>
+        <p>Exemple d’une requête préparée sécurisée :</p>
+        <pre>
+&lt;?php
+$stmt = $pdo->prepare("SELECT nom, email FROM utilisateurs WHERE id = :id");
+$stmt->execute(['id' => 3]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($user) {
+    echo "Nom : " . $user['nom'] . " - Email : " . $user['email'];
+} else {
+    echo "Aucun utilisateur trouvé.";
+}
+?&gt;
+        </pre>
+
+        <h2>6. Insertion de données avec PDO</h2>
+        <pre>
+&lt;?php
+$sql = "INSERT INTO utilisateurs (nom, email) VALUES (:nom, :email)";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([
+    'nom' => 'Jean Dupont',
+    'email' => 'jean.dupont@example.com'
+]);
+echo "Nouvel utilisateur ajouté avec l’ID : " . $pdo->lastInsertId();
+?&gt;
+        </pre>
+
+        <h2>7. Gestion des erreurs</h2>
+        <p>
+            Grâce à l’option <code>PDO::ERRMODE_EXCEPTION</code>, toutes les erreurs SQL lèvent une exception <code>PDOException</code>,
+            que vous pouvez attraper pour gérer proprement les erreurs.
+        </p>
+
+        <h2>8. Conclusion</h2>
+        <p>
+            PDO est la méthode recommandée pour accéder aux bases de données en PHP grâce à sa flexibilité,
+            sa sécurité et sa compatibilité avec plusieurs systèmes de gestion.
+        </p>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Documentation officielle PHP : <a href="https://www.php.net/manual/fr/book.pdo.php">PDO</a></p>
+    </footer>
+</body>
+
+</html>

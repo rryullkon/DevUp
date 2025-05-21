@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - ORM (Doctrine)</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>ORM (Doctrine)</h1>
+        <p>Introduction aux ORM avec Doctrine.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 45: ORM (Doctrine)</h1>
+
+        <h2>1. Qu’est-ce qu’un ORM ?</h2>
+        <p>
+            ORM signifie <strong>Object-Relational Mapping</strong>. C’est une technique qui permet de mapper les tables d’une base de données
+            aux objets d’un langage orienté objet comme PHP. Cela facilite la manipulation des données en évitant d’écrire directement du SQL.
+        </p>
+
+        <h2>2. Pourquoi utiliser un ORM ?</h2>
+        <ul>
+            <li><strong>Abstraction</strong> : vous travaillez avec des objets PHP au lieu de manipuler des tables et colonnes SQL.</li>
+            <li><strong>Productivité</strong> : Doctrine génère automatiquement les requêtes SQL, ce qui réduit le risque d’erreurs.</li>
+            <li><strong>Portabilité</strong> : Doctrine supporte plusieurs types de bases de données (MySQL, PostgreSQL, SQLite, etc.) sans changer votre code.</li>
+            <li><strong>Gestion avancée</strong> : relations, héritage, transactions et validation intégrées.</li>
+        </ul>
+
+        <h2>3. Présentation de Doctrine</h2>
+        <p>
+            Doctrine est l’un des ORM les plus populaires en PHP. Il s’intègre facilement avec les frameworks comme Symfony, mais peut aussi être utilisé seul.
+        </p>
+
+        <h2>4. Fonctionnement basique</h2>
+        <p>
+            Avec Doctrine, chaque table correspond à une classe PHP appelée <em>entité</em>. Les colonnes de la table sont représentées par les propriétés de la classe.
+            Vous manipulez les objets, et Doctrine se charge de traduire ces opérations en requêtes SQL.
+        </p>
+
+        <h2>5. Exemple simplifié d’une entité</h2>
+        <pre>
+&lt;?php
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="utilisateurs")
+ */
+class Utilisateur
+{
+    /** 
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
+    private $id;
+
+    /** @ORM\Column(type="string") */
+    private $nom;
+
+    /** @ORM\Column(type="string") */
+    private $email;
+
+    // getters et setters...
+}
+?&gt;
+        </pre>
+
+        <h2>6. Utilisation courante</h2>
+        <p>
+            Pour enregistrer un nouvel utilisateur :
+        </p>
+        <pre>
+&lt;?php
+// $entityManager est l'instance Doctrine pour gérer la persistance
+$utilisateur = new Utilisateur();
+$utilisateur->setNom("Alice");
+$utilisateur->setEmail("alice@example.com");
+
+$entityManager->persist($utilisateur); // Prépare l'objet à être sauvegardé
+$entityManager->flush(); // Effectue l'insertion en base
+?&gt;
+        </pre>
+
+        <h2>7. Avantages et inconvénients</h2>
+        <ul>
+            <li><strong>Avantages :</strong> gain de temps, code plus lisible, moins d’erreurs SQL, portabilité.</li>
+            <li><strong>Inconvénients :</strong> courbe d’apprentissage, surcoût en performances pour des requêtes très complexes.</li>
+        </ul>
+
+        <h2>8. Conclusion</h2>
+        <p>
+            Doctrine est un outil puissant pour gérer vos données avec PHP de manière orientée objet, simplifiant la communication avec la base de données.
+            C’est un choix privilégié dans de nombreux projets professionnels.
+        </p>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Documentation officielle Doctrine : 
+            <a href="https://www.doctrine-project.org/projects/orm.html" target="_blank" rel="noopener noreferrer">https://www.doctrine-project.org/projects/orm.html</a>
+        </p>
+    </footer>
+</body>
+
+</html>

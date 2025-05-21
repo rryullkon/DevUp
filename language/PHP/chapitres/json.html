@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - Manipulation de JSON</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Manipulation de JSON</h1>
+        <p>Encodage et décodage de JSON.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 51: Manipulation de JSON</h1>
+
+        <h2>1. Qu’est-ce que JSON ?</h2>
+        <p>
+            JSON (JavaScript Object Notation) est un format léger d’échange de données, facile à lire et à écrire pour les humains,
+            et facile à analyser et générer pour les machines. Il est largement utilisé pour communiquer entre serveurs et clients web.
+        </p>
+
+        <h2>2. Encodage JSON en PHP</h2>
+        <p>
+            Pour convertir une variable PHP (tableau, objet) en chaîne JSON, on utilise la fonction <code>json_encode()</code>.
+            Cela est utile pour envoyer des données structurées vers une API ou une application frontend.
+        </p>
+        <pre>
+&lt;?php
+$data = [
+    "nom" =&gt; "Dupont",
+    "age" =&gt; 30,
+    "enfants" =&gt; ["Alice", "Bob"]
+];
+
+$json = json_encode($data);
+echo $json; // Affiche {"nom":"Dupont","age":30,"enfants":["Alice","Bob"]}
+?&gt;
+        </pre>
+
+        <h2>3. Décodage JSON en PHP</h2>
+        <p>
+            Pour convertir une chaîne JSON en variable PHP, on utilise <code>json_decode()</code>. Par défaut, le résultat est un objet,
+            mais on peut demander un tableau associatif en passant <code>true</code> en second argument.
+        </p>
+        <pre>
+&lt;?php
+$json = '{"nom":"Dupont","age":30,"enfants":["Alice","Bob"]}';
+
+// Décodage en objet PHP
+$obj = json_decode($json);
+echo $obj->nom; // Dupont
+
+// Décodage en tableau associatif
+$arr = json_decode($json, true);
+echo $arr['age']; // 30
+?&gt;
+        </pre>
+
+        <h2>4. Gestion des erreurs</h2>
+        <p>
+            Après un encodage ou décodage, il est important de vérifier les erreurs avec <code>json_last_error()</code> et <code>json_last_error_msg()</code>.
+        </p>
+        <pre>
+&lt;?php
+$json = '{"nom":"Dupont",age:30}'; // JSON mal formé
+
+$data = json_decode($json);
+
+if (json_last_error() !== JSON_ERROR_NONE) {
+    echo "Erreur JSON : " . json_last_error_msg();
+}
+?&gt;
+        </pre>
+
+        <h2>5. Options utiles de <code>json_encode()</code></h2>
+        <ul>
+            <li><code>JSON_PRETTY_PRINT</code> : pour un formatage lisible (indentation).</li>
+            <li><code>JSON_UNESCAPED_UNICODE</code> : pour garder les caractères UTF-8 non échappés.</li>
+            <li><code>JSON_FORCE_OBJECT</code> : force l’encodage des tableaux en objets JSON.</li>
+        </ul>
+        <pre>
+&lt;?php
+echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+?&gt;
+        </pre>
+
+        <h2>6. Cas d’utilisation courants</h2>
+        <ul>
+            <li>API RESTful : échanges de données entre serveur et client.</li>
+            <li>Stockage temporaire de données structurées.</li>
+            <li>Configuration et paramètres.</li>
+        </ul>
+
+        <h2>7. Conclusion</h2>
+        <p>
+            JSON est un format essentiel en développement web. PHP offre des fonctions simples et puissantes pour encoder et décoder
+            les données JSON de manière sécurisée et efficace.
+        </p>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Documentation officielle PHP : 
+            <a href="https://www.php.net/manual/fr/book.json.php" target="_blank" rel="noopener noreferrer">https://www.php.net/manual/fr/book.json.php</a>
+        </p>
+    </footer>
+</body>
+
+</html>

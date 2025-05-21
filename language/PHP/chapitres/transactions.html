@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP - Transactions</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Transactions</h1>
+        <p>Gestion des transactions en PHP.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 44: Transactions</h1>
+
+        <h2>1. Qu’est-ce qu’une transaction ?</h2>
+        <p>
+            Une transaction est un ensemble d'opérations SQL qui doivent être exécutées de manière atomique : 
+            soit toutes les opérations réussissent, soit aucune n'est appliquée.
+            Cela garantit la cohérence et l’intégrité des données dans la base.
+        </p>
+
+        <h2>2. Pourquoi utiliser les transactions ?</h2>
+        <ul>
+            <li>Assurer la cohérence des données en cas d’erreurs ou d’interruptions.</li>
+            <li>Permettre des opérations complexes composées de plusieurs requêtes.</li>
+            <li>Gérer les situations où plusieurs utilisateurs modifient simultanément les mêmes données.</li>
+        </ul>
+
+        <h2>3. Les quatre propriétés ACID</h2>
+        <p>
+            Une transaction doit respecter les propriétés ACID :
+        </p>
+        <ul>
+            <li><strong>Atomicité</strong> : tout ou rien.</li>
+            <li><strong>Consistance</strong> : la base reste cohérente avant et après la transaction.</li>
+            <li><strong>Isolation</strong> : les modifications d’une transaction ne sont pas visibles avant sa validation.</li>
+            <li><strong>Durabilité</strong> : une fois validée, la transaction est permanente même en cas de panne.</li>
+        </ul>
+
+        <h2>4. Utilisation des transactions avec PDO</h2>
+        <pre>
+&lt;?php
+try {
+    $pdo->beginTransaction();
+
+    // Exemple : Débit d’un compte
+    $stmt1 = $pdo->prepare("UPDATE comptes SET solde = solde - :montant WHERE id = :id");
+    $stmt1->execute(['montant' => 100, 'id' => 1]);
+
+    // Exemple : Crédit d’un autre compte
+    $stmt2 = $pdo->prepare("UPDATE comptes SET solde = solde + :montant WHERE id = :id");
+    $stmt2->execute(['montant' => 100, 'id' => 2]);
+
+    // Validation de la transaction
+    $pdo->commit();
+    echo "Transaction réussie.";
+} catch (PDOException $e) {
+    // Annulation en cas d’erreur
+    $pdo->rollBack();
+    echo "Erreur lors de la transaction : " . $e->getMessage();
+}
+?&gt;
+        </pre>
+
+        <h2>5. Utilisation des transactions avec MySQLi</h2>
+        <pre>
+&lt;?php
+$conn->begin_transaction();
+
+try {
+    $conn->query("UPDATE comptes SET solde = solde - 100 WHERE id = 1");
+    $conn->query("UPDATE comptes SET solde = solde + 100 WHERE id = 2");
+    $conn->commit();
+    echo "Transaction réussie.";
+} catch (Exception $e) {
+    $conn->rollback();
+    echo "Erreur lors de la transaction : " . $e->getMessage();
+}
+?&gt;
+        </pre>
+
+        <h2>6. Bonnes pratiques</h2>
+        <ul>
+            <li>Encapsulez toutes les opérations critiques dans une transaction.</li>
+            <li>Ne gardez pas une transaction ouverte trop longtemps pour éviter les blocages.</li>
+            <li>Gérez toujours les exceptions ou erreurs pour effectuer un rollback en cas de problème.</li>
+        </ul>
+
+        <h2>7. Conclusion</h2>
+        <p>
+            La gestion des transactions est essentielle pour garantir la fiabilité des opérations complexes en base de données. 
+            PDO et MySQLi offrent des méthodes simples pour commencer à utiliser les transactions.
+        </p>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Documentation officielle PHP : <a href="https://www.php.net/manual/fr/pdo.transactions.php">Transactions PDO</a></p>
+    </footer>
+</body>
+
+</html>

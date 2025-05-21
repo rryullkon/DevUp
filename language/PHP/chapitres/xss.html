@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PHP - XSS (Cross-Site Scripting)</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>XSS (Cross-Site Scripting)</h1>
+        <p>Protection contre les attaques XSS.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 48: XSS (Cross-Site Scripting)</h1>
+
+        <h2>1. Qu’est-ce que le XSS ?</h2>
+        <p>
+            Le Cross-Site Scripting (XSS) est une vulnérabilité web qui permet à un attaquant d’injecter du code malveillant (généralement du JavaScript)
+            dans une page web vue par d’autres utilisateurs. Cela peut entraîner le vol de cookies, la redirection vers des sites malveillants,
+            ou encore la modification de l’affichage de la page.
+        </p>
+
+        <h2>2. Types d’attaques XSS</h2>
+        <ul>
+            <li><strong>XSS réfléchi (Reflected XSS)</strong> : le script malveillant est injecté via une requête HTTP et renvoyé immédiatement dans la réponse.</li>
+            <li><strong>XSS stocké (Stored XSS)</strong> : le script est stocké dans la base de données (par exemple via un formulaire) et exécuté lors du chargement de la page.</li>
+            <li><strong>XSS DOM-based</strong> : le script malveillant est injecté et exécuté via la manipulation du DOM côté client.</li>
+        </ul>
+
+        <h2>3. Comment prévenir le XSS en PHP ?</h2>
+        <p>
+            La meilleure façon de se protéger est d’échapper correctement toutes les données affichées dans le navigateur.
+            Cela empêche les balises et scripts malveillants d’être interprétés.
+        </p>
+
+        <h2>4. Utilisation de <code>htmlspecialchars()</code></h2>
+        <p>
+            En PHP, la fonction <code>htmlspecialchars()</code> convertit les caractères spéciaux en entités HTML, ce qui neutralise les scripts.
+        </p>
+        <pre>
+&lt;?php
+$texte = "&lt;script&gt;alert('XSS');&lt;/script&gt;";
+echo htmlspecialchars($texte, ENT_QUOTES, 'UTF-8');
+// Affiche : &lt;script&gt;alert('XSS');&lt;/script&gt; sans exécuter le script
+?&gt;
+        </pre>
+
+        <h2>5. Validation des entrées utilisateur</h2>
+        <p>
+            En plus de l’échappement à l’affichage, validez et filtrez les données reçues pour limiter ce qui peut être soumis par les utilisateurs.
+        </p>
+
+        <h2>6. Utilisation de Content Security Policy (CSP)</h2>
+        <p>
+            Le CSP est une politique de sécurité côté serveur qui limite les sources de scripts exécutables dans le navigateur.
+            Elle réduit considérablement les risques d’attaques XSS.
+        </p>
+
+        <h2>7. Autres bonnes pratiques</h2>
+        <ul>
+            <li>Ne jamais faire confiance aux données externes.</li>
+            <li>Éviter d’insérer du contenu non filtré dans les attributs HTML ou dans les scripts JavaScript.</li>
+            <li>Utiliser des frameworks et bibliothèques qui intègrent des protections contre le XSS.</li>
+        </ul>
+
+        <h2>8. Conclusion</h2>
+        <p>
+            La protection contre les attaques XSS repose principalement sur l’échappement systématique des données affichées
+            et une validation rigoureuse des entrées utilisateur. Ces pratiques garantissent la sécurité et la confiance des utilisateurs.
+        </p>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage PHP &copy; 2025 | Documentation officielle PHP : 
+            <a href="https://www.php.net/manual/fr/security.cross-site-scripting.php" target="_blank" rel="noopener noreferrer">https://www.php.net/manual/fr/security.cross-site-scripting.php</a>
+        </p>
+    </footer>
+</body>
+
+</html>
