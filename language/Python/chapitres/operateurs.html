@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Python - Les opérateurs en Python</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Les opérateurs en Python</h1>
+        <p>Utiliser les opérateurs arithmétiques, logiques et de comparaison.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 6 : Les opérateurs en Python</h1>
+
+        <h2>1. Les opérateurs arithmétiques</h2>
+        <p>
+            Ces opérateurs permettent d’effectuer des calculs mathématiques :
+        </p>
+        <table>
+            <tr>
+                <th>Opérateur</th>
+                <th>Nom</th>
+                <th>Exemple</th>
+                <th>Résultat</th>
+            </tr>
+            <tr>
+                <td><code>+</code></td>
+                <td>Addition</td>
+                <td><code>5 + 3</code></td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td><code>-</code></td>
+                <td>Soustraction</td>
+                <td><code>5 - 2</code></td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td><code>*</code></td>
+                <td>Multiplication</td>
+                <td><code>4 * 3</code></td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td><code>/</code></td>
+                <td>Division</td>
+                <td><code>10 / 4</code></td>
+                <td>2.5</td>
+            </tr>
+            <tr>
+                <td><code>//</code></td>
+                <td>Division entière</td>
+                <td><code>10 // 3</code></td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td><code>%</code></td>
+                <td>Modulo (reste)</td>
+                <td><code>10 % 3</code></td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td><code>**</code></td>
+                <td>Puissance</td>
+                <td><code>2 ** 3</code></td>
+                <td>8</td>
+            </tr>
+        </table>
+
+        <h2>2. Les opérateurs de comparaison</h2>
+        <p>
+            Ils sont utilisés pour comparer deux valeurs. Le résultat est un booléen (<code>True</code> ou <code>False</code>) :
+        </p>
+        <pre>
+x = 5
+y = 3
+
+x == y   # False (égal à)
+x != y   # True (différent de)
+x > y    # True (supérieur à)
+x < y    # False (inférieur à)
+x >= y   # True (supérieur ou égal à)
+x <= y   # False (inférieur ou égal à)
+        </pre>
+
+        <h2>3. Les opérateurs logiques</h2>
+        <p>
+            Ils permettent de combiner plusieurs conditions :
+        </p>
+        <pre>
+a = True
+b = False
+
+a and b   # False (ET logique)
+a or b    # True (OU logique)
+not a     # False (NON logique)
+        </pre>
+
+        <h2>4. Combinaison d'opérateurs</h2>
+        <p>
+            On peut combiner les opérateurs pour construire des expressions plus complexes :
+        </p>
+        <pre>
+age = 20
+citoyen = True
+
+if age >= 18 and citoyen:
+    print("Peut voter")  # Cette condition est vraie
+        </pre>
+
+        <h2>5. Priorité des opérateurs</h2>
+        <p>
+            Comme en mathématiques, les expressions respectent un ordre de priorité. L’usage des parenthèses permet de clarifier :
+        </p>
+        <pre>
+resultat = 3 + 4 * 2    # 11 (multiplication d'abord)
+resultat = (3 + 4) * 2  # 14 (addition d'abord grâce aux parenthèses)
+        </pre>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage Python &copy; 2025 | Pour toute question, consultez la <a
+                href="https://docs.python.org/fr/3/">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>

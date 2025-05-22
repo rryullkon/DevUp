@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Python - Les tuples</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Les tuples</h1>
+        <p>Découvrir les tuples, structures de données immuables.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 11 : Les tuples</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Un tuple est une collection ordonnée d’éléments, similaire à une liste, mais **immuable**, ce qui signifie qu’on ne peut pas modifier ses éléments après sa création.
+        </p>
+
+        <h2>2. Créer un tuple</h2>
+        <p>
+            On crée un tuple en plaçant les éléments entre parenthèses, séparés par des virgules.
+        </p>
+        <pre>
+coordonnees = (10, 20)
+couleurs = ("rouge", "vert", "bleu")
+tuple_vide = ()
+        </pre>
+
+        <h2>3. Accéder aux éléments</h2>
+        <p>
+            Comme les listes, les éléments d’un tuple sont accessibles par leur indice, en commençant à 0.
+        </p>
+        <pre>
+couleurs = ("rouge", "vert", "bleu")
+print(couleurs[0])  # Affiche : rouge
+print(couleurs[-1]) # Affiche : bleu
+        </pre>
+
+        <h2>4. Immuabilité</h2>
+        <p>
+            Contrairement aux listes, on ne peut pas modifier, ajouter ou supprimer un élément dans un tuple après sa création. Toute tentative de modification provoquera une erreur.
+        </p>
+        <pre>
+coordonnees = (10, 20)
+# coordonnees[0] = 15  # Erreur : les tuples sont immuables
+        </pre>
+
+        <h2>5. Utilité des tuples</h2>
+        <p>
+            Les tuples sont utiles lorsqu’on veut s’assurer que des données ne seront pas modifiées par erreur, ou pour représenter des données fixes comme des coordonnées géographiques.
+        </p>
+
+        <h2>6. Tuple avec un seul élément</h2>
+        <p>
+            Pour créer un tuple contenant un seul élément, il faut mettre une virgule après l’élément.
+        </p>
+        <pre>
+mon_tuple = (5,)
+print(type(mon_tuple))  # Affiche : &lt;class 'tuple'&gt;
+        </pre>
+
+        <h2>7. Déballage de tuple (unpacking)</h2>
+        <p>
+            On peut assigner chaque élément d’un tuple à une variable distincte en une seule opération.
+        </p>
+        <pre>
+point = (3, 7)
+x, y = point
+print(x)  # 3
+print(y)  # 7
+        </pre>
+
+        <h2>8. Conversion entre listes et tuples</h2>
+        <p>
+            On peut convertir une liste en tuple et inversement avec les fonctions <code>tuple()</code> et <code>list()</code>.
+        </p>
+        <pre>
+ma_liste = [1, 2, 3]
+mon_tuple = tuple(ma_liste)
+print(mon_tuple)  # (1, 2, 3)
+
+nouvelle_liste = list(mon_tuple)
+print(nouvelle_liste)  # [1, 2, 3]
+        </pre>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage Python &copy; 2025 | Pour toute question, consultez la <a
+                href="https://docs.python.org/fr/3/">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>

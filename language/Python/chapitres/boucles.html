@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Python - Les boucles for et while</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Les boucles for et while</h1>
+        <p>Répéter des instructions avec les boucles for et while.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 8 : Les boucles for et while</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Les boucles sont des structures qui permettent de répéter un bloc de code plusieurs fois, ce qui est essentiel pour automatiser des tâches répétitives.
+        </p>
+
+        <h2>2. La boucle <code>for</code></h2>
+        <p>
+            La boucle <code>for</code> est utilisée pour itérer sur une séquence (liste, chaîne de caractères, plage de nombres, etc.).
+        </p>
+        <pre>
+for i in range(5):
+    print(i)
+# Affiche : 0, 1, 2, 3, 4
+        </pre>
+        <p>
+            Ici, <code>range(5)</code> crée une séquence de nombres de 0 à 4, et la boucle exécute le bloc <code>print(i)</code> pour chaque valeur.
+        </p>
+
+        <h2>3. Parcourir une liste avec <code>for</code></h2>
+        <pre>
+fruits = ["pomme", "banane", "cerise"]
+for fruit in fruits:
+    print(fruit)
+# Affiche chaque fruit dans la liste
+        </pre>
+
+        <h2>4. La boucle <code>while</code></h2>
+        <p>
+            La boucle <code>while</code> répète un bloc tant qu'une condition est vraie.
+        </p>
+        <pre>
+compteur = 0
+while compteur < 5:
+    print(compteur)
+    compteur += 1
+# Affiche : 0, 1, 2, 3, 4
+        </pre>
+
+        <h2>5. Différences entre <code>for</code> et <code>while</code></h2>
+        <ul>
+            <li><code>for</code> est idéal quand on connaît à l’avance le nombre d’itérations (ex: parcourir une liste).</li>
+            <li><code>while</code> est utile quand la répétition dépend d’une condition qui peut changer durant l’exécution.</li>
+        </ul>
+
+        <h2>6. Les instructions <code>break</code> et <code>continue</code></h2>
+        <p>
+            - <code>break</code> permet d’arrêter la boucle immédiatement.<br>
+            - <code>continue</code> saute le reste du bloc et passe à l’itération suivante.
+        </p>
+        <pre>
+for i in range(10):
+    if i == 5:
+        break  # Arrête la boucle quand i vaut 5
+    print(i)
+
+for i in range(5):
+    if i == 2:
+        continue  # Ignore l’itération quand i vaut 2
+    print(i)
+        </pre>
+
+        <h2>7. Exemples pratiques</h2>
+        <p>
+            Calculer la somme des nombres de 1 à 10 avec une boucle <code>for</code> :
+        </p>
+        <pre>
+somme = 0
+for nombre in range(1, 11):
+    somme += nombre
+print("Somme =", somme)  # Somme = 55
+        </pre>
+
+        <p>
+            Compter à rebours avec une boucle <code>while</code> :
+        </p>
+        <pre>
+compteur = 5
+while compteur > 0:
+    print(compteur)
+    compteur -= 1
+print("Décollage !")
+        </pre>
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage Python &copy; 2025 | Pour toute question, consultez la <a
+                href="https://docs.python.org/fr/3/">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>

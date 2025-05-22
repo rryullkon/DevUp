@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Python - Les dictionnaires</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Les dictionnaires</h1>
+        <p>Utiliser les dictionnaires pour stocker des paires clé/valeur.</p>
+    </header>
+
+    <main>
+        <h1>Chapitre 12 : Les dictionnaires</h1>
+
+        <h2>1. Introduction</h2>
+        <p>
+            Un dictionnaire est une collection non ordonnée de paires clé/valeur. Chaque clé unique permet d’accéder à sa valeur associée, ce qui est très utile pour organiser et retrouver rapidement des données.
+        </p>
+
+        <h2>2. Créer un dictionnaire</h2>
+        <p>
+            On crée un dictionnaire en plaçant les paires clé/valeur entre accolades, séparées par des virgules. Les clés et valeurs sont séparées par deux-points.
+        </p>
+        <pre>
+personne = {
+    "nom": "Dupont",
+    "age": 30,
+    "ville": "Paris"
+}
+        </pre>
+
+        <h2>3. Accéder aux valeurs</h2>
+        <p>
+            On accède à la valeur associée à une clé en utilisant la clé entre crochets.
+        </p>
+        <pre>
+print(personne["nom"])  # Affiche : Dupont
+print(personne["age"])  # Affiche : 30
+        </pre>
+
+        <h2>4. Modifier et ajouter des éléments</h2>
+        <p>
+            On peut modifier la valeur d’une clé existante ou en ajouter de nouvelles très simplement.
+        </p>
+        <pre>
+personne["age"] = 31          # Modification
+personne["profession"] = "Ingénieur"  # Ajout d'une nouvelle paire clé/valeur
+        </pre>
+
+        <h2>5. Supprimer une paire clé/valeur</h2>
+        <p>
+            Pour supprimer une entrée, on utilise <em>del</em> avec la clé.
+        </p>
+        <pre>
+del personne["ville"]
+        </pre>
+
+        <h2>6. Parcourir un dictionnaire</h2>
+        <p>
+            On peut parcourir les clés, les valeurs ou les deux en même temps avec des boucles.
+        </p>
+        <pre>
+# Parcourir les clés
+for cle in personne:
+    print(cle)
+
+# Parcourir les valeurs
+for valeur in personne.values():
+    print(valeur)
+
+# Parcourir clés et valeurs
+for cle, valeur in personne.items():
+    print(cle, ":", valeur)
+        </pre>
+
+        <h2>7. Méthodes utiles</h2>
+        <ul>
+            <li><strong>keys()</strong> : retourne une vue des clés</li>
+            <li><strong>values()</strong> : retourne une vue des valeurs</li>
+            <li><strong>items()</strong> : retourne une vue des paires clé/valeur</li>
+            <li><strong>get(clé, valeur_par_defaut)</strong> : retourne la valeur associée à la clé ou la valeur par défaut si la clé n’existe pas</li>
+            <li><strong>clear()</strong> : vide le dictionnaire</li>
+        </ul>
+
+        <h2>8. Exemple complet</h2>
+        <pre>
+contacts = {
+    "Alice": "alice@example.com",
+    "Bob": "bob@example.com"
+}
+
+# Ajouter un contact
+contacts["Charlie"] = "charlie@example.com"
+
+# Afficher tous les contacts
+for nom, email in contacts.items():
+    print(nom, "->", email)
+        </pre>
+
+    </main>
+
+    <footer>
+        <p>Guide d'apprentissage Python &copy; 2025 | Pour toute question, consultez la <a
+                href="https://docs.python.org/fr/3/">documentation officielle</a></p>
+    </footer>
+</body>
+
+</html>
