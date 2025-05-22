@@ -1,21 +1,21 @@
 :root {
-    /* Palette React étendue */
-    --react-blue: #61dafb;
-    --react-dark: #282c34;
-    --react-light: #f6f8fa;
-    --react-white: #ffffff;
-    --react-gray: #dcdcdc;
-    --react-secondary: #20232a;
-    --react-blue-light: #8ae2fc;
-    --react-blue-dark: #4dbddc;
-    --react-accent: #149eca;
-    --react-code-bg: #f7f9fb;
+    /* Palette Python étendue */
+    --python-blue: #3572A5;
+    --python-dark: #2B5B84;
+    --python-light: #E5F0F8;
+    --python-white: #ffffff;
+    --python-gray: #dcdcdc;
+    --python-yellow: #FFD43B;
+    --python-blue-light: #4C8BBF;
+    --python-blue-dark: #1D3F5C;
+    --python-accent: #306998;
+    --python-code-bg: #f5f9ff;
     
-    /* Dégradés React */
-    --gradient-react: linear-gradient(135deg, var(--react-blue) 0%, var(--react-secondary) 100%);
-    --gradient-react-reverse: linear-gradient(135deg, var(--react-secondary) 0%, var(--react-blue) 100%);
-    --gradient-react-dark: linear-gradient(135deg, var(--react-dark) 0%, var(--react-secondary) 100%);
-    --gradient-table-header: linear-gradient(90deg, var(--react-dark) 60%, var(--react-blue) 100%);
+    /* Dégradés Python */
+    --gradient-python: linear-gradient(135deg, var(--python-blue) 0%, var(--python-dark) 100%);
+    --gradient-python-reverse: linear-gradient(135deg, var(--python-dark) 0%, var(--python-blue) 100%);
+    --gradient-python-dark: linear-gradient(135deg, var(--python-dark) 0%, var(--python-blue-dark) 100%);
+    --gradient-table-header: linear-gradient(90deg, var(--python-dark) 60%, var(--python-blue) 100%);
     
     /* Espacements */
     --space-xs: 0.5rem;
@@ -32,9 +32,9 @@
     
     /* Ombres */
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 6px rgba(32, 35, 42, 0.15);
-    --shadow-lg: 0 10px 25px rgba(32, 35, 42, 0.2);
-    --shadow-react: 0 5px 15px rgba(97, 218, 251, 0.4);
+    --shadow-md: 0 4px 6px rgba(76, 90, 147, 0.15);
+    --shadow-lg: 0 10px 25px rgba(76, 90, 147, 0.2);
+    --shadow-python: 0 5px 15px rgba(53, 114, 165, 0.4);
     
     /* Animations */
     --transition-smooth: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
@@ -48,15 +48,15 @@
 }
 
 *::selection {
-    background-color: var(--react-blue);
+    background-color: var(--python-blue);
     color: white;
 }
 
 /* Base stylisée */
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(145deg, var(--react-light) 0%, var(--react-white) 100%);
-    color: var(--react-dark);
+    background: linear-gradient(145deg, var(--python-light) 0%, var(--python-white) 100%);
+    color: var(--python-dark);
     line-height: 1.7;
     min-height: 100vh;
     display: flex;
@@ -69,12 +69,12 @@ body {
 .progress-container {
     width: 80%;
     max-width: 600px;
-    background-color: var(--react-white);
+    background-color: var(--python-white);
     border-radius: var(--radius-xl);
     padding: 6px;
     box-shadow: var(--shadow-md);
     margin: 20px auto;
-    border: 1px solid var(--react-gray);
+    border: 1px solid var(--python-gray);
     position: relative;
     overflow: hidden;
 }
@@ -93,13 +93,13 @@ body {
 
 .progress-bar {
     height: 30px;
-    background: var(--gradient-react);
+    background: var(--gradient-python);
     border-radius: var(--radius-md);
     width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--react-white);
+    color: var(--python-white);
     font-weight: bold;
     transition: width 0.5s ease, transform 0.3s ease;
     box-shadow: 
@@ -144,9 +144,9 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
     font-size: 3.2rem;
-    color: var(--react-white);
+    color: var(--python-white);
     margin-bottom: var(--space-xs);
-    text-shadow: 0 2px 10px rgba(32, 35, 42, 0.3);
+    text-shadow: 0 2px 10px rgba(76, 90, 147, 0.3);
     letter-spacing: 0.04em;
     position: relative;
     display: inline-block;
@@ -160,7 +160,7 @@ h1::after {
     left: 20%;
     width: 60%;
     height: 3px;
-    background: var(--react-accent);
+    background: var(--python-accent);
     border-radius: 3px;
     transform: scaleX(0);
     transform-origin: center;
@@ -173,11 +173,11 @@ h1:hover::after {
 
 h2 {
     font-size: 2.4rem;
-    color: var(--react-blue-dark);
+    color: var(--python-blue-dark);
     position: relative;
     padding-left: var(--space-md);
     margin: var(--space-xl) 0 var(--space-lg);
-    text-shadow: 0 1px 4px rgba(97, 218, 251, 0.1);
+    text-shadow: 0 1px 4px rgba(136, 146, 190, 0.1);
 }
 
 h2::before {
@@ -187,14 +187,14 @@ h2::before {
     top: 0.15em;
     bottom: 0.15em;
     width: 8px;
-    background: var(--gradient-react);
+    background: var(--gradient-python);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-sm);
 }
 
 h3 {
     font-size: 1.5rem;
-    color: var(--react-blue);
+    color: var(--python-yellow);
     margin-bottom: 0.75em;
     letter-spacing: 0.03em;
     position: relative;
@@ -209,7 +209,7 @@ h3::after {
     left: 0;
     width: 100%;
     height: 2px;
-    background: var(--gradient-react);
+    background: var(--gradient-python);
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.4s ease;
@@ -222,11 +222,11 @@ h3:hover::after {
 
 /* En-tête spectaculaire */
 header {
-    background: var(--gradient-react-dark);
-    color: var(--react-white);
+    background: var(--gradient-python-dark);
+    color: var(--python-white);
     padding: var(--space-xl) var(--space-md) var(--space-lg);
     text-align: center;
-    box-shadow: 0 10px 30px rgba(32, 35, 42, 0.2);
+    box-shadow: 0 10px 30px rgba(76, 90, 147, 0.2);
     position: relative;
     overflow: hidden;
     border-radius: 0 0 40px 40px;
@@ -260,7 +260,7 @@ header::after {
     left: 0;
     right: 0;
     height: 8px;
-    background: linear-gradient(90deg, var(--react-accent), var(--react-blue), var(--react-secondary));
+    background: linear-gradient(90deg, var(--python-accent), var(--python-blue), var(--python-yellow));
     border-radius: 0 0 20px 20px;
     opacity: 0.8;
 }
@@ -322,16 +322,16 @@ main::before {
     border: none;
     border-radius: var(--radius-xl);
     padding: 2.5rem 2rem 2rem;
-    background: linear-gradient(145deg, var(--react-white) 0%, var(--react-light) 100%);
+    background: linear-gradient(145deg, var(--python-white) 0%, var(--python-light) 100%);
     box-shadow: 
-        0 6px 30px rgba(97, 218, 251, 0.15),
-        0 2px 8px rgba(32, 35, 42, 0.08);
+        0 6px 30px rgba(136, 146, 190, 0.15),
+        0 2px 8px rgba(90, 105, 166, 0.08);
     transition: var(--transition-smooth);
     position: relative;
     overflow: hidden;
     
     z-index: 1;
-    border: 1px solid rgba(97, 218, 251, 0.2);
+    border: 1px solid rgba(136, 146, 190, 0.2);
 }
 
 .chapter-card::before {
@@ -354,7 +354,7 @@ main::before {
     left: 0;
     right: 0;
     height: 5px;
-    background: var(--gradient-react);
+    background: var(--gradient-python);
     opacity: 0;
     transition: var(--transition-smooth);
 }
@@ -362,9 +362,9 @@ main::before {
 .chapter-card:hover {
     transform: translateY(-10px) scale(1.03);
     box-shadow: 
-        0 15px 40px rgba(32, 35, 42, 0.25),
-        0 5px 15px rgba(32, 35, 42, 0.15);
-    border-color: rgba(97, 218, 251, 0.4);
+        0 15px 40px rgba(90, 105, 166, 0.25),
+        0 5px 15px rgba(76, 90, 147, 0.15);
+    border-color: rgba(136, 146, 190, 0.4);
 }
 
 .chapter-card:hover::before {
@@ -377,7 +377,7 @@ main::before {
 
 .chapter-card h3 {
     margin-top: 0;
-    color: var(--react-blue);
+    color: var(--python-yellow);
     z-index: 2;
     font-size: 1.6rem;
 }
@@ -396,14 +396,14 @@ main::before {
     align-items: center;
     justify-content: center;
     padding: 0.9em 2em;
-    background: var(--gradient-react);
+    background: var(--gradient-python);
     color: white;
     text-decoration: none;
     border-radius: var(--radius-lg);
     font-weight: 700;
     font-size: 1.1rem;
     box-shadow: 
-        0 4px 15px rgba(97, 218, 251, 0.3),
+        0 4px 15px rgba(136, 146, 190, 0.3),
         inset 0 1px 1px rgba(255, 255, 255, 0.2);
     border: none;
     transition: var(--transition-smooth);
@@ -432,10 +432,10 @@ main::before {
 }
 
 .chapter-card .btn:hover {
-    background: var(--gradient-react-reverse);
+    background: var(--gradient-python-reverse);
     transform: translateY(-3px) scale(1.05);
     box-shadow: 
-        0 7px 20px rgba(32, 35, 42, 0.4),
+        0 7px 20px rgba(90, 105, 166, 0.4),
         inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
@@ -577,7 +577,7 @@ li {
 }
 
 ul li::marker {
-    color: var(--react-blue);
+    color: var(--python-blue);
 }
 
 /* Styles pour les tableaux */
@@ -585,7 +585,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin: var(--space-md) 0 var(--space-lg);
-    background: var(--react-white);
+    background: var(--python-white);
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
@@ -621,22 +621,22 @@ table tbody tr {
 }
 
 table tbody tr:nth-child(even) {
-    background: var(--react-light);
+    background: var(--python-light);
 }
 
 table tbody tr:hover {
-    background: rgba(97, 218, 251, 0.08);
+    background: rgba(136, 146, 190, 0.08);
 }
 
 table td {
     padding: var(--space-sm) var(--space-md);
-    border-bottom: 1px solid var(--react-gray);
+    border-bottom: 1px solid var(--python-gray);
     vertical-align: middle;
 }
 
 table td:first-child {
     font-weight: 500;
-    color: var(--react-blue);
+    color: var(--python-blue);
 }
 
 table caption {
@@ -650,21 +650,21 @@ table caption {
 /* Styles pour le code */
 code {
     font-family: 'Fira Code', 'Courier New', monospace;
-    background-color: var(--react-code-bg);
+    background-color: var(--python-code-bg);
     padding: 0.2em 0.4em;
     border-radius: var(--radius-sm);
     font-size: 0.95em;
-    color: var(--react-dark);
-    border: 1px solid rgba(97, 218, 251, 0.2);
+    color: var(--python-dark);
+    border: 1px solid rgba(136, 146, 190, 0.2);
 }
 
 pre {
-    background-color: var(--react-code-bg);
+    background-color: var(--python-code-bg);
     padding: var(--space-md);
     border-radius: var(--radius-md);
     overflow-x: auto;
     box-shadow: var(--shadow-sm);
-    border-left: 4px solid var(--react-blue);
+    border-left: 4px solid var(--python-blue);
     margin: var(--space-md) 0;
     font-family: 'Fira Code', 'Courier New', monospace;
     line-height: 1.5;
@@ -685,10 +685,10 @@ footer {
     text-align: center;
     padding: var(--space-lg) var(--space-md);
     margin-top: var(--space-xl);
-    color: var(--react-dark);
+    color: var(--python-dark);
     font-size: 1.05rem;
-    background: linear-gradient(145deg, var(--react-white) 0%, var(--react-light) 100%);
-    box-shadow: 0 -5px 20px rgba(97, 218, 251, 0.1);
+    background: linear-gradient(145deg, var(--python-white) 0%, var(--python-light) 100%);
+    box-shadow: 0 -5px 20px rgba(136, 146, 190, 0.1);
     position: relative;
     z-index: 1;
 }
@@ -700,18 +700,18 @@ footer::before {
     left: 0;
     right: 0;
     height: 4px;
-    background: var(--gradient-react);
+    background: var(--gradient-python);
     opacity: 0.7;
 }
 
 footer a {
-    color: var(--react-blue);
+    color: var(--python-blue);
     font-weight: 600;
     transition: var(--transition-smooth);
 }
 
 footer a:hover {
-    color: var(--react-dark);
+    color: var(--python-dark);
     text-decoration: underline;
 }
 
@@ -816,7 +816,7 @@ footer a:hover {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(97, 218, 251, 0.1) 0%, rgba(97, 218, 251, 0) 70%);
+    background: radial-gradient(circle, rgba(136, 146, 190, 0.1) 0%, rgba(136, 146, 190, 0) 70%);
     pointer-events: none;
     z-index: 0;
 }
