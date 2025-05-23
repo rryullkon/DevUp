@@ -95,7 +95,7 @@ body {
     height: 30px;
     background: var(--gradient-python);
     border-radius: var(--radius-md);
-    width: 80%;
+    width: 17.6%;  /*       12/68 * 100 = 17.6%    */
     display: flex;
     justify-content: center;
     align-items: center;
