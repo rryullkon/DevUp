@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Installation de Python sur macOS | DevUp Python</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" href="../../../Sans titre-1.png" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <h1>Installation de Python sur macOS</h1>
+        <p>Guide complet pour installer Python correctement sur votre système Mac</p>
+    </header>
+    <main>
+        <section class="nouveautes">
+            <h2 class="nouveautes__titre">Sommaire du chapitre</h2>
+            <ul class="nouveautes__liste">
+                <li class="nouveautes__item"><a href="#etape1" class="nouveautes__lien"><strong>Étape 1 :</strong> Vérification initiale</a></li>
+                <li class="nouveautes__item"><a href="#etape2" class="nouveautes__lien"><strong>Étape 2 :</strong> Installation via Homebrew ou python.org</a></li>
+                <li class="nouveautes__item"><a href="#etape3" class="nouveautes__lien"><strong>Étape 3 :</strong> Vérification</a></li>
+                <li class="nouveautes__item"><a href="#troubleshooting" class="nouveautes__lien">Dépannage</a></li>
+            </ul>
+        </section>
+
+        <article class="chapter-content">
+            <section id="etape1">
+                <h2>Étape 1 : Vérification initiale</h2>
+                <p>macOS inclut parfois une ancienne version de Python (2.x). Vérifions d'abord :</p>
+                <pre><code class="language-bash">python3 --version
+which python3</code></pre>
+                <p>Si vous obtenez une version 3.x, Python est déjà installé. Sinon, passez à l'étape suivante.</p>
+            </section>
+
+            <section id="etape2">
+                <h2>Étape 2 : Installation de Python</h2>
+                <p>Deux options s'offrent à vous :</p>
+
+                <h3> Option 1 : Utiliser Homebrew (recommandé)</h3>
+                <pre><code class="language-bash"># Installer Homebrew si ce n'est pas déjà fait
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Installer Python
+brew install python</code></pre>
+
+                <h3> Option 2 : Télécharger depuis python.org</h3>
+<section id="etape1">
+    <h2>Étape 1 : Téléchargement</h2>
+    <p>Pour installer Python sur macOS, suivez ces étapes :</p>
+
+    <div class="note">
+        <strong>Note importante :</strong> Téléchargez toujours Python depuis le site officiel pour éviter
+        les versions modifiées ou malveillantes.
+    </div>
+
+    <div class="steps">
+        <div class="step">
+            <span class="step-number">1</span>
+            <p>Rendez-vous sur <a href="https://www.python.org/downloads/mac-osx/" target="_blank">python.org/downloads/mac-osx</a></p>
+        </div>
+        <div class="step">
+            <span class="step-number">2</span>
+            <p>Téléchargez le fichier <code>.pkg</code> correspondant à la dernière version de Python</p>
+        </div>
+        <div class="step">
+            <span class="step-number">3</span>
+            <p>Ouvrez le fichier téléchargé et suivez les instructions d'installation</p>
+        </div>
+    </div>
+
+    <div class="warning">
+        <strong>Attention :</strong> Si une version de Python est déjà installée sur votre Mac, l’installeur pourra vous proposer une mise à jour ou une installation parallèle.
+    </div>
+</section>
+
+            </section>
+
+            <section id="etape3">
+                <h2>Étape 3 : Vérification</h2>
+                <p>Vérifiez que Python et pip sont bien installés :</p>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">Terminal</span>
+                    </div>
+                    <div class="terminal-body">
+                        <span class="prompt">$</span> <span class="command">python3 --version</span>
+                        <div class="output">Python 3.12.1</div>
+
+                        <span class="prompt">$</span> <span class="command">pip3 --version</span>
+                        <div class="output">pip 23.x from /usr/local/lib/python3.12/site-packages (python 3.12)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>Dépannage</h2>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-button">python3 : commande introuvable</button>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Installez Python avec Homebrew :</p>
+                                <pre><code class="language-bash">brew install python</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button">pip3 ne fonctionne pas</button>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Assurez-vous qu'il a été installé avec Python. Sinon, utilisez :</p>
+                                <pre><code class="language-bash">sudo easy_install pip</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <div class="navigation-buttons">
+            <a href="../" class="button button-secondary">← Retour à l'accueil Python</a>
+            <a href="2-premiers-pas.html" class="button button-primary" style="pointer-events:none;opacity:0.6;">Suivant : Votre premier script Python →</a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const content = this.nextElementSibling;
+
+                    document.querySelectorAll('.accordion-content').forEach(item => {
+                        if (item !== content && item.classList.contains('show')) {
+                            item.style.maxHeight = null;
+                            item.classList.remove('show');
+                            item.previousElementSibling.classList.remove('active');
+                        }
+                    });
+
+                    this.classList.toggle('active');
+
+                    if (content.classList.contains('show')) {
+                        content.style.maxHeight = null;
+                        content.classList.remove('show');
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        content.classList.add('show');
+                    }
+                });
+
+                if (button.classList.contains('active')) {
+                    const content = button.nextElementSibling;
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

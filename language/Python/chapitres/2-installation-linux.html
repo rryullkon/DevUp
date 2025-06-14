@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Installation de Python sur Linux | DevUp Python</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" href="../../../Sans titre-1.png" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <h1>Installation de Python sur Linux</h1>
+        <p>Guide complet pour installer Python correctement sur votre système Linux</p>
+    </header>
+    <main>
+        <section class="nouveautes">
+            <h2 class="nouveautes__titre">Sommaire du chapitre</h2>
+            <ul class="nouveautes__liste">
+                <li class="nouveautes__item"><a href="#etape1" class="nouveautes__lien"><strong>Étape 1 :</strong> Mise à jour du système</a></li>
+                <li class="nouveautes__item"><a href="#etape2" class="nouveautes__lien"><strong>Étape 2 :</strong> Installation de Python</a></li>
+                <li class="nouveautes__item"><a href="#etape3" class="nouveautes__lien"><strong>Étape 3 :</strong> Vérification</a></li>
+                <li class="nouveautes__item"><a href="#troubleshooting" class="nouveautes__lien">Dépannage</a></li>
+            </ul>
+        </section>
+
+        <article class="chapter-content">
+            <section id="etape1">
+                <h2>Étape 1 : Mise à jour du système</h2>
+                <p>Avant toute chose, assurez-vous que votre système est à jour :</p>
+                <pre><code class="language-bash">sudo apt update && sudo apt upgrade -y   # Pour les distributions basées sur Debian/Ubuntu
+sudo dnf update -y                        # Pour Fedora
+sudo pacman -Syu                          # Pour Arch Linux</code></pre>
+            </section>
+
+            <section id="etape2">
+                <h2>Étape 2 : Installation de Python</h2>
+                <p>La commande varie selon votre distribution :</p>
+                <div class="steps">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <p><strong>Ubuntu/Debian :</strong> <code>sudo apt install python3 python3-pip -y</code></p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <p><strong>Fedora :</strong> <code>sudo dnf install python3 -y</code></p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <p><strong>Arch Linux :</strong> <code>sudo pacman -S python</code></p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="etape3">
+                <h2>Étape 3 : Vérification</h2>
+                <p>Vérifiez que Python et pip sont bien installés :</p>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">Terminal</span>
+                    </div>
+                    <div class="terminal-body">
+                        <span class="prompt">$</span> <span class="command">python3 --version</span>
+                        <div class="output">Python 3.11.x</div>
+
+                        <span class="prompt">$</span> <span class="command">pip3 --version</span>
+                        <div class="output">pip 23.x.x from /usr/lib/python3/dist-packages (python 3.11)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>Dépannage</h2>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-button">python3 : commande introuvable</button>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Python n'est peut-être pas installé ou votre PATH est mal configuré.</p>
+                                <ol>
+                                    <li>Réinstallez Python avec la commande adaptée à votre distribution</li>
+                                    <li>Vérifiez avec <code>which python3</code> ou <code>echo $PATH</code></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button">pip3 ne fonctionne pas</button>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Essayez :</p>
+                                <ol>
+                                    <li><code>sudo apt install python3-pip</code> (Ubuntu/Debian)</li>
+                                    <li>Ou installez manuellement via <code>curl https://bootstrap.pypa.io/get-pip.py | sudo python3</code></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <div class="navigation-buttons">
+            <a href="../" class="button button-secondary">← Retour à l'accueil Python</a>
+            <a href="3-installation-mac.html" class="button button-primary">Suivant : Installation de Python sur macOS →</a>
+        </div>
+    </main>
+
+    <script>
+        // Même script d'accordéon que le fichier Windows
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const content = this.nextElementSibling;
+
+                    document.querySelectorAll('.accordion-content').forEach(item => {
+                        if (item !== content && item.classList.contains('show')) {
+                            item.style.maxHeight = null;
+                            item.classList.remove('show');
+                            item.previousElementSibling.classList.remove('active');
+                        }
+                    });
+
+                    this.classList.toggle('active');
+
+                    if (content.classList.contains('show')) {
+                        content.style.maxHeight = null;
+                        content.classList.remove('show');
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        content.classList.add('show');
+                    }
+                });
+
+                if (button.classList.contains('active')) {
+                    const content = button.nextElementSibling;
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
