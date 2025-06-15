@@ -455,6 +455,10 @@ main {
     z-index: 1;
 }
 
+.section-divider__title:hover {
+    color: var(--python-light);
+}
+
 .section-divider::before {
     content: "";
     position: absolute;
@@ -973,29 +977,41 @@ pre code {
 
 .step {
     display: flex;
-    margin-bottom: var(--spacing-md);
     align-items: flex-start;
-}
-
-.step p {
-    margin-bottom: 1em;
-    /* ajoute de l’espace sous le texte si nécessaire */
+    padding: 10px;
 }
 
 .step-number {
-    background: var(--python-primary);
-    color: white;
+    margin-right: var(--spacing-md);
+    flex-shrink: 0;
     width: 24px;
     height: 24px;
+    background: var(--python-primary);
+    color: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: var(--spacing-md);
-    flex-shrink: 0;
-    font-size: 0.8rem;
     font-weight: bold;
+    font-size: 0.8rem;
 }
+
+.step-content {
+    display: block;
+    flex: 1; /* occupe tout l'espace restant */
+}
+
+
+.step-content p {
+    margin-bottom: 8px;
+}
+
+.step-content pre {
+
+    white-space: pre-wrap;
+    margin-top: 0;
+}
+
 
 /* Tableaux */
 .options-table {

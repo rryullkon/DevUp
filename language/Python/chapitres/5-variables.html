@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Les variables en Python | DevUp Python</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" href="../../../Sans titre-1.png" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <h1>Les variables en Python</h1>
+        <p>Comprendre et utiliser les variables dans vos scripts Python</p>
+    </header>
+
+    <main>
+        <section class="nouveautes">
+            <h2 class="nouveautes__titre">Sommaire du chapitre</h2>
+            <ul class="nouveautes__liste">
+                <li class="nouveautes__item"><a href="#etape1" class="nouveautes__lien"><strong>Étape 1 :</strong> Déclaration d'une variable</a></li>
+                <li class="nouveautes__item"><a href="#etape2" class="nouveautes__lien"><strong>Étape 2 :</strong> Affichage d'une variable</a></li>
+                <li class="nouveautes__item"><a href="#etape3" class="nouveautes__lien"><strong>Étape 3 :</strong> Types de variables</a></li>
+                <li class="nouveautes__item"><a href="#troubleshooting" class="nouveautes__lien">Dépannage</a></li>
+            </ul>
+        </section>
+
+        <article class="chapter-content">
+
+            <section id="etape1">
+                <h2>Étape 1 : Déclaration d'une variable</h2>
+                <div class="steps">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <p>Choisissez un nom de variable (ex. : <code>nom</code>)</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <p>Affectez une valeur avec le symbole <code>=</code></p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <p>Par exemple : <code>nom = "Alice"</code></p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="etape2">
+                <h2>Étape 2 : Affichage d'une variable</h2>
+                <div class="steps">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <p>Utilisez la fonction <code>print()</code></p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <p>Par exemple : <code>print(nom)</code> affichera <code>Alice</code></p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="etape3">
+                <h2>Étape 3 : Types de variables</h2>
+                <p>Voici les types de variables les plus courants en Python :</p>
+                <table  class="options-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Exemple</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>str</code></td>
+                            <td><code>nom = "Alice"</code></td>
+                            <td>Chaîne de caractères (texte).</td>
+                        </tr>
+                        <tr>
+                            <td><code>int</code></td>
+                            <td><code>age = 30</code></td>
+                            <td>Nombre entier sans virgule.</td>
+                        </tr>
+                        <tr>
+                            <td><code>float</code></td>
+                            <td><code>taille = 1.75</code></td>
+                            <td>Nombre à virgule flottante (décimal).</td>
+                        </tr>
+                        <tr>
+                            <td><code>bool</code></td>
+                            <td><code>est_majeur = True</code></td>
+                            <td>Valeur booléenne : <code>True</code> ou <code>False</code>.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>Dépannage</h2>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-button">Erreur : variable non définie</button>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Assurez-vous que la variable est bien déclarée avant son utilisation.</p>
+                                <pre><code># Mauvais
+print(prenom)
+
+# Correct
+prenom = "Emma"
+print(prenom)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button">Erreur de type</button>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Ne mélangez pas types incompatibles sans conversion :</p>
+                                <pre><code># Mauvais :
+age = 25
+print("Âge : " + age)  # Erreur
+
+# Bon :
+print("Âge : " + str(age))</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </article>
+
+        <div class="navigation-buttons">
+            <a href="../index.html" class="button button-secondary">← Retour à l'accueil Python</a>
+            <a href="6-types-donnees.html" class="button button-primary">Suivant : Les types de données →</a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const content = this.nextElementSibling;
+                    document.querySelectorAll('.accordion-content').forEach(item => {
+                        if (item !== content && item.classList.contains('show')) {
+                            item.style.maxHeight = null;
+                            item.classList.remove('show');
+                            item.previousElementSibling.classList.remove('active');
+                        }
+                    });
+                    this.classList.toggle('active');
+                    if (content.classList.contains('show')) {
+                        content.style.maxHeight = null;
+                        content.classList.remove('show');
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        content.classList.add('show');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
