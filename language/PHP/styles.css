@@ -1,0 +1,1201 @@
+:root {
+    /* Palette de couleurs PHP */
+    --php-primary: #777BB4;
+    --php-secondary: #8892BF;
+    --php-dark: #4F5B93;
+    --php-light: #E8EAF6;
+    --php-accent: #A7B2D9;
+
+    /* Couleurs complémentaires */
+    --ios-white: #FFFFFF;
+    --ios-gray-light: #F2F2F7;
+    --ios-gray-medium: #C7C7CC;
+    --ios-gray-dark: #8E8E93;
+    --ios-black: #1C1C1E;
+
+    /* Espacements selon les guidelines iOS */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 44px;
+
+    /* Rayons de bordure iOS */
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-xxl: 28px;
+
+    /* Ombres iOS avec profondeur réaliste */
+    --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    --shadow-sm: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    --shadow-lg: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    --shadow-xl: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+
+    /* Animations avec courbes d'accélération iOS */
+    --ease-in-out-ios: cubic-bezier(0.4, 0.0, 0.2, 1.0);
+    --ease-out-ios: cubic-bezier(0.0, 0.0, 0.2, 1.0);
+    --ease-in-ios: cubic-bezier(0.4, 0.0, 1.0, 1.0);
+    --spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --spring-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    /* Durées d'animation iOS */
+    --duration-quick: 200ms;
+    --duration-normal: 300ms;
+    --duration-slow: 500ms;
+    --duration-extra-slow: 800ms;
+}
+
+/* Reset avec smooth scrolling iOS */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+*::selection {
+    background-color: var(--php-primary);
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Body avec effet de profondeur iOS */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+    background: var(--ios-gray-light);
+    color: var(--ios-black);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Effet de parallax subtil en arrière-plan */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(119, 123, 180, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(136, 146, 191, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(167, 178, 217, 0.05) 0%, transparent 50%);
+    z-index: -1;
+    animation: parallaxFloat 20s ease-in-out infinite;
+}
+
+@keyframes parallaxFloat {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    33% {
+        transform: translateY(-10px) rotate(0.5deg);
+    }
+    66% {
+        transform: translateY(5px) rotate(-0.3deg);
+    }
+}
+
+/* Typographie avec animations iOS */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
+    letter-spacing: -0.02em;
+    color: var(--ios-black);
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: var(--ios-white);
+    margin-bottom: var(--spacing-sm);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.03em;
+    position: relative;
+    opacity: 0;
+    animation: titleSlideUp var(--duration-extra-slow) var(--ease-out-ios) forwards;
+}
+
+@keyframes titleSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--php-dark);
+    position: relative;
+    padding-left: var(--spacing-md);
+    margin: var(--spacing-xl) 0 var(--spacing-lg);
+    opacity: 0;
+    animation: fadeInLeft var(--duration-slow) var(--ease-out-ios) forwards;
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--php-primary), var(--php-accent));
+    border-radius: 2px;
+    animation: barGrow var(--duration-normal) var(--ease-out-ios) 0.2s forwards;
+    transform-origin: center;
+    scale: 0 1;
+}
+
+@keyframes barGrow {
+    0% {
+        scale: 0 1;
+    }
+    100% {
+        scale: 1 1;
+    }
+}
+
+h3 {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    color: var(--php-primary);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    display: inline-block;
+    transition: all var(--duration-normal) var(--ease-in-out-ios);
+}
+
+h3:hover {
+    transform: translateX(5px);
+    color: var(--php-dark);
+}
+
+/* Header avec effet glassmorphism iOS */
+header {
+    background: linear-gradient(135deg, var(--php-primary), var(--php-dark));
+    color: var(--ios-white);
+    padding: var(--spacing-xxl) var(--spacing-lg) var(--spacing-xl);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 0 0 var(--radius-xxl) var(--radius-xxl);
+    box-shadow: var(--shadow-lg);
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(119, 123, 180, 0.8), rgba(79, 91, 147, 0.9));
+    border-radius: 0 0 var(--radius-xxl) var(--radius-xxl);
+    z-index: 1;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></svg>');
+    animation: floatingParticles 30s linear infinite;
+    z-index: 0;
+}
+
+@keyframes floatingParticles {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate(-100px, -100px) rotate(360deg);
+    }
+}
+
+header>* {
+    position: relative;
+    z-index: 2;
+}
+
+header p {
+    margin-top: var(--spacing-sm);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeInUp var(--duration-slow) var(--ease-out-ios) 0.4s forwards;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
+}
+
+/* Main content avec stagger animation */
+main {
+    max-width: 1200px;
+    width: 100%;
+    margin: var(--spacing-xl) auto;
+    padding: 0 var(--spacing-lg);
+    flex: 1;
+    position: relative;
+}
+
+/* Sections avec effet de carte iOS */
+.nouveautes {
+    background: var(--ios-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-xl);
+    border: 0.5px solid var(--ios-gray-medium);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: cardSlideUp var(--duration-slow) var(--ease-out-ios) forwards;
+}
+
+@keyframes cardSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.nouveautes:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    transition: all var(--duration-normal) var(--ease-out-ios);
+}
+
+.nouveautes::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, var(--php-primary), var(--php-accent));
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out-ios);
+}
+
+.nouveautes:hover::before {
+    opacity: 1;
+}
+
+.nouveautes__titre {
+    color: var(--php-dark);
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+    font-weight: 600;
+}
+
+.nouveautes__liste {
+    list-style: none;
+    padding: 0;
+}
+
+.nouveautes__item {
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-lg);
+    position: relative;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: listItemSlide var(--duration-normal) var(--ease-out-ios) forwards;
+}
+
+.nouveautes__item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.nouveautes__item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.nouveautes__item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.nouveautes__item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.nouveautes__item:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+@keyframes listItemSlide {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.nouveautes__item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--php-primary);
+    border-radius: 50%;
+    transition: all var(--duration-quick) var(--ease-out-ios);
+}
+
+.nouveautes__item:hover::before {
+    transform: translateY(-50%) scale(1.5);
+    background: var(--php-accent);
+}
+
+.nouveautes__item:hover {
+    transform: translateX(5px);
+    transition: transform var(--duration-normal) var(--spring-gentle);
+}
+
+/* Styles pour les séparateurs de section */
+.section-divider {
+    width: 100%;
+    margin: 3rem 0 1rem;
+    position: relative;
+    text-align: center;
+}
+
+.section-divider__title {
+    display: inline-block;
+    padding: 0.5rem 2rem;
+    background: var(--php-primary);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 30px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    z-index: 1;
+}
+
+.section-divider__title:hover {
+    color: var(--php-light);
+}
+
+.section-divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--php-primary), transparent);
+    z-index: 0;
+}
+
+/* Grille de cartes avec stagger animation */
+.cards {
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+    list-style: none;
+    padding: 0;
+}
+
+/* Cartes avec effet iOS moderne */
+.card {
+    background: var(--ios-white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xs);
+    transition: all var(--duration-normal) var(--ease-out-ios);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-xl) var(--spacing-lg);
+    text-align: center;
+    min-height: 200px;
+    border: 0.5px solid var(--ios-gray-medium);
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    animation: cardAppear var(--duration-slow) var(--spring-bounce) forwards;
+}
+
+.card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.card:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+.card:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+.card:nth-child(8) {
+    animation-delay: 0.8s;
+}
+
+@keyframes cardAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 100%);
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out-ios);
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:active {
+    transform: translateY(-4px) scale(0.98);
+    transition: transform var(--duration-quick) var(--ease-in-ios);
+}
+
+.card div {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+    transition: transform var(--duration-normal) var(--spring-gentle);
+}
+
+.card:hover div {
+    transform: scale(1.05);
+}
+
+.card a {
+    color: white;
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    transition: all var(--duration-normal) var(--ease-out-ios);
+    margin-top: auto;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.card a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left var(--duration-normal) var(--ease-out-ios);
+}
+
+.card a:hover {
+    background: rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card a:hover::before {
+    left: 100%;
+}
+
+.card a:active {
+    transform: translateY(0) scale(0.95);
+    transition: transform var(--duration-quick) var(--ease-in-ios);
+}
+
+/* Style spécifique pour les cartes PHP */
+.card-php {
+    background: linear-gradient(135deg, var(--php-primary), var(--php-dark));
+    position: relative;
+}
+
+.card-php::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(167, 178, 217, 0.1) 50%,
+            transparent 70%);
+    animation: phpShimmer 3s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes phpShimmer {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+/* Resources avec effet iOS moderne */
+.resources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-xl) 0;
+}
+
+.resource-card {
+    flex: 1;
+    min-width: 200px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: resourceAppear var(--duration-slow) var(--ease-out-ios) forwards;
+}
+
+.resource-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.resource-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.resource-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.resource-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+@keyframes resourceAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.resource-card a {
+    display: block;
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, var(--php-primary), var(--php-dark));
+    color: white;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--duration-normal) var(--ease-out-ios);
+    position: relative;
+    overflow: hidden;
+}
+
+.resource-card a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 100%);
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out-ios);
+}
+
+.resource-card a:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-md);
+}
+
+.resource-card a:hover::before {
+    opacity: 1;
+}
+
+.resource-card a:active {
+    transform: translateY(-2px) scale(0.98);
+    transition: transform var(--duration-quick) var(--ease-in-ios);
+}
+
+/* Barre de progression iOS */
+.progress-container {
+    width: 80%;
+    max-width: 500px;
+    background: var(--ios-gray-light);
+    border-radius: var(--radius-xl);
+    padding: 6px;
+    box-shadow: var(--shadow-xs);
+    margin: var(--spacing-lg) auto;
+    border: 0.5px solid var(--ios-gray-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 28px;
+    background: linear-gradient(135deg, var(--php-primary), var(--php-accent));
+    border-radius: var(--radius-md);
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--ios-white);
+    font-weight: 500;
+    transition: width var(--duration-extra-slow) var(--spring-bounce);
+    box-shadow: var(--shadow-xs);
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent);
+    animation: progressShine 2s infinite var(--duration-normal);
+}
+
+@keyframes progressShine {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* CHAPTER CONTENT STYLES  */
+/* Styles supplémentaires pour les pages de chapitre */
+
+.chapter-content {
+    background: var(--ios-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-xl);
+    border: 0.5px solid var(--ios-gray-medium);
+}
+
+.chapter-content section {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--ios-gray-light);
+}
+
+.chapter-content section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Styles pour les blocs de code */
+pre,
+code {
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+pre {
+    background: var(--php-dark);
+    color: white;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    box-shadow: var(--shadow-xs);
+    margin: var(--spacing-md) 0;
+    position: relative;
+}
+
+pre code {
+    color: inherit;
+    background: transparent;
+}
+
+.language-bash .token.operator {
+    color: var(--php-accent);
+}
+
+.language-bash .token.comment {
+    color: var(--ios-gray-medium);
+    font-style: italic;
+}
+
+/* Terminal stylisé */
+.terminal {
+    background: var(--ios-black);
+    color: var(--ios-gray-light);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin: var(--spacing-md) 0;
+    box-shadow: var(--shadow-md);
+}
+
+.terminal-header {
+    background: var(--ios-gray-dark);
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: flex;
+    align-items: center;
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.terminal-dot.red {
+    background: #FF5F56;
+}
+
+.terminal-dot.yellow {
+    background: #FFBD2E;
+}
+
+.terminal-dot.green {
+    background: #27C93F;
+}
+
+.terminal-title {
+    margin-left: var(--spacing-sm);
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.terminal-body {
+    padding: var(--spacing-md);
+    font-family: 'SF Mono', monospace;
+    line-height: 1.6;
+}
+
+.prompt {
+    color: var(--php-accent);
+}
+
+.command {
+    color: var(--ios-white);
+}
+
+.output {
+    color: var(--ios-gray-medium);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Notes et avertissements */
+.note,
+.warning {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin: var(--spacing-md) 0;
+    position: relative;
+    padding-left: var(--spacing-xl);
+}
+
+.note {
+    background-color: rgba(119, 123, 180, 0.1);
+    border-left: 4px solid var(--php-primary);
+}
+
+.warning {
+    background-color: rgba(136, 146, 191, 0.1);
+    border-left: 4px solid var(--php-accent);
+}
+
+.note::before,
+.warning::before {
+    position: absolute;
+    left: var(--spacing-md);
+    top: var(--spacing-md);
+    font-weight: bold;
+}
+
+.note::before {
+    content: "";
+}
+
+.warning::before {
+    content: "";
+}
+
+/* Étapes numérotées */
+.steps {
+    display: block;
+    /* s'assurer que le conteneur n'est pas en flex */
+    margin: var(--spacing-lg) 0;
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.step-number {
+    margin-right: var(--spacing-md);
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--php-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.step-content {
+    display: block;
+    flex: 1;
+}
+
+.step-content p {
+    margin-bottom: 8px;
+}
+
+.step-content pre {
+    white-space: pre-wrap;
+    margin-top: 0;
+}
+
+/* Tableaux */
+.options-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--spacing-md) 0;
+    box-shadow: var(--shadow-xs);
+}
+
+.options-table th,
+.options-table td {
+    padding: var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid var(--ios-gray-light);
+}
+
+.options-table th {
+    background: var(--php-primary);
+    color: white;
+}
+
+.options-table tr:nth-child(even) {
+    background: var(--ios-gray-light);
+}
+
+.recommended {
+    color: var(--php-primary);
+    font-weight: bold;
+}
+
+.required {
+    color: #34C759;
+    font-weight: bold;
+}
+
+.optional {
+    color: var(--ios-gray-dark);
+}
+
+/* Accordéon */
+/* Styles pour l'accordéon et son contenu */
+.accordion {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    margin: var(--spacing-lg) 0;
+    background: var(--ios-white);
+    border: 1px solid var(--ios-gray-medium);
+}
+
+.accordion-item {
+    border-bottom: 1px solid var(--ios-gray-light);
+}
+
+.accordion-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-button {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-align: left;
+    background: var(--ios-gray-light);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--php-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color var(--duration-quick) var(--ease-out-ios);
+}
+
+.accordion-button:hover {
+    background: rgba(119, 123, 180, 0.1);
+}
+
+.accordion-button::after {
+    content: "+";
+    font-size: 1.5rem;
+    color: var(--php-primary);
+    transition: transform var(--duration-normal) var(--ease-out-ios);
+}
+
+.accordion-button.active::after {
+    content: "-";
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--duration-normal) var(--ease-out-ios);
+    background: var(--ios-white);
+}
+
+.accordion-content.show {
+    max-height: var(--accordion-max-height, 1000px);
+    /* Utilisation d'une variable CSS */
+}
+
+/* Conteneur interne pour le contenu */
+.accordion-content-inner {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition:
+        opacity var(--duration-normal) var(--ease-out-ios),
+        transform var(--duration-normal) var(--ease-out-ios);
+}
+
+.accordion-content.show .accordion-content-inner {
+    opacity: 1;
+    transform: translateY(0);
+    padding-top: var(--spacing-md);
+}
+
+/* Contenu intérieur de l'accordéon */
+.accordion-content p,
+.accordion-content ul,
+.accordion-content ol {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+}
+
+.accordion-content ul,
+.accordion-content ol {
+    padding-left: var(--spacing-lg);
+}
+
+.accordion-content li {
+    list-style: none;
+    margin-bottom: var(--spacing-xs);
+    position: relative;
+}
+
+.accordion-content li::before {
+    content: "•";
+    color: var(--php-primary);
+    position: absolute;
+    left: -15px;
+}
+
+.accordion-content ol {
+    counter-reset: list-counter;
+}
+
+.accordion-content ol li {
+    counter-increment: list-counter;
+}
+
+.accordion-content ol li::before {
+    content: counter(list-counter) ".";
+    color: var(--php-primary);
+    font-weight: bold;
+}
+
+/* Boutons de navigation */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--spacing-xl);
+}
+
+.button {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all var(--duration-normal) var(--ease-out-ios);
+}
+
+.button-primary {
+    background: var(--php-primary);
+    color: white;
+}
+
+.button-primary:hover {
+    background: var(--php-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.button-secondary {
+    background: var(--ios-gray-light);
+    color: var(--php-dark);
+    border: 1px solid var(--php-primary);
+}
+
+.button-secondary:hover {
+    background: var(--ios-gray-medium);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xs);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navigation-buttons {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .button {
+        width: 100%;
+        text-align: center;
+    }
+} 
