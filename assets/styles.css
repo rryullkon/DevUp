@@ -17,7 +17,7 @@
     
     /* Couleurs pour langages avec teintes iOS */
     --python-color: #3776AB;
-    --php-color: #8E44AD;
+    --php-color: #777BB4;
     --html-color: #E67E22;
     --css-color: #3498DB;
     --js-color: #F39C12;
@@ -630,7 +630,7 @@ main {
 }
 
 .card-php {
-    background: linear-gradient(135deg, var(--php-color), #6A1B9A);
+    background: linear-gradient(135deg, var(--php-color), #4F5B93);
 }
 
 .card-html {

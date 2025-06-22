@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liens hypertextes | DevUp HTML</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" href="../../../Sans titre-1.png" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <h1>Liens hypertextes</h1>
+        <p>Apprenez à créer des liens vers d'autres pages ou sites web avec HTML</p>
+    </header>
+
+    <main>
+        <section class="nouveautes">
+            <h2 class="nouveautes__titre">Sommaire du chapitre</h2>
+            <ul class="nouveautes__liste">
+                <li class="nouveautes__item"><a href="#etape1" class="nouveautes__lien"><strong>Étape 1 :</strong> Lien vers un site externe</a></li>
+                <li class="nouveautes__item"><a href="#etape2" class="nouveautes__lien"><strong>Étape 2 :</strong> Lien vers une page interne</a></li>
+                <li class="nouveautes__item"><a href="#etape3" class="nouveautes__lien"><strong>Étape 3 :</strong> Ouvrir un lien dans un nouvel onglet</a></li>
+                <li class="nouveautes__item"><a href="#troubleshooting" class="nouveautes__lien">Dépannage</a></li>
+            </ul>
+        </section>
+
+        <article class="chapter-content">
+
+            <section id="etape1">
+                <h2>Étape 1 : Lien vers un site externe</h2>
+                <p>Pour créer un lien vers un autre site web, utilisez la balise <code>&lt;a&gt;</code> avec l’attribut <code>href</code> :</p>
+                <pre><code>
+&lt;a href="https://www.google.com"&gt;Aller sur Google&lt;/a&gt;
+                </code></pre>
+                <p>Ce lien redirigera l'utilisateur vers le site spécifié.</p>
+            </section>
+
+            <section id="etape2">
+                <h2>Étape 2 : Lien vers une page interne</h2>
+                <p>Vous pouvez également faire un lien vers une autre page de votre propre site :</p>
+                <pre><code>
+&lt;a href="contact.html"&gt;Page de contact&lt;/a&gt;
+                </code></pre>
+                <p>Le fichier <code>contact.html</code> doit être dans le même dossier que la page actuelle.</p>
+            </section>
+
+            <section id="etape3">
+                <h2>Étape 3 : Ouvrir un lien dans un nouvel onglet</h2>
+                <p>Ajoutez l’attribut <code>target="_blank"</code> pour ouvrir le lien dans un nouvel onglet :</p>
+                <pre><code>
+&lt;a href="https://www.wikipedia.org" target="_blank"&gt;Wikipedia&lt;/a&gt;
+                </code></pre>
+                <p>Cela permet à l’utilisateur de rester sur votre site tout en visitant l’autre lien.</p>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>Dépannage</h2>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-button">Le lien ne fonctionne pas</button>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Vérifiez que l'attribut <code>href</code> contient une URL ou un chemin valide.</p>
+                                <p>Exemples corrects :</p>
+                                <ul>
+                                    <li><code>https://www.example.com</code></li>
+                                    <li><code>page2.html</code></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button">Le lien s’affiche mais ne ressemble pas à un lien</button>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Assurez-vous qu'aucun style CSS ne supprime les styles par défaut (comme la couleur bleue et le soulignement).</p>
+                                <p>Sinon, ajoutez un style CSS personnalisé :</p>
+                                <pre><code>
+a {
+    color: blue;
+    text-decoration: underline;
+}
+                                </code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </article>
+
+        <div class="navigation-buttons">
+            <a href="../index.html" class="button button-secondary">← Retour à l'accueil HTML</a>
+            <a href="7-images.html" class="button button-primary" style="pointer-events:none;opacity:0.6;">Suivant : Images →</a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const content = this.nextElementSibling;
+                    document.querySelectorAll('.accordion-content').forEach(item => {
+                        if (item !== content && item.classList.contains('show')) {
+                            item.style.maxHeight = null;
+                            item.classList.remove('show');
+                            item.previousElementSibling.classList.remove('active');
+                        }
+                    });
+                    this.classList.toggle('active');
+                    if (content.classList.contains('show')) {
+                        content.style.maxHeight = null;
+                        content.classList.remove('show');
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        content.classList.add('show');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

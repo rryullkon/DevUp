@@ -3,24 +3,27 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Balises et éléments | DevUp HTML</title>
+    <title>Attributs HTML | DevUp HTML</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="icon" href="../../../Sans titre-1.png" type="image/x-icon">
 </head>
 
 <body>
     <header>
-        <h1>Balises et éléments</h1>
-        <p>Comprendre la différence entre balises et éléments en HTML</p>
+        <h1>Attributs HTML</h1>
+        <p>Comprendre le rôle des attributs dans les éléments HTML</p>
     </header>
 
     <main>
         <section class="nouveautes">
             <h2 class="nouveautes__titre">Sommaire du chapitre</h2>
             <ul class="nouveautes__liste">
-                <li class="nouveautes__item"><a href="#etape1" class="nouveautes__lien"><strong>Étape 1 :</strong> Qu’est-ce qu’une balise ?</a></li>
-                <li class="nouveautes__item"><a href="#etape2" class="nouveautes__lien"><strong>Étape 2 :</strong> Différence entre balise et élément</a></li>
-                <li class="nouveautes__item"><a href="#etape3" class="nouveautes__lien"><strong>Étape 3 :</strong> Exemples d’éléments HTML</a></li>
+                <li class="nouveautes__item"><a href="#etape1" class="nouveautes__lien"><strong>Étape 1 :</strong>
+                        Qu’est-ce qu’un attribut ?</a></li>
+                <li class="nouveautes__item"><a href="#etape2" class="nouveautes__lien"><strong>Étape 2 :</strong>
+                        Syntaxe des attributs</a></li>
+                <li class="nouveautes__item"><a href="#etape3" class="nouveautes__lien"><strong>Étape 3 :</strong>
+                        Exemples d’attributs HTML courants</a></li>
                 <li class="nouveautes__item"><a href="#troubleshooting" class="nouveautes__lien">Dépannage</a></li>
             </ul>
         </section>
@@ -28,62 +31,69 @@
         <article class="chapter-content">
 
             <section id="etape1">
-                <h2>Étape 1 : Qu’est-ce qu’une balise ?</h2>
+                <h2>Étape 1 : Qu’est-ce qu’un attribut ?</h2>
                 <div class="steps">
                     <div class="step">
                         <span class="step-number">1</span>
-                        <p>Une <strong>balise</strong> est un mot-clé entouré d’angles (<code>&lt; &gt;</code>) utilisé pour marquer une partie du contenu HTML.</p>
+                        <p>Un <strong>attribut HTML</strong> fournit des informations supplémentaires sur un élément.
+                        </p>
                     </div>
                     <div class="step">
                         <span class="step-number">2</span>
-                        <p>Il existe des balises ouvrantes <code>&lt;p&gt;</code> et des balises fermantes <code>&lt;/p&gt;</code>.</p>
+                        <p>Il est généralement placé dans la balise ouvrante d’un élément HTML.</p>
                     </div>
                 </div>
             </section>
 
             <section id="etape2">
-                <h2>Étape 2 : Différence entre balise et élément</h2>
-                <p>Un <strong>élément HTML</strong> est constitué d'une balise ouvrante, d'un contenu, puis d'une balise fermante.</p>
-                <pre><code>&lt;p&gt;Ceci est un paragraphe&lt;/p&gt;</code></pre>
-                <p>Dans cet exemple :</p>
+                <h2>Étape 2 : Syntaxe des attributs</h2>
+                <p>La syntaxe d’un attribut est toujours :</p>
+                <pre><code>&lt;balise nom="valeur"&gt;Contenu&lt;/balise&gt;</code></pre>
+                <p>Par exemple :</p>
+                <pre><code>&lt;a href="https://exemple.com"&gt;Visitez le site&lt;/a&gt;</code></pre>
+                <p>Ici :</p>
                 <ul>
-                    <li><code>&lt;p&gt;</code> est la balise ouvrante</li>
-                    <li><code>Ceci est un paragraphe</code> est le contenu</li>
-                    <li><code>&lt;/p&gt;</code> est la balise fermante</li>
-                    <li>L’ensemble forme un <strong>élément</strong></li>
+                    <li><code>href</code> est le nom de l’attribut</li>
+                    <li><code>"https://exemple.com"</code> est sa valeur</li>
+                    <li>L’attribut affecte le comportement de l’élément <code>&lt;a&gt;</code></li>
                 </ul>
             </section>
 
             <section id="etape3">
-                <h2>Étape 3 : Exemples d’éléments HTML</h2>
+                <h2>Étape 3 : Exemples d’attributs HTML courants</h2>
                 <table class="options-table">
                     <thead>
                         <tr>
                             <th>Élément</th>
+                            <th>Attribut</th>
                             <th>Exemple</th>
                             <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><code>&lt;h1&gt;...&lt;/h1&gt;</code></td>
-                            <td><code>&lt;h1&gt;Titre principal&lt;/h1&gt;</code></td>
-                            <td>Titre de niveau 1</td>
+                            <td><code>&lt;a&gt;</code></td>
+                            <td><code>href</code></td>
+                            <td><code>&lt;a href="https://site.com"&gt;lien&lt;/a&gt;</code></td>
+                            <td>Définit la destination du lien</td>
                         </tr>
                         <tr>
-                            <td><code>&lt;p&gt;...&lt;/p&gt;</code></td>
-                            <td><code>&lt;p&gt;Un paragraphe.&lt;/p&gt;</code></td>
-                            <td>Texte de paragraphe</td>
+                            <td><code>&lt;img&gt;</code></td>
+                            <td><code>src</code>, <code>alt</code></td>
+                            <td><code>&lt;img src="logo.png" alt="Logo"&gt;</code></td>
+                            <td>Spécifie l'image et sa description</td>
                         </tr>
                         <tr>
-                            <td><code>&lt;a&gt;...&lt;/a&gt;</code></td>
-                            <td><code>&lt;a href="url"&gt;lien&lt;/a&gt;</code></td>
-                            <td>Lien hypertexte</td>
+                            <td><code>&lt;input&gt;</code></td>
+                            <td><code>type</code>, <code>placeholder</code></td>
+                            <td><code>&lt;input type="text" placeholder="Nom"&gt;</code></td>
+                            <td>Définit le type de champ de formulaire</td>
                         </tr>
                         <tr>
-                            <td><code>&lt;img /&gt;</code></td>
-                            <td><code>&lt;img src="image.png" alt="Description" /&gt;</code></td>
-                            <td>Image (élément autofermant)</td>
+                            <td><code>&lt;button&gt;</code></td>
+                            <td><code>disabled</code></td>
+                            <td><code>&lt;button disabled&gt;Envoyer&lt;/button&gt;</code></td>
+                            <td>Désactive le bouton</td>
                         </tr>
                     </tbody>
                 </table>
@@ -94,21 +104,23 @@
 
                 <div class="accordion">
                     <div class="accordion-item">
-                        <button class="accordion-button">Erreur : contenu non affiché</button>
+                        <button class="accordion-button">Mon lien ne fonctionne pas</button>
                         <div class="accordion-content">
                             <div class="accordion-content-inner">
-                                <p>Assurez-vous que vos balises sont bien fermées.</p>
-                                <pre><code>&lt;p&gt;Paragraphe&lt;/p&gt;</code></pre>
+                                <p>Vérifiez que l’attribut <code>href</code> est bien présent et que l’URL est correcte
+                                    :</p>
+                                <pre><code>&lt;a href="https://exemple.com"&gt;Texte du lien&lt;/a&gt;</code></pre>
                             </div>
                         </div>
                     </div>
 
                     <div class="accordion-item">
-                        <button class="accordion-button">Les balises s’affichent à l’écran</button>
+                        <button class="accordion-button">Image non affichée</button>
                         <div class="accordion-content">
                             <div class="accordion-content-inner">
-                                <p>Utilisez les entités HTML pour afficher des balises comme du texte :</p>
-                                <code>&amp;lt;p&amp;gt;Texte&amp;lt;/p&amp;gt;</code>
+                                <p>Assurez-vous que l’attribut <code>src</code> pointe vers le bon fichier et que le
+                                    chemin est correct.</p>
+                                <pre><code>&lt;img src="chemin/vers/image.jpg" alt="Description"&gt;</code></pre>
                             </div>
                         </div>
                     </div>
@@ -119,7 +131,8 @@
 
         <div class="navigation-buttons">
             <a href="../index.html" class="button button-secondary">← Retour à l'accueil HTML</a>
-            <a href="3-attributs.html" class="button button-primary">Suivant : Les attributs HTML →</a>
+            <a href="4-textes.html" class="button button-primary">Suivant : En-têtes et paragraphes
+                →</a>
         </div>
     </main>
 

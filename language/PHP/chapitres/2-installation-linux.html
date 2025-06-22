@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Installation de PHP sur Linux | DevUp PHP</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" href="../../../Sans titre-1.png" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <h1>Installation de PHP sur Linux</h1>
+        <p>Guide complet pour installer PHP correctement sur votre système Linux (Ubuntu/Debian)</p>
+    </header>
+
+    <main>
+        <section class="nouveautes">
+            <h2 class="nouveautes__titre">Sommaire du chapitre</h2>
+            <ul class="nouveautes__liste">
+                <li class="nouveautes__item"><a href="#etape1" class="nouveautes__lien"><strong>Étape 1 :</strong> Mise à jour du système</a></li>
+                <li class="nouveautes__item"><a href="#etape2" class="nouveautes__lien"><strong>Étape 2 :</strong> Installation de PHP</a></li>
+                <li class="nouveautes__item"><a href="#etape3" class="nouveautes__lien"><strong>Étape 3 :</strong> Installation des extensions</a></li>
+                <li class="nouveautes__item"><a href="#etape4" class="nouveautes__lien"><strong>Étape 4 :</strong> Vérification</a></li>
+                <li class="nouveautes__item"><a href="#troubleshooting" class="nouveautes__lien">Dépannage</a></li>
+            </ul>
+        </section>
+
+        <article class="chapter-content">
+            <section id="etape1">
+                <h2>Étape 1 : Mise à jour du système</h2>
+                <p>Avant toute installation, commencez par mettre à jour les paquets existants :</p>
+
+                <pre><code class="language-bash">sudo apt update
+sudo apt upgrade</code></pre>
+
+                <div class="note">
+                    <strong>Note :</strong> Ces commandes assurent que votre gestionnaire de paquets est à jour.
+                </div>
+            </section>
+
+            <section id="etape2">
+                <h2>Étape 2 : Installation de PHP</h2>
+                <p>Installez PHP avec la commande suivante :</p>
+
+                <pre><code class="language-bash">sudo apt install php</code></pre>
+
+                <p>Cela installera la version stable de PHP disponible dans vos dépôts.</p>
+
+                <div class="warning">
+                    <strong>Besoin d’une version spécifique ?</strong> Utilisez un PPA comme <code>ondrej/php</code> pour accéder à d'autres versions.
+                </div>
+
+                <pre><code class="language-bash">sudo add-apt-repository ppa:ondrej/php
+sudo apt update
+sudo apt install php8.3</code></pre>
+            </section>
+
+            <section id="etape3">
+                <h2>Étape 3 : Installation des extensions</h2>
+                <p>Ajoutez les extensions dont vous avez besoin :</p>
+
+                <pre><code class="language-bash">sudo apt install php-mysql php-cli php-curl php-xml php-mbstring</code></pre>
+
+                <p>Ces extensions sont souvent requises pour les frameworks comme Laravel ou Symfony.</p>
+            </section>
+
+            <section id="etape4">
+                <h2>Étape 4 : Vérification</h2>
+                <p>Vérifiez si PHP est bien installé :</p>
+
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">Terminal</span>
+                    </div>
+                    <div class="terminal-body">
+                        <span class="prompt">user@ubuntu:~$</span> <span class="command">php -v</span>
+                        <div class="output">PHP 8.3.0 (cli) (built: Nov 23 2024 12:00:00) ( NTS )</div>
+                    </div>
+                </div>
+
+                <p>Un message comme ci-dessus confirme le bon fonctionnement de PHP.</p>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>Dépannage</h2>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-button">La commande "php" ne fonctionne pas</button>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Essayez les étapes suivantes :</p>
+                                <ol>
+                                    <li>Vérifiez que PHP est bien installé : <code>which php</code></li>
+                                    <li>Ajoutez manuellement le chemin de PHP à votre <code>PATH</code></li>
+                                    <li>Relancez votre terminal ou session</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button">PHP ne fonctionne pas avec Apache</button>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Assurez-vous que le module PHP pour Apache est installé :</p>
+                                <pre><code class="language-bash">sudo apt install libapache2-mod-php
+sudo systemctl restart apache2</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <div class="navigation-buttons">
+            <a href="../" class="button button-secondary">← Retour à l'accueil PHP</a>
+            <a href="3-installation-mac.html" class="button button-primary">Suivant : Installation de PHP sur macOS →</a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const content = this.nextElementSibling;
+
+                    document.querySelectorAll('.accordion-content').forEach(item => {
+                        if (item !== content && item.classList.contains('show')) {
+                            item.style.maxHeight = null;
+                            item.classList.remove('show');
+                            item.previousElementSibling.classList.remove('active');
+                        }
+                    });
+
+                    this.classList.toggle('active');
+
+                    if (content.classList.contains('show')) {
+                        content.style.maxHeight = null;
+                        content.classList.remove('show');
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        content.classList.add('show');
+                    }
+                });
+
+                if (button.classList.contains('active')) {
+                    const content = button.nextElementSibling;
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

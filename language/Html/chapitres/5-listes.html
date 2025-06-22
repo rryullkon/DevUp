@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Listes ordonnées et non ordonnées | DevUp HTML</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" href="../../../Sans titre-1.png" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <h1>Listes ordonnées et non ordonnées</h1>
+        <p>Apprenez à structurer des listes en HTML avec les balises <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code> et <code>&lt;li&gt;</code></p>
+    </header>
+
+    <main>
+        <section class="nouveautes">
+            <h2 class="nouveautes__titre">Sommaire du chapitre</h2>
+            <ul class="nouveautes__liste">
+                <li class="nouveautes__item"><a href="#etape1" class="nouveautes__lien"><strong>Étape 1 :</strong> Liste non ordonnée</a></li>
+                <li class="nouveautes__item"><a href="#etape2" class="nouveautes__lien"><strong>Étape 2 :</strong> Liste ordonnée</a></li>
+                <li class="nouveautes__item"><a href="#etape3" class="nouveautes__lien"><strong>Étape 3 :</strong> Listes imbriquées</a></li>
+                <li class="nouveautes__item"><a href="#troubleshooting" class="nouveautes__lien">Dépannage</a></li>
+            </ul>
+        </section>
+
+        <article class="chapter-content">
+
+            <section id="etape1">
+                <h2>Étape 1 : Liste non ordonnée</h2>
+                <p>Utilisez la balise <code>&lt;ul&gt;</code> pour créer une liste à puces :</p>
+                <pre><code>
+&lt;ul&gt;
+    &lt;li&gt;Pomme&lt;/li&gt;
+    &lt;li&gt;Banane&lt;/li&gt;
+    &lt;li&gt;Orange&lt;/li&gt;
+&lt;/ul&gt;
+                </code></pre>
+                <p>Chaque élément de liste est défini avec la balise <code>&lt;li&gt;</code>.</p>
+            </section>
+
+            <section id="etape2">
+                <h2>Étape 2 : Liste ordonnée</h2>
+                <p>Utilisez <code>&lt;ol&gt;</code> pour créer une liste numérotée :</p>
+                <pre><code>
+&lt;ol&gt;
+    &lt;li&gt;Étape 1&lt;/li&gt;
+    &lt;li&gt;Étape 2&lt;/li&gt;
+    &lt;li&gt;Étape 3&lt;/li&gt;
+&lt;/ol&gt;
+                </code></pre>
+                <p>La numérotation est générée automatiquement par le navigateur.</p>
+            </section>
+
+            <section id="etape3">
+                <h2>Étape 3 : Listes imbriquées</h2>
+                <p>Vous pouvez placer une liste à l'intérieur d'une autre :</p>
+                <pre><code>
+&lt;ul&gt;
+    &lt;li&gt;Fruits
+        &lt;ul&gt;
+            &lt;li&gt;Pomme&lt;/li&gt;
+            &lt;li&gt;Raisin&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Légumes&lt;/li&gt;
+&lt;/ul&gt;
+                </code></pre>
+                <p>Cela permet de créer des sous-catégories visuelles.</p>
+            </section>
+
+            <section id="troubleshooting">
+                <h2>Dépannage</h2>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-button">Ma liste ne s’affiche pas</button>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Assurez-vous que vos balises <code>&lt;ul&gt;</code> ou <code>&lt;ol&gt;</code> sont bien ouvertes et fermées, et que vos éléments sont dans des <code>&lt;li&gt;</code>.</p>
+                                <pre><code>
+&lt;ul&gt;
+    &lt;li&gt;Élément&lt;/li&gt;
+&lt;/ul&gt;
+                                </code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-button">Les puces ou numéros n’apparaissent pas</button>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Vérifiez si un style CSS ne désactive pas l'affichage des puces ou numéros. Par exemple :</p>
+                                <pre><code>
+ul {
+    list-style-type: none;
+}
+                                </code></pre>
+                                <p>Supprimez cette règle ou remplacez-la par <code>disc</code> pour les puces ou <code>decimal</code> pour les listes numérotées.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </article>
+
+        <div class="navigation-buttons">
+            <a href="../index.html" class="button button-secondary">← Retour à l'accueil HTML</a>
+            <a href="6-liens.html" class="button button-primary">Suivant : Liens hypertextes →</a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const content = this.nextElementSibling;
+                    document.querySelectorAll('.accordion-content').forEach(item => {
+                        if (item !== content && item.classList.contains('show')) {
+                            item.style.maxHeight = null;
+                            item.classList.remove('show');
+                            item.previousElementSibling.classList.remove('active');
+                        }
+                    });
+                    this.classList.toggle('active');
+                    if (content.classList.contains('show')) {
+                        content.style.maxHeight = null;
+                        content.classList.remove('show');
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        content.classList.add('show');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
